@@ -21,8 +21,8 @@ public class Cerveza {
 		return id_cerveza;
 	}
 
-	public void setId_cerveza(int id_marca) {
-		this.id_cerveza = id_marca;
+	public void setId_cerveza(int id_cerveza) {
+		this.id_cerveza = id_cerveza;
 	}
 
 	public String getNombre() {
