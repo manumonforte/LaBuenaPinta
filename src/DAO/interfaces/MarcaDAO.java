@@ -1,6 +1,6 @@
 package DAO.interfaces;
 
-import modelo.Marca;
+import modelo.transfer.TMarca;
 
-public interface MarcaDAO extends DAO<Marca>{
+public interface MarcaDAO extends DAO<TMarca>{
 }

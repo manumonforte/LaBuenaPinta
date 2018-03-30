@@ -1,7 +1,7 @@
 package DAO.interfaces;
 
 
-import modelo.Factura;
+import modelo.transfer.TFactura;
 
-public interface FacturaDAO extends DAO<Factura> {
+public interface FacturaDAO extends DAO<TFactura> {
 }

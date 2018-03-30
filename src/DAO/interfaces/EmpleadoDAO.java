@@ -1,6 +1,6 @@
 package DAO.interfaces;
 
-import modelo.Empleado;
+import modelo.transfer.TEmpleado;
 
-public interface EmpleadoDAO extends DAO<Empleado> {
+public interface EmpleadoDAO extends DAO<TEmpleado> {
 }

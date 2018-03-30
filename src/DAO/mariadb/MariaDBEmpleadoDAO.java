@@ -1,7 +1,7 @@
 package DAO.mariadb;
 
 import DAO.interfaces.EmpleadoDAO;
-import modelo.Empleado;
+import modelo.transfer.TEmpleado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBEmpleadoDao implements EmpleadoDAO {
+public class MariaDBEmpleadoDAO implements EmpleadoDAO {
     private Connection conn;
 
     private final String INSERT = "INSERT INTO empleado(nombre, telefono, tiempo_completo) VALUES(?, ?, ?)";
@@ -19,12 +19,12 @@ public class MariaDBEmpleadoDao implements EmpleadoDAO {
     private final String UPDATE = "UPDATE empleado SET nombre = ?, telefono = ?, tiempo_completo = ? WHERE id_marca = ?";
     private final String DELETE = "DELETE FROM empleado WHERE id_empleado = ?";
 
-    public MariaDBEmpleadoDao(Connection conn) {
+    public MariaDBEmpleadoDAO(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insertar(Empleado e) {
+    public void insertar(TEmpleado e) {
         try (PreparedStatement st = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setString(1, e.getNombre());
             st.setInt(2, e.getTelefono());
@@ -40,13 +40,13 @@ public class MariaDBEmpleadoDao implements EmpleadoDAO {
     }
 
     @Override
-    public Empleado mostrar(int id) {
-        Empleado e = null;
+    public TEmpleado mostrar(int id) {
+        TEmpleado e = null;
         try (PreparedStatement st = conn.prepareStatement(READ)) {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()){
-                e = new Empleado(id,
+                e = new TEmpleado(id,
                         rs.getString("nombre"),
                         rs.getInt("telefono"),
                         rs.getBoolean("tiempo_completo"));
@@ -58,12 +58,12 @@ public class MariaDBEmpleadoDao implements EmpleadoDAO {
     }
 
     @Override
-    public List<Empleado> mostrarTodos() {
-        ArrayList<Empleado> lista = new ArrayList<Empleado>();
+    public List<TEmpleado> mostrarTodos() {
+        ArrayList<TEmpleado> lista = new ArrayList<TEmpleado>();
         try (PreparedStatement st = conn.prepareStatement(READALL)) {
             ResultSet rs = st.executeQuery();
             while (rs.next()){
-                lista.add(new Empleado(rs.getInt("id_empleado"),
+                lista.add(new TEmpleado(rs.getInt("id_empleado"),
                         rs.getString("nombre"),
                         rs.getInt("telefono"),
                         rs.getBoolean("tiempo_completo")));
@@ -75,7 +75,7 @@ public class MariaDBEmpleadoDao implements EmpleadoDAO {
     }
 
     @Override
-    public void modificar(Empleado e) {
+    public void modificar(TEmpleado e) {
         try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
             st.setString(1, e.getNombre());
             st.setInt(2, e.getTelefono());
@@ -88,7 +88,7 @@ public class MariaDBEmpleadoDao implements EmpleadoDAO {
     }
 
     @Override
-    public void eliminar(Empleado e) {
+    public void eliminar(TEmpleado e) {
         try (PreparedStatement st = conn.prepareStatement(DELETE)) {
             st.setInt(1, e.getId_empleado());
         } catch (SQLException ex) {

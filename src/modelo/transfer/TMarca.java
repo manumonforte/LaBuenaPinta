@@ -1,13 +1,13 @@
-package modelo;
+package modelo.transfer;
 
-public class Marca {
+public class TMarca {
 	private int id_marca;
 	private String nombre;
 	private String sede;
 	private String pais;
 	private boolean activa;
 
-	public Marca(int id_marca, String nombre, String sede, String pais, boolean activa) {
+	public TMarca(int id_marca, String nombre, String sede, String pais, boolean activa) {
 		this.id_marca = id_marca; //TODO revisar
 		this.nombre = nombre;
 		this.sede = sede;

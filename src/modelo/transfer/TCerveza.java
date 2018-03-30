@@ -1,6 +1,6 @@
-package modelo;
+package modelo.transfer;
 
-public class Cerveza {
+public class TCerveza {
 	private int id_cerveza;
 	private String nombre;
 	private int stock;
@@ -8,7 +8,7 @@ public class Cerveza {
 	private double precio;
 	private boolean activa;
 
-	public Cerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa) {
+	public TCerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa) {
 		this.id_cerveza = id_cerveza; //TODO revisar
 		this.nombre = nombre;
 		this.stock = stock;

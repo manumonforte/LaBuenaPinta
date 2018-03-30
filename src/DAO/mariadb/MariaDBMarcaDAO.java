@@ -1,7 +1,7 @@
 package DAO.mariadb;
 
 import DAO.interfaces.MarcaDAO;
-import modelo.Marca;
+import modelo.transfer.TMarca;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBMarcaDao implements MarcaDAO {
+public class MariaDBMarcaDAO implements MarcaDAO {
 	private Connection conn;
 
 	private final String INSERT = "INSERT INTO marca(nombre, sede, pais, activa) VALUES(?, ?, ?, ?)";
@@ -19,12 +19,12 @@ public class MariaDBMarcaDao implements MarcaDAO {
 	private final String UPDATE = "UPDATE marca SET nombre = ?, sede = ?, pais = ?, activa = ? WHERE id_marca = ?";
 	private final String DELETE = "DELETE FROM marca WHERE id_marca = ?";
 
-	public MariaDBMarcaDao(Connection conn) {
+	public MariaDBMarcaDAO(Connection conn) {
 		this.conn = conn;
 	}
 
 	@Override
-	public void insertar(Marca e) {
+	public void insertar(TMarca e) {
 		try (PreparedStatement st = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			st.setString(1, e.getNombre());
 			st.setString(2, e.getSede());
@@ -41,13 +41,13 @@ public class MariaDBMarcaDao implements MarcaDAO {
 	}
 
 	@Override
-	public Marca mostrar(int id) {
-		Marca m = null;
+	public TMarca mostrar(int id) {
+		TMarca m = null;
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()){
-				m = new Marca(id, rs.getString("nombre"), rs.getString("sede"),
+				m = new TMarca(id, rs.getString("nombre"), rs.getString("sede"),
 						rs.getString("pais"), rs.getBoolean("activa"));
 			}
 		} catch (SQLException e) {
@@ -57,12 +57,12 @@ public class MariaDBMarcaDao implements MarcaDAO {
 	}
 
 	@Override
-	public List<Marca> mostrarTodos() {
-		ArrayList<Marca> lista = new ArrayList<Marca>();
+	public List<TMarca> mostrarTodos() {
+		ArrayList<TMarca> lista = new ArrayList<TMarca>();
 		try (PreparedStatement st = conn.prepareStatement(READALL)) {
 			ResultSet rs = st.executeQuery();
 			while (rs.next()){
-				lista.add(new Marca(rs.getInt("id_marca"), rs.getString("nombre"), rs.getString("sede"),
+				lista.add(new TMarca(rs.getInt("id_marca"), rs.getString("nombre"), rs.getString("sede"),
 						rs.getString("pais"), rs.getBoolean("activa")));
 			}
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class MariaDBMarcaDao implements MarcaDAO {
 	}
 
 	@Override
-	public void modificar(Marca e) {
+	public void modificar(TMarca e) {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
 			st.setString(1, e.getNombre());
 			st.setString(2, e.getSede());
@@ -86,7 +86,7 @@ public class MariaDBMarcaDao implements MarcaDAO {
 	}
 
 	@Override
-	public void eliminar(Marca e) {
+	public void eliminar(TMarca e) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
 			st.setInt(1, e.getId_marca());
 		} catch (SQLException e1) {

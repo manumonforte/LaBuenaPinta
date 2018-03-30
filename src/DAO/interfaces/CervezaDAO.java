@@ -1,6 +1,6 @@
 package DAO.interfaces;
 
-import modelo.Cerveza;
+import modelo.transfer.TCerveza;
 
-public interface CervezaDAO extends DAO<Cerveza>{
+public interface CervezaDAO extends DAO<TCerveza>{
 }

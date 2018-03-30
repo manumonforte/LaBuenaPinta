@@ -1,13 +1,13 @@
-package modelo;
+package modelo.transfer;
 
-public class Empleado {
+public class TEmpleado {
 
     private int id_empleado;
     private String nombre;
     private int telefono;
     private boolean tiempo_completo;
 
-    public Empleado(int id_empleado, String nombre, int telefono, boolean tiempo_completo) {
+    public TEmpleado(int id_empleado, String nombre, int telefono, boolean tiempo_completo) {
         this.id_empleado = id_empleado; //TODO revisar
         this.nombre = nombre;
         this.telefono = telefono;
