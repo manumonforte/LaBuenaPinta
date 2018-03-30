@@ -32,9 +32,10 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 			st.setDouble(4, e.getPrecio());
 			st.setBoolean(5, e.isActiva());
 			st.executeUpdate();
-			ResultSet rs = st.getGeneratedKeys();
-			if (rs.next()) {
-				e.setId_cerveza(rs.getInt(1));
+			try(ResultSet rs = st.getGeneratedKeys()) {
+				if (rs.next()) {
+					e.setId_cerveza(rs.getInt(1));
+				}
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -46,10 +47,11 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 		TCerveza c = null;
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
-			ResultSet rs = st.executeQuery();
-			if (rs.next()){
-				c = new TCerveza(id, rs.getString("nombre"), rs.getInt("stock"),
-						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa"));
+			try(ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					c = new TCerveza(id, rs.getString("nombre"), rs.getInt("stock"),
+							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,8 +62,7 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 	@Override
 	public List<TCerveza> mostrarTodos() {
 		ArrayList<TCerveza> lista = new ArrayList<TCerveza>();
-		try (PreparedStatement st = conn.prepareStatement(READALL)) {
-			ResultSet rs = st.executeQuery();
+		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()){
 				lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
 						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa")));

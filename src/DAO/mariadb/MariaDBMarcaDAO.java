@@ -31,9 +31,10 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 			st.setString(3, e.getPais());
 			st.setBoolean(4, e.isActiva());
 			st.executeUpdate();
-			ResultSet rs = st.getGeneratedKeys();
-			if (rs.next()) {
-				e.setId_marca(rs.getInt(1));
+			try(ResultSet rs = st.getGeneratedKeys()){
+				if (rs.next()) {
+					e.setId_marca(rs.getInt(1));
+				}
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -45,10 +46,11 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 		TMarca m = null;
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
-			ResultSet rs = st.executeQuery();
-			if (rs.next()){
-				m = new TMarca(id, rs.getString("nombre"), rs.getString("sede"),
-						rs.getString("pais"), rs.getBoolean("activa"));
+			try(ResultSet rs = st.executeQuery()){
+				if (rs.next()){
+					m = new TMarca(id, rs.getString("nombre"), rs.getString("sede"),
+							rs.getString("pais"), rs.getBoolean("activa"));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,9 +61,8 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 	@Override
 	public List<TMarca> mostrarTodos() {
 		ArrayList<TMarca> lista = new ArrayList<TMarca>();
-		try (PreparedStatement st = conn.prepareStatement(READALL)) {
-			ResultSet rs = st.executeQuery();
-			while (rs.next()){
+		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
+			while (rs.next()) {
 				lista.add(new TMarca(rs.getInt("id_marca"), rs.getString("nombre"), rs.getString("sede"),
 						rs.getString("pais"), rs.getBoolean("activa")));
 			}

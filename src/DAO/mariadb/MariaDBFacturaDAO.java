@@ -30,9 +30,10 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 			st.setInt(1, e.getPrecio_total());
 			st.setInt(2, e.getEmpleado());
 			st.executeUpdate();
-			ResultSet rs = st.getGeneratedKeys();
-			if (rs.next()) {
-				e.setId_factura(rs.getInt(1));
+			try(ResultSet rs = st.getGeneratedKeys()) {
+				if (rs.next()) {
+					e.setId_factura(rs.getInt(1));
+				}
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -44,9 +45,10 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 		TFactura f = null;
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
-			ResultSet rs = st.executeQuery();
-			if (rs.next()){
-				f = new TFactura(id, rs.getInt("precio_total"), rs.getInt("empleado"));
+			try(ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					f = new TFactura(id, rs.getInt("precio_total"), rs.getInt("empleado"));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,8 +59,7 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 	@Override
 	public List<TFactura> mostrarTodos() {
 		ArrayList<TFactura> lista = new ArrayList<TFactura>();
-		try (PreparedStatement st = conn.prepareStatement(READALL)) {
-			ResultSet rs = st.executeQuery();
+		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()){
 				lista.add(new TFactura(rs.getInt("id_factura"), rs.getInt("precio_total"), rs.getInt("empleado")));
 			}
