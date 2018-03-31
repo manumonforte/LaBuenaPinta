@@ -15,7 +15,7 @@ public class MariaDBEmpleadoDAO implements EmpleadoDAO {
 
 	private final String INSERT = "INSERT INTO empleado(nombre, telefono, tiempo_completo) VALUES(?, ?, ?)";
 	private final String READALL = "SELECT * FROM empleado";
-	private final String READ = READALL + "WHERE id_empleado = ?";
+	private final String READ = READALL + " WHERE id_empleado = ?";
 	private final String UPDATE = "UPDATE empleado SET nombre = ?, telefono = ?, tiempo_completo = ? WHERE id_marca = ?";
 	private final String DELETE = "DELETE FROM empleado WHERE id_empleado = ?";
 

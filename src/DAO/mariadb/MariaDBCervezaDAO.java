@@ -15,7 +15,7 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 
 	private final String INSERT = "INSERT INTO cerveza(nombre, stock, graduacion, precio, activa) VALUES(?, ?, ?, ?, ?)";
 	private final String READALL = "SELECT * FROM cerveza";
-	private final String READ = READALL + "WHERE id_cerveza = ?";
+	private final String READ = READALL + " WHERE id_cerveza = ?";
 	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, activa = ? WHERE id_cerveza = ?";
 	private final String DELETE = "DELETE FROM cerveza WHERE id_cerveza = ?";
 

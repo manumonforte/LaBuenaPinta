@@ -15,7 +15,7 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 
 	private final String INSERT = "INSERT INTO factura(precio_total, empleado) VALUES(?, ?)";
 	private final String READALL = "SELECT * FROM factura";
-	private final String READ = READALL + "WHERE id_factura = ?";
+	private final String READ = READALL + " WHERE id_factura = ?";
 	private final String UPDATE = "UPDATE factura SET precio_total = ?, empleado = ? WHERE id_factura = ?";
 	private final String DELETE = "DELETE FROM factura WHERE id_factura = ?";
 

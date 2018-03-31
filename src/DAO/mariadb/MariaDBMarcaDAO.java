@@ -15,7 +15,7 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 
 	private final String INSERT = "INSERT INTO marca(nombre, sede, pais, activa) VALUES(?, ?, ?, ?)";
 	private final String READALL = "SELECT * FROM marca";
-	private final String READ = READALL + "WHERE id_marca = ?";
+	private final String READ = READALL + " WHERE id_marca = ?";
 	private final String UPDATE = "UPDATE marca SET nombre = ?, sede = ?, pais = ?, activa = ? WHERE id_marca = ?";
 	private final String DELETE = "DELETE FROM marca WHERE id_marca = ?";
 
