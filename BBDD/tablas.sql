@@ -37,14 +37,12 @@ CREATE TABLE factura(
     id_factura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     precio_total FLOAT NOT NULL,
     empleado INT NOT NULL,
-    PRIMARY KEY (id_factura),
-    FOREIGN KEY(empleado) REFERENCES empleado(id_empleado),
+    FOREIGN KEY(empleado) REFERENCES empleado(id_empleado)
 );
 
 CREATE TABLE empleado(
     id_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(9) NOT NULL,
-    tiempo_completo BOOLEAN NOT NULL DEFAULT 0,
-    PRIMARY KEY (id_empleado)
+    tiempo_completo BOOLEAN NOT NULL DEFAULT 0
 );
