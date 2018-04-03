@@ -1,7 +1,7 @@
-package DAO.mariadb;
+package integracion.DAO.mariadb;
 
-import DAO.interfaces.FacturaDAO;
-import modelo.transfer.TFactura;
+import integracion.DAO.interfaces.FacturaDAO;
+import negocio.transfer.TFactura;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

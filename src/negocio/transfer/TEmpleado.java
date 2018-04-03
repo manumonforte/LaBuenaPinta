@@ -1,4 +1,4 @@
-package modelo.transfer;
+package negocio.transfer;
 
 public class TEmpleado {
 

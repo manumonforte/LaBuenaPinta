@@ -1,7 +1,7 @@
-package DAO.mariadb;
+package integracion.DAO.mariadb;
 
-import DAO.interfaces.MarcaDAO;
-import modelo.transfer.TMarca;
+import integracion.DAO.interfaces.MarcaDAO;
+import negocio.transfer.TMarca;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

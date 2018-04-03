@@ -1,7 +1,7 @@
-package DAO.mariadb;
+package integracion.DAO.mariadb;
 
-import DAO.interfaces.EmpleadoDAO;
-import modelo.transfer.TEmpleado;
+import integracion.DAO.interfaces.EmpleadoDAO;
+import negocio.transfer.TEmpleado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

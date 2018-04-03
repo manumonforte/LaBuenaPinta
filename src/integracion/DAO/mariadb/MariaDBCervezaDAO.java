@@ -1,7 +1,7 @@
-package DAO.mariadb;
+package integracion.DAO.mariadb;
 
-import DAO.interfaces.CervezaDAO;
-import modelo.transfer.TCerveza;
+import integracion.DAO.interfaces.CervezaDAO;
+import negocio.transfer.TCerveza;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
-package DAO.mariadb;
+package integracion.DAO.mariadb;
 
-import DAO.interfaces.*;
+import integracion.DAO.interfaces.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
