@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 public class MariadDBGestorDAO implements GestorDAO {
 
+	private static MariadDBGestorDAO instancia = new MariadDBGestorDAO();
+
 	private Connection conn;
 
 	private CervezaDAO cerveza = null;
@@ -15,12 +17,16 @@ public class MariadDBGestorDAO implements GestorDAO {
 	private FacturaDAO factura = null;
 	private MarcaDAO marca = null;
 
-	public MariadDBGestorDAO() {
+	private MariadDBGestorDAO() {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LBP", "empleado", "password");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static MariadDBGestorDAO getInstancia() {
+		return instancia;
 	}
 
 	@Override

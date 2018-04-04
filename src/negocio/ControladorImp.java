@@ -1,5 +1,6 @@
 package negocio;
 
+import integracion.DAO.mariadb.MariadDBGestorDAO;
 import negocio.transfer.TCerveza;
 import negocio.transfer.TEmpleado;
 import negocio.transfer.TFactura;
@@ -7,7 +8,6 @@ import negocio.transfer.TMarca;
 
 public class ControladorImp implements Controlador{
 	//TODO
-
 	public boolean ejecutarCerveza(Acciones accion, TCerveza tCerveza){
 		switch (accion) {
 			case insertar:
@@ -21,7 +21,6 @@ public class ControladorImp implements Controlador{
 			case eliminar:
 				break;
 		}
-
 		return false;
 	}
 

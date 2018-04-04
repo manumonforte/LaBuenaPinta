@@ -6,8 +6,8 @@ import negocio.transfer.TFactura;
 import negocio.transfer.TMarca;
 
 public interface Controlador {
-	public boolean ejecutarCerveza(Acciones accion, TCerveza tCerveza);
-	public boolean ejecutarEmpleado(Acciones accion, TEmpleado tEmpleado);
-	public boolean ejecutarFactura(Acciones accion, TFactura tFactura);
-	public boolean ejecutarMarca(Acciones accion, TMarca tMarca);
+	public void ejecutarCerveza(Acciones accion, TCerveza tCerveza);
+	public void ejecutarEmpleado(Acciones accion, TEmpleado tEmpleado);
+	public void ejecutarFactura(Acciones accion, TFactura tFactura);
+	public void ejecutarMarca(Acciones accion, TMarca tMarca);
 }
