@@ -12,5 +12,5 @@ public interface DAO<T> {
 
 	void modificar(T e);
 
-	void eliminar(T e);
+	void eliminar(int id);
 }

@@ -16,8 +16,9 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 	private final String INSERT = "INSERT INTO marca(nombre, sede, pais, activa) VALUES(?, ?, ?, ?)";
 	private final String READALL = "SELECT * FROM marca";
 	private final String READ = READALL + " WHERE id_marca = ?";
+	private final String READBYNAME = READALL + " WHERE nombre = ?";
 	private final String UPDATE = "UPDATE marca SET nombre = ?, sede = ?, pais = ?, activa = ? WHERE id_marca = ?";
-	private final String DELETE = "DELETE FROM marca WHERE id_marca = ?";
+	private final String DELETE = "UPDATE marca SET activa = 0 WHERE id_marca = ?";
 
 	public MariaDBMarcaDAO(Connection conn) {
 		this.conn = conn;
@@ -59,6 +60,23 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 	}
 
 	@Override
+	public TMarca mostrarPorNombre(String nombre) {
+		TMarca m = null;
+		try (PreparedStatement st = conn.prepareStatement(READBYNAME)) {
+			st.setString(1, nombre);
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					m = new TMarca(rs.getInt("id_marca"), rs.getString("nombre"), rs.getString("sede"),
+							rs.getString("pais"), rs.getBoolean("activa"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
+
+	@Override
 	public List<TMarca> mostrarTodos() {
 		ArrayList<TMarca> lista = new ArrayList<TMarca>();
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
@@ -87,9 +105,10 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 	}
 
 	@Override
-	public void eliminar(TMarca e) {
+	public void eliminar(int id) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
-			st.setInt(1, e.getId_marca());
+			st.setInt(1, id);
+			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

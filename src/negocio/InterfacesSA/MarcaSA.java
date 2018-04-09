@@ -2,16 +2,18 @@ package negocio.InterfacesSA;
 
 import negocio.transfer.TMarca;
 
+import java.util.List;
+
 public interface MarcaSA {
 
-	public boolean insertar_marca(TMarca tMarca);
+	boolean insertar_marca(TMarca tMarca);
 
-	public boolean mostrar_marca(TMarca tMarca);
+	TMarca mostrar_marca(TMarca tMarca);
 
-	public boolean mostrar_todos_marca(TMarca tMarca);
+	List<TMarca> mostrar_todos_marca();
 
-	public boolean modificar_marca(TMarca tMarca);
+	boolean modificar_marca(TMarca tMarca);
 
-	public boolean baja_marca(TMarca tMarca);
+	boolean baja_marca(TMarca tMarca);
 
 }

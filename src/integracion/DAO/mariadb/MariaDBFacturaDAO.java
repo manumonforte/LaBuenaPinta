@@ -82,9 +82,10 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 	}
 
 	@Override
-	public void eliminar(TFactura e) {
+	public void eliminar(int id) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
-			st.setInt(1, e.getId_factura());
+			st.setInt(1, id);
+			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

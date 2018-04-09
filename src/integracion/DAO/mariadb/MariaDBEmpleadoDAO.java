@@ -89,9 +89,10 @@ public class MariaDBEmpleadoDAO implements EmpleadoDAO {
 	}
 
 	@Override
-	public void eliminar(TEmpleado e) {
+	public void eliminar(int id) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
-			st.setInt(1, e.getId_empleado());
+			st.setInt(1, id);
+			st.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

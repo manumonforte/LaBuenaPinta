@@ -16,8 +16,10 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 	private final String INSERT = "INSERT INTO cerveza(nombre, stock, graduacion, precio, activa) VALUES(?, ?, ?, ?, ?)";
 	private final String READALL = "SELECT * FROM cerveza";
 	private final String READ = READALL + " WHERE id_cerveza = ?";
+	private final String READBYNAME = READALL + " WHERE nombre = ?";
+	private final String READBYBRAND = READALL + " JOIN produce ON id_cerveza = cerveza WHERE marca = ?";
 	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, activa = ? WHERE id_cerveza = ?";
-	private final String DELETE = "DELETE FROM cerveza WHERE id_cerveza = ?";
+	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_marca = ?";
 
 	public MariaDBCervezaDAO(Connection conn) {
 		this.conn = conn;
@@ -60,6 +62,37 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 	}
 
 	@Override
+	public TCerveza mostrarPorNombre(String nombre) {
+		TCerveza c = null;
+		try (PreparedStatement st = conn.prepareStatement(READBYNAME)) {
+			st.setString(1, nombre);
+			try(ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					c = new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
+							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
+	@Override
+	public List<TCerveza> mostrarPorMarca(int id){
+		ArrayList<TCerveza> lista = new ArrayList<TCerveza>();
+		try (PreparedStatement st = conn.prepareStatement(READBYBRAND); ResultSet rs = st.executeQuery()) {
+			while (rs.next()){
+				lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
+						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	@Override
 	public List<TCerveza> mostrarTodos() {
 		ArrayList<TCerveza> lista = new ArrayList<TCerveza>();
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
@@ -89,9 +122,10 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 	}
 
 	@Override
-	public void eliminar(TCerveza e) {
+	public void eliminar(int id) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
-			st.setInt(1, e.getId_cerveza());
+			st.setInt(1, id);
+			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

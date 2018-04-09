@@ -2,16 +2,18 @@ package negocio.InterfacesSA;
 
 import negocio.transfer.TEmpleado;
 
+import java.util.List;
+
 public interface EmpleadoSA {
 
-	public boolean insertar_emplado(TEmpleado tEmpleado);
+	boolean insertar_emplado(TEmpleado tEmpleado);
 
-	public boolean mostrar_empleado((TEmpleado tEmpleado);
+	TEmpleado mostrar_empleado(TEmpleado tEmpleado);
 
-	public boolean mostrar_todos_empleado(TEmpleado tEmpleado);
+	List<TEmpleado> mostrar_todos_empleado();
 
-	public boolean modificar_empleado(TEmpleado tEmpleado);
+	boolean modificar_empleado(TEmpleado tEmpleado);
 
-	public boolean baja_empleado(TEmpleado tEmpleado);
+	boolean baja_empleado(TEmpleado tEmpleado);
 
 }
