@@ -5,7 +5,6 @@ import negocio.transfer.TMarca;
 import java.util.List;
 
 public interface MarcaSA {
-
 	boolean insertar_marca(TMarca tMarca);
 
 	TMarca mostrar_marca(TMarca tMarca);

@@ -2,6 +2,7 @@ package negocio.factoria;
 
 import negocio.InterfacesSA.CervezaSA;
 import negocio.InterfacesSA.EmpleadoSA;
+import negocio.InterfacesSA.FacturaSA;
 import negocio.InterfacesSA.MarcaSA;
 
 public interface FactoriaSA {
@@ -11,5 +12,5 @@ public interface FactoriaSA {
 
 	EmpleadoSA generarSAEmpleado();
 
-	FactoriaSA generarSAFactura();
+	FacturaSA generarSAFactura();
 }

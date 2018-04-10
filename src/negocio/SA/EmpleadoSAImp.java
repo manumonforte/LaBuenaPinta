@@ -1,4 +1,33 @@
 package negocio.SA;
 
-public class EmpleadoSAImp {
+import negocio.InterfacesSA.EmpleadoSA;
+import negocio.transfer.TEmpleado;
+
+import java.util.List;
+
+public class EmpleadoSAImp implements EmpleadoSA {//TODO
+	@Override
+	public boolean insertar_emplado(TEmpleado tEmpleado) {
+		return false;
+	}
+
+	@Override
+	public TEmpleado mostrar_empleado(TEmpleado tEmpleado) {
+		return null;
+	}
+
+	@Override
+	public List<TEmpleado> mostrar_todos_empleado() {
+		return null;
+	}
+
+	@Override
+	public boolean modificar_empleado(TEmpleado tEmpleado) {
+		return false;
+	}
+
+	@Override
+	public boolean baja_empleado(TEmpleado tEmpleado) {
+		return false;
+	}
 }
