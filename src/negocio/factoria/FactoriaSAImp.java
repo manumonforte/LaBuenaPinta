@@ -9,7 +9,7 @@ import negocio.SA.EmpleadoSAImp;
 import negocio.SA.FacturaSAImp;
 import negocio.SA.MarcaSAImp;
 
-public class FactoriaSAImp implements FactoriaSA{
+public class FactoriaSAImp extends FactoriaSA{
 
 	@Override
 	public MarcaSA generarSAMarca() {

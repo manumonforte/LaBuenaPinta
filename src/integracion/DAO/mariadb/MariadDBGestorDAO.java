@@ -12,11 +12,6 @@ public class MariadDBGestorDAO implements GestorDAO {
 
 	private Connection conn;
 
-	private CervezaDAO cerveza = null;
-	private EmpleadoDAO empleado = null;
-	private FacturaDAO factura = null;
-	private MarcaDAO marca = null;
-
 	private MariadDBGestorDAO() {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LBP", "empleado", "password");
@@ -31,34 +26,25 @@ public class MariadDBGestorDAO implements GestorDAO {
 
 	@Override
 	public CervezaDAO getCervezaDAO() {
-		if (cerveza == null) {
-			cerveza = new MariaDBCervezaDAO(conn);
-		}
-		return cerveza;
+		return new MariaDBCervezaDAO(conn);
 	}
 
 	@Override
 	public EmpleadoDAO getEmpleadoDAO() {
-		if (empleado == null) {
-			empleado = new MariaDBEmpleadoDAO(conn);
-		}
-		return empleado;
+		return new MariaDBEmpleadoDAO(conn);
+
 	}
 
 	@Override
 	public FacturaDAO getFacturaDAO() {
-		if (factura == null) {
-			factura = new MariaDBFacturaDAO(conn);
-		}
-		return factura;
+		return new MariaDBFacturaDAO(conn);
+
 	}
 
 	@Override
 	public MarcaDAO getMarcaDAO() {
-		if (marca == null) {
-			marca = new MariaDBMarcaDAO(conn);
-		}
-		return marca;
+		return new MariaDBMarcaDAO(conn);
+
 	}
 
 	public void cerrarConnection(){

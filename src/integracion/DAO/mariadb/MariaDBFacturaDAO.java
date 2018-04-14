@@ -18,6 +18,7 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 	private final String READ = READALL + " WHERE id_factura = ?";
 	private final String UPDATE = "UPDATE factura SET precio_total = ?, empleado = ? WHERE id_factura = ?";
 	private final String DELETE = "DELETE FROM factura WHERE id_factura = ?";
+	private final String RETURN = "DELETE FROM asociada WHERE factura = ? AND empleado = ?";
 
 	public MariaDBFacturaDAO(Connection conn) {
 		this.conn = conn;
@@ -85,6 +86,17 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 	public void eliminar(int id) {
 		try (PreparedStatement st = conn.prepareStatement(DELETE)) {
 			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void devolver_producto(int id_factura, int id_empleado) {
+		try (PreparedStatement st = conn.prepareStatement(RETURN)) {
+			st.setInt(1, id_factura);
+			st.setInt(2, id_empleado);
 			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

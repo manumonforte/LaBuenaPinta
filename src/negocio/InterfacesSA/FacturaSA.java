@@ -16,4 +16,5 @@ public interface FacturaSA {
 
 	boolean baja_factura(TFactura tFactura);
 
+	//boolean devolver_producto() //TODO necesita 2 parametros
 }

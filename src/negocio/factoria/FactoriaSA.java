@@ -5,12 +5,21 @@ import negocio.InterfacesSA.EmpleadoSA;
 import negocio.InterfacesSA.FacturaSA;
 import negocio.InterfacesSA.MarcaSA;
 
-public interface FactoriaSA {
-	MarcaSA generarSAMarca();
+public abstract class FactoriaSA {
+	private static FactoriaSA instancia = null;
 
-	CervezaSA generarSACerveza();
+	abstract public MarcaSA generarSAMarca();
 
-	EmpleadoSA generarSAEmpleado();
+	abstract public CervezaSA generarSACerveza();
 
-	FacturaSA generarSAFactura();
+	abstract public EmpleadoSA generarSAEmpleado();
+
+	abstract public FacturaSA generarSAFactura();
+
+	public static FactoriaSA getInstancia() {
+		if (instancia == null) {
+			instancia = new FactoriaSAImp();
+		}
+		return instancia;
+	}
 }
