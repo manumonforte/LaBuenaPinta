@@ -1,7 +1,7 @@
 package negocio.SA;
 
 import negocio.InterfacesSA.FacturaSA;
-import negocio.transfer.TFactura;
+import presentacion.transfer.TFactura;
 
 import java.util.List;
 

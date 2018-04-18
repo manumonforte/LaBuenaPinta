@@ -1,6 +1,6 @@
 package negocio.InterfacesSA;
 
-import negocio.transfer.TMarca;
+import presentacion.transfer.TMarca;
 
 import java.util.List;
 

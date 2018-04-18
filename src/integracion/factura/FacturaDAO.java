@@ -1,8 +1,9 @@
-package integracion.DAO.interfaces;
+package integracion.factura;
 
 
-import negocio.transfer.TCerveza;
-import negocio.transfer.TFactura;
+
+import integracion.DAO;
+import presentacion.transfer.TFactura;
 
 public interface FacturaDAO extends DAO<TFactura> {
 	public void devolver_producto(int id_factura, int id_empleado);

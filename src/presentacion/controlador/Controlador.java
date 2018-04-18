@@ -1,4 +1,4 @@
-package controlador;
+package presentacion.controlador;
 
 public abstract class Controlador {
 	private static Controlador instancia = null;

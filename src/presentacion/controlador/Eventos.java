@@ -1,4 +1,4 @@
-package controlador;
+package presentacion.controlador;
 
 public enum Eventos {
 

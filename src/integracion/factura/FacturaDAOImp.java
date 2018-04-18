@@ -1,7 +1,7 @@
-package integracion.DAO.mariadb;
+package integracion.factura;
 
-import integracion.DAO.interfaces.FacturaDAO;
-import negocio.transfer.TFactura;
+import integracion.FactoriaGestor.GestorConnexiones;
+import presentacion.transfer.TFactura;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBFacturaDAO implements FacturaDAO{
+public class FacturaDAOImp implements FacturaDAO{
 	private Connection conn;
 
 	private final String INSERT = "INSERT INTO factura(precio_total, empleado) VALUES(?, ?)";
@@ -20,8 +20,8 @@ public class MariaDBFacturaDAO implements FacturaDAO{
 	private final String DELETE = "DELETE FROM factura WHERE id_factura = ?";
 	private final String RETURN = "DELETE FROM asociada WHERE factura = ? AND empleado = ?";
 
-	public MariaDBFacturaDAO(Connection conn) {
-		this.conn = conn;
+	public FacturaDAOImp() {
+		this.conn = GestorConnexiones.getInstancia().getConnection();
 	}
 
 

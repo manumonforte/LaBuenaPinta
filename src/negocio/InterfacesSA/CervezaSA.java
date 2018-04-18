@@ -1,6 +1,6 @@
 package negocio.InterfacesSA;
 
-import negocio.transfer.TCerveza;
+import presentacion.transfer.TCerveza;
 
 import java.util.List;
 

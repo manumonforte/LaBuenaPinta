@@ -8,13 +8,13 @@ import negocio.InterfacesSA.MarcaSA;
 public abstract class FactoriaSA {
 	private static FactoriaSA instancia = null;
 
-	abstract public MarcaSA generarSAMarca();
+	public abstract MarcaSA generarSAMarca();
 
-	abstract public CervezaSA generarSACerveza();
+	public abstract CervezaSA generarSACerveza();
 
-	abstract public EmpleadoSA generarSAEmpleado();
+	public abstract EmpleadoSA generarSAEmpleado();
 
-	abstract public FacturaSA generarSAFactura();
+	public abstract FacturaSA generarSAFactura();
 
 	public static FactoriaSA getInstancia() {
 		if (instancia == null) {

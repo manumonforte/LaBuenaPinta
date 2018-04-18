@@ -1,7 +1,7 @@
 package negocio.SA;
 
 import negocio.InterfacesSA.EmpleadoSA;
-import negocio.transfer.TEmpleado;
+import presentacion.transfer.TEmpleado;
 
 import java.util.List;
 

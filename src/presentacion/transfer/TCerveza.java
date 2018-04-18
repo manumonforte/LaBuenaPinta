@@ -1,4 +1,4 @@
-package negocio.transfer;
+package presentacion.transfer;
 
 public class TCerveza {
 	private int id_cerveza;

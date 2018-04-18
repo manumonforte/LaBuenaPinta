@@ -1,4 +1,4 @@
-package negocio.transfer;
+package presentacion.transfer;
 
 public class TMarca {
 	private int id_marca;

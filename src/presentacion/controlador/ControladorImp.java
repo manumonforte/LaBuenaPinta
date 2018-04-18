@@ -1,10 +1,10 @@
-package controlador;
+package presentacion.controlador;
 
 import negocio.factoria.FactoriaSA;
-import negocio.transfer.TCerveza;
-import negocio.transfer.TEmpleado;
-import negocio.transfer.TFactura;
-import negocio.transfer.TMarca;
+import presentacion.transfer.TCerveza;
+import presentacion.transfer.TEmpleado;
+import presentacion.transfer.TFactura;
+import presentacion.transfer.TMarca;
 
 public class ControladorImp extends Controlador {
 

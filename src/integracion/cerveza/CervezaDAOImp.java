@@ -1,7 +1,7 @@
-package integracion.DAO.mariadb;
+package integracion.cerveza;
 
-import integracion.DAO.interfaces.CervezaDAO;
-import negocio.transfer.TCerveza;
+import integracion.FactoriaGestor.GestorConnexiones;
+import presentacion.transfer.TCerveza;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBCervezaDAO implements CervezaDAO {
+public class CervezaDAOImp implements CervezaDAO {
 	private Connection conn;
 
 	private final String INSERT = "INSERT INTO cerveza(nombre, stock, graduacion, precio, activa) VALUES(?, ?, ?, ?, ?)";
@@ -21,8 +21,8 @@ public class MariaDBCervezaDAO implements CervezaDAO {
 	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, activa = ? WHERE id_cerveza = ?";
 	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_marca = ?";
 
-	public MariaDBCervezaDAO(Connection conn) {
-		this.conn = conn;
+	public CervezaDAOImp() {
+		this.conn = GestorConnexiones.getInstancia().getConnection();
 	}
 
 	@Override

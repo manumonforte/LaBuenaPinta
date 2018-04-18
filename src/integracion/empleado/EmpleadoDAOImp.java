@@ -1,7 +1,7 @@
-package integracion.DAO.mariadb;
+package integracion.empleado;
 
-import integracion.DAO.interfaces.EmpleadoDAO;
-import negocio.transfer.TEmpleado;
+import integracion.FactoriaGestor.GestorConnexiones;
+import presentacion.transfer.TEmpleado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBEmpleadoDAO implements EmpleadoDAO {
+public class EmpleadoDAOImp implements EmpleadoDAO {
 	private Connection conn;
 
 	private final String INSERT = "INSERT INTO empleado(nombre, telefono, tiempo_completo) VALUES(?, ?, ?)";
@@ -19,8 +19,8 @@ public class MariaDBEmpleadoDAO implements EmpleadoDAO {
 	private final String UPDATE = "UPDATE empleado SET nombre = ?, telefono = ?, tiempo_completo = ? WHERE id_marca = ?";
 	private final String DELETE = "DELETE FROM empleado WHERE id_empleado = ?";
 
-	public MariaDBEmpleadoDAO(Connection conn) {
-		this.conn = conn;
+	public EmpleadoDAOImp() {
+		this.conn = GestorConnexiones.getInstancia().getConnection();
 	}
 
 	@Override

@@ -1,7 +1,7 @@
-package integracion.DAO.mariadb;
+package integracion.marca;
 
-import integracion.DAO.interfaces.MarcaDAO;
-import negocio.transfer.TMarca;
+import integracion.FactoriaGestor.GestorConnexiones;
+import presentacion.transfer.TMarca;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MariaDBMarcaDAO implements MarcaDAO {
+public class MarcaDAOImp implements MarcaDAO {
 	private Connection conn;
 
 	private final String INSERT = "INSERT INTO marca(nombre, sede, pais, activa) VALUES(?, ?, ?, ?)";
@@ -20,8 +20,8 @@ public class MariaDBMarcaDAO implements MarcaDAO {
 	private final String UPDATE = "UPDATE marca SET nombre = ?, sede = ?, pais = ?, activa = ? WHERE id_marca = ?";
 	private final String DELETE = "UPDATE marca SET activa = 0 WHERE id_marca = ?";
 
-	public MariaDBMarcaDAO(Connection conn) {
-		this.conn = conn;
+	public MarcaDAOImp() {
+		this.conn = GestorConnexiones.getInstancia().getConnection();
 	}
 
 	@Override

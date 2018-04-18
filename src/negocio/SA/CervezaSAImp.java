@@ -1,8 +1,8 @@
 package negocio.SA;
 
-import integracion.DAO.mariadb.MariadDBGestorDAO;
+import integracion.factoriaDAO.FactoriaDAOImp;
 import negocio.InterfacesSA.CervezaSA;
-import negocio.transfer.TCerveza;
+import presentacion.transfer.TCerveza;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ public class CervezaSAImp implements CervezaSA{
 
 	@Override
 	public boolean insertar_cerveza(TCerveza tCerveza) {
-		TCerveza tl = MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre());
+		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre());
 
 		if (tl == null){
-			MariadDBGestorDAO.getInstancia().getCervezaDAO().insertar(tCerveza);
+			FactoriaDAOImp.getInstancia().getCervezaDAO().insertar(tCerveza);
 			return true;
 		} else {
 			return false;
@@ -22,36 +22,36 @@ public class CervezaSAImp implements CervezaSA{
 
 	@Override
 	public TCerveza mostrar_cerveza(TCerveza tCerveza) {
-		return MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
+		return FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
 	}
 
 	@Override
 	public List<TCerveza> mostrar_todos_cerveza() {
-		return MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrarTodos();
+		return FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarTodos();
 	}
 
 	@Override
 	public boolean modificar_cerveza(TCerveza tCerveza) {
-		TCerveza tl = MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
+		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
 
 		if (tl == null) {
 			return false;
-		} else if (MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre()).getId_cerveza()
+		} else if (FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre()).getId_cerveza()
 				!= tl.getId_cerveza()) {
 			return false;
 		} else {
-			MariadDBGestorDAO.getInstancia().getCervezaDAO().modificar(tCerveza);
+			FactoriaDAOImp.getInstancia().getCervezaDAO().modificar(tCerveza);
 			return true;
 		}	}
 
 	@Override
 	public boolean baja_cerveza(TCerveza tCerveza) {
-		TCerveza tl = MariadDBGestorDAO.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
+		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
 
 		if (tl == null || tl.getStock() != 0){
 			return false;
 		} else {
-			MariadDBGestorDAO.getInstancia().getCervezaDAO().eliminar(tCerveza.getId_cerveza());
+			FactoriaDAOImp.getInstancia().getCervezaDAO().eliminar(tCerveza.getId_cerveza());
 			return true;
 		}
 	}
