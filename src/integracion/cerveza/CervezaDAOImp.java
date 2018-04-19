@@ -1,6 +1,6 @@
 package integracion.cerveza;
 
-import integracion.FactoriaGestor.GestorConnexiones;
+import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TCerveza;
 
 import java.sql.Connection;

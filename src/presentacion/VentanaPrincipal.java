@@ -1,25 +1,22 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import presentacion.controlador.Controlador;
 
-public class MainWindow extends JFrame{
+public class VentanaPrincipal extends JFrame{
 	
 	private Controlador controlador;
 
-	private MenuBar menuBar;
+	private Menu menu;
 	
-	public MainWindow(Controlador controlador){
+	public VentanaPrincipal(Controlador controlador){
 		super("La Buena Pinta");
-		this.controlador = this.controlador;
+		this.controlador = controlador;
 		this.initGUI();
 	}
 	
@@ -33,8 +30,6 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void windowActivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
@@ -49,58 +44,40 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void windowIconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void windowOpened(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 		});
 		
-		JPanel mainPanel = this.createMainPanel();
-		//this.setContentPane(mainPanel);
+
+		//PanelTabs superior
+		Menu menu = new Menu(this, controlador);
+		this.setJMenuBar(menu);
 		
-		//Panel superior
-		MenuBar menuBar = new MenuBar(this, this.controlador);
-		this.setJMenuBar(menuBar);
-		
-		TabbedPane tabbedPane = new TabbedPane(this, this.controlador);
-		JPanel centerPanel = new JPanel(new GridLayout(1, 1));
-		centerPanel.add(tabbedPane);
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		PanelTabs tabbedPane = new PanelTabs(this, controlador);
 		setContentPane(tabbedPane);
-		
+
 		this.pack();
 		this.setVisible(true);
-	}
-	
-	private JPanel createMainPanel() {
-		return new JPanel(new BorderLayout());
 	}
 	
 	//main para probar la ejecucion de la clase
 	public static void main(String[] args) {
 		 SwingUtilities.invokeLater(new Runnable() {
-			
 			@Override
 			public void run() {
-				new MainWindow(null);
+				new VentanaPrincipal(null);
 			}
 		});
 	}

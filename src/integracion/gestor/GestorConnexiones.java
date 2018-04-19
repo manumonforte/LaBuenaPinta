@@ -1,4 +1,4 @@
-package integracion.FactoriaGestor;
+package integracion.gestor;
 
 import java.sql.Connection;
 
@@ -12,4 +12,6 @@ public abstract class GestorConnexiones {
 		return instancia;
 	}
 	public abstract Connection getConnection();
+
+	public abstract void cerrarConnection();
 }

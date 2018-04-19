@@ -1,6 +1,6 @@
 package integracion.factura;
 
-import integracion.FactoriaGestor.GestorConnexiones;
+import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TFactura;
 
 import java.sql.Connection;

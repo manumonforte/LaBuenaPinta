@@ -1,6 +1,6 @@
 package integracion.empleado;
 
-import integracion.FactoriaGestor.GestorConnexiones;
+import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TEmpleado;
 
 import java.sql.Connection;

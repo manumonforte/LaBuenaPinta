@@ -1,4 +1,4 @@
-package integracion.FactoriaGestor;
+package integracion.gestor;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

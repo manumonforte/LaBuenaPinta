@@ -1,6 +1,6 @@
 package integracion.marca;
 
-import integracion.FactoriaGestor.GestorConnexiones;
+import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TMarca;
 
 import java.sql.Connection;

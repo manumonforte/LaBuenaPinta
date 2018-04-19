@@ -11,30 +11,29 @@ import javax.swing.KeyStroke;
 
 import presentacion.controlador.Controlador;
 
-public class MenuBar extends JMenuBar {
+public class Menu extends JMenuBar {
 
-	public MenuBar(MainWindow mainWindow, Controlador controlador) {
+	public Menu(VentanaPrincipal ventanaPrincipal, Controlador controlador) {
 		super();
 
 		// Create
 		JMenu create = new JMenu("Create");
 		this.add(create);
-		this.addCreateMenu(create, mainWindow);
+		this.addCreateMenu(create, ventanaPrincipal);
 
-		// Delete
+		//Delete
 		JMenu delete = new JMenu("Delete");
 		this.add(delete);
-		this.addDeleteMenu(delete, mainWindow);
+		this.addDeleteMenu(delete, ventanaPrincipal);
 		
 		//Modify
 		JMenu modify = new JMenu("Modify");
 		this.add(modify);
-		this.addModifyMenu(modify,mainWindow);
+		this.addModifyMenu(modify, ventanaPrincipal);
 
 	}
-
-	private void addCreateMenu(JMenu jMenu, MainWindow mainWindow) {
-
+	
+	private void addCreateMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal){
 		JMenuItem createMark = new JMenuItem("Create Mark");
 		createMark.setMnemonic(KeyEvent.VK_M);
 		createMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -84,9 +83,8 @@ public class MenuBar extends JMenuBar {
 		jMenu.add(createEmployee);
 		jMenu.add(createBill);
 	}
-
-	public void addDeleteMenu(JMenu jMenu, MainWindow mainWindow) {
-
+	
+	public void addDeleteMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal) {
 		JMenuItem deleteMark = new JMenuItem("Delete Mark");
 		deleteMark.setMnemonic(KeyEvent.VK_M);
 		deleteMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
@@ -136,9 +134,8 @@ public class MenuBar extends JMenuBar {
 		jMenu.add(deleteEmployee);
 		jMenu.add(deleteBill);
 	}
-
-	public void addModifyMenu(JMenu jMenu, MainWindow mainWindow) {
-
+	
+	public void addModifyMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal) {
 		JMenuItem modifyMark = new JMenuItem("Modify Mark");
 		modifyMark.setMnemonic(KeyEvent.VK_M);
 		modifyMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
