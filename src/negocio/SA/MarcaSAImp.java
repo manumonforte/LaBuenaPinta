@@ -52,6 +52,10 @@ public class MarcaSAImp implements MarcaSA {
 		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
 		List<TCerveza> tlCerveza = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorMarca(tMarca.getId_marca());
 
+		if (tl == null){
+			return false;
+		}
+
 		for (TCerveza tCerveza : tlCerveza) {
 			if (tCerveza.isActiva()) {
 				return false;

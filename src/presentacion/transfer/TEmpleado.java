@@ -4,13 +4,14 @@ public class TEmpleado {
 
 	private int id_empleado;
 	private String nombre;
-	private int telefono;
+	private String DNI;
 	private boolean tiempo_completo;
+	private boolean activo;
 
-	public TEmpleado(int id_empleado, String nombre, int telefono, boolean tiempo_completo) {
+	public TEmpleado(int id_empleado, String nombre, String DNI, boolean tiempo_completo) {
 		this.id_empleado = id_empleado; //TODO revisar
 		this.nombre = nombre;
-		this.telefono = telefono;
+		this.DNI = DNI;
 		this.tiempo_completo = tiempo_completo;
 	}
 
@@ -30,12 +31,12 @@ public class TEmpleado {
 		this.nombre = nombre;
 	}
 
-	public int getTelefono() {
-		return telefono;
+	public String getDNI() {
+		return DNI;
 	}
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
+	public void setDNI(String DNI) {
+		this.DNI = DNI;
 	}
 
 	public boolean isTiempo_completo() {
@@ -44,5 +45,14 @@ public class TEmpleado {
 
 	public void setTiempo_completo(boolean tiempo_completo) {
 		this.tiempo_completo = tiempo_completo;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public TEmpleado setActivo(boolean activo) {
+		this.activo = activo;
+		return this;
 	}
 }

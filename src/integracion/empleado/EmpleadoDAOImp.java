@@ -13,11 +13,12 @@ import java.util.List;
 public class EmpleadoDAOImp implements EmpleadoDAO {
 	private Connection conn;
 
-	private final String INSERT = "INSERT INTO empleado(nombre, telefono, tiempo_completo) VALUES(?, ?, ?)";
+	private final String INSERT = "INSERT INTO empleado(nombre, DNI, tiempo_completo) VALUES(?, ?, ?)";
 	private final String READALL = "SELECT * FROM empleado";
 	private final String READ = READALL + " WHERE id_empleado = ?";
-	private final String UPDATE = "UPDATE empleado SET nombre = ?, telefono = ?, tiempo_completo = ? WHERE id_marca = ?";
-	private final String DELETE = "DELETE FROM empleado WHERE id_empleado = ?";
+	private final String READBYDNI = READALL + " WHERE DNI = ?";
+	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_marca = ?";
+	private final String DELETE = "UPDATE empleado SET activo = 0 WHERE id_empleado = ?";
 
 	public EmpleadoDAOImp() {
 		this.conn = GestorConnexiones.getInstancia().getConnection();
@@ -27,7 +28,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	public void insertar(TEmpleado e) {
 		try (PreparedStatement st = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			st.setString(1, e.getNombre());
-			st.setInt(2, e.getTelefono());
+			st.setString(2, e.getDNI());
 			st.setBoolean(3, e.isTiempo_completo());
 			st.executeUpdate();
 			try (ResultSet rs = st.getGeneratedKeys()) {
@@ -49,7 +50,26 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 				if (rs.next()) {
 					e = new TEmpleado(id,
 							rs.getString("nombre"),
-							rs.getInt("telefono"),
+							rs.getString("DNI"),
+							rs.getBoolean("tiempo_completo"));
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return e;
+	}
+
+	@Override
+	public TEmpleado mostrarPorDNI(String DNI) {
+		TEmpleado e = null;
+		try (PreparedStatement st = conn.prepareStatement(READBYDNI)) {
+			st.setString(1, DNI);
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					e = new TEmpleado(rs.getInt("id_empleado"),
+							rs.getString("nombre"),
+							rs.getString("DNI"),
 							rs.getBoolean("tiempo_completo"));
 				}
 			}
@@ -66,7 +86,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			while (rs.next()) {
 				lista.add(new TEmpleado(rs.getInt("id_empleado"),
 						rs.getString("nombre"),
-						rs.getInt("telefono"),
+						rs.getString("DNI"),
 						rs.getBoolean("tiempo_completo")));
 			}
 		} catch (SQLException ex) {
@@ -79,7 +99,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	public void modificar(TEmpleado e) {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
 			st.setString(1, e.getNombre());
-			st.setInt(2, e.getTelefono());
+			st.setString(2, e.getDNI());
 			st.setBoolean(3, e.isTiempo_completo());
 			st.setInt(5, e.getId_empleado());
 			st.executeUpdate();

@@ -4,4 +4,6 @@ import integracion.DAO;
 import presentacion.transfer.TEmpleado;
 
 public interface EmpleadoDAO extends DAO<TEmpleado> {
+	TEmpleado mostrarPorDNI(String DNI);
+
 }

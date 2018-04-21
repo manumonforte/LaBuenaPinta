@@ -19,7 +19,7 @@ public class CervezaDAOImp implements CervezaDAO {
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
 	private final String READBYBRAND = READALL + " JOIN produce ON id_cerveza = cerveza WHERE marca = ?";
 	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, activa = ? WHERE id_cerveza = ?";
-	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_marca = ?";
+	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_cerveza = ?";
 
 	public CervezaDAOImp() {
 		this.conn = GestorConnexiones.getInstancia().getConnection();
