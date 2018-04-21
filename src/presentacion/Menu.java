@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,28 +17,27 @@ public class Menu extends JMenuBar {
 	public Menu(VentanaPrincipal ventanaPrincipal, Controlador controlador) {
 		super();
 
+		this.setBackground(new Color(255, 255, 255));
+
 		// Create
-		JMenu create = new JMenu("Create");
+		JMenu create = new JMenu("Crear");
 		this.add(create);
 		this.addCreateMenu(create, ventanaPrincipal);
 
 		//Delete
-		JMenu delete = new JMenu("Delete");
+		JMenu delete = new JMenu("Eliminar");
 		this.add(delete);
 		this.addDeleteMenu(delete, ventanaPrincipal);
 		
 		//Modify
-		JMenu modify = new JMenu("Modify");
+		JMenu modify = new JMenu("Modificar");
 		this.add(modify);
 		this.addModifyMenu(modify, ventanaPrincipal);
-
 	}
 	
 	private void addCreateMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal){
-		JMenuItem createMark = new JMenuItem("Create Mark");
-		createMark.setMnemonic(KeyEvent.VK_M);
-		createMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
-		createMark.addActionListener(new ActionListener() {
+		JMenuItem crearMarca = new JMenuItem("Crear Marca");
+		crearMarca.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -45,10 +45,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem createBeer = new JMenuItem("Create Beer");
-		createBeer.setMnemonic(KeyEvent.VK_B);
-		createBeer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		createBeer.addActionListener(new ActionListener() {
+		JMenuItem crearCerveza = new JMenuItem("Crear Cerveza");
+		crearCerveza.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -56,10 +54,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem createEmployee = new JMenuItem("Create Employee");
-		createEmployee.setMnemonic(KeyEvent.VK_E);
-		createEmployee.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		createEmployee.addActionListener(new ActionListener() {
+		JMenuItem crearEmpleado = new JMenuItem("Crear Empleado");
+		crearEmpleado.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -67,10 +63,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem createBill = new JMenuItem("Create Bill");
-		createBill.setMnemonic(KeyEvent.VK_F);
-		createBill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.ALT_MASK));
-		createBill.addActionListener(new ActionListener() {
+		JMenuItem crearFactura = new JMenuItem("Crear Factura");
+		crearFactura.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -78,17 +72,15 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		jMenu.add(createMark);
-		jMenu.add(createBeer);
-		jMenu.add(createEmployee);
-		jMenu.add(createBill);
+		jMenu.add(crearMarca);
+		jMenu.add(crearCerveza);
+		jMenu.add(crearEmpleado);
+		jMenu.add(crearFactura);
 	}
 	
 	public void addDeleteMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal) {
-		JMenuItem deleteMark = new JMenuItem("Delete Mark");
-		deleteMark.setMnemonic(KeyEvent.VK_M);
-		deleteMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
-		deleteMark.addActionListener(new ActionListener() {
+		JMenuItem eliminarMarca = new JMenuItem("Eliminar Marca");
+		eliminarMarca.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -96,10 +88,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteBeer = new JMenuItem("Delete beer");
-		deleteBeer.setMnemonic(KeyEvent.VK_B);
-		deleteBeer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		deleteBeer.addActionListener(new ActionListener() {
+		JMenuItem eliminarCerveza = new JMenuItem("Eliminar Cerveza");
+		eliminarCerveza.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,10 +97,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteEmployee = new JMenuItem("Delete Employee");
-		deleteEmployee.setMnemonic(KeyEvent.VK_E);
-		deleteEmployee.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		deleteEmployee.addActionListener(new ActionListener() {
+		JMenuItem eliminarEmpleado = new JMenuItem("Eliminar Empleado");
+		eliminarEmpleado.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -118,10 +106,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteBill = new JMenuItem("Delete Bill");
-		deleteBill.setMnemonic(KeyEvent.VK_F);
-		deleteBill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.ALT_MASK));
-		deleteBill.addActionListener(new ActionListener() {
+		JMenuItem eliminarFactura = new JMenuItem("Eliminar Factura");
+		eliminarFactura.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -129,17 +115,15 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		jMenu.add(deleteMark);
-		jMenu.add(deleteBeer);
-		jMenu.add(deleteEmployee);
-		jMenu.add(deleteBill);
+		jMenu.add(eliminarMarca);
+		jMenu.add(eliminarCerveza);
+		jMenu.add(eliminarEmpleado);
+		jMenu.add(eliminarFactura);
 	}
 	
 	public void addModifyMenu(JMenu jMenu, VentanaPrincipal ventanaPrincipal) {
-		JMenuItem modifyMark = new JMenuItem("Modify Mark");
-		modifyMark.setMnemonic(KeyEvent.VK_M);
-		modifyMark.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
-		modifyMark.addActionListener(new ActionListener() {
+		JMenuItem modificarMarca = new JMenuItem("Modificar Marca");
+		modificarMarca.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -147,10 +131,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteBeer = new JMenuItem("Modify Beer");
-		deleteBeer.setMnemonic(KeyEvent.VK_B);
-		deleteBeer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		deleteBeer.addActionListener(new ActionListener() {
+		JMenuItem modificarCerveza = new JMenuItem("Modificar Cerveza");
+		modificarCerveza.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -158,10 +140,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteEmployee = new JMenuItem("Modify Employee");
-		deleteEmployee.setMnemonic(KeyEvent.VK_E);
-		deleteEmployee.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-		deleteEmployee.addActionListener(new ActionListener() {
+		JMenuItem modificarEmpleado = new JMenuItem("Modificar Empleado");
+		modificarEmpleado.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -169,10 +149,8 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		JMenuItem deleteBill = new JMenuItem("Modify Bill");
-		deleteBill.setMnemonic(KeyEvent.VK_F);
-		deleteBill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.ALT_MASK));
-		deleteBill.addActionListener(new ActionListener() {
+		JMenuItem modificarFactura = new JMenuItem("Modificar Factura");
+		modificarFactura.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -180,9 +158,9 @@ public class Menu extends JMenuBar {
 			}
 		});
 
-		jMenu.add(modifyMark);
-		jMenu.add(deleteBeer);
-		jMenu.add(deleteEmployee);
-		jMenu.add(deleteBill);
+		jMenu.add(modificarMarca);
+		jMenu.add(modificarCerveza);
+		jMenu.add(modificarEmpleado);
+		jMenu.add(modificarFactura);
 	}
 }

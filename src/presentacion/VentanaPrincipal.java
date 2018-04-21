@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -25,7 +26,10 @@ public class VentanaPrincipal extends JFrame{
 	}
 	
 	private void initGUI() {
-	    this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+	    this.setPreferredSize(new Dimension( 1024, 720 ));
+	    this.setResizable(false);
+		this.setLocationRelativeTo(null);
+
 		this.addWindowListener(new WindowListener() {
 
 			@Override
@@ -59,7 +63,6 @@ public class VentanaPrincipal extends JFrame{
 			}
 			
 		});
-		
 
 		//PanelTabs superior
 		Menu menu = new Menu(this, controlador);
@@ -71,7 +74,7 @@ public class VentanaPrincipal extends JFrame{
 		this.pack();
 		this.setVisible(true);
 	}
-	
+
 	//main para probar la ejecucion de la clase
 	public static void main(String[] args) {
 		 SwingUtilities.invokeLater(new Runnable() {

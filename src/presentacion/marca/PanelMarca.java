@@ -3,8 +3,8 @@ package presentacion.marca;
 import javax.swing.*;
 
 import presentacion.controlador.Controlador;
+import presentacion.controlador.Eventos;
 
-import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -14,23 +14,18 @@ import java.awt.event.ActionListener;
 
 public class PanelMarca extends JPanel{
 
+	private Controlador controlador;
 	private JToolBar toolBarMarca;
-
-	private JPanel panelMarca;
-
-	private JPanel panelFormAlta;
-	private JPanel panelFormBaja;
-	private JPanel panelFormMostrar;
-	private JPanel panelFormModificar;
+	private JDialog panelFormAlta;
+	private JDialog panelFormBaja;
+	private JDialog panelFormMostrar;
+	private JDialog panelFormModificar;
 
 	public PanelMarca(Controlador controlador){
 		super();
-
-		panelMarca = new JPanel(new BorderLayout());
-
-		panelMarca.add(toolbarMarca(), BorderLayout.NORTH);
-
-		this.add(panelMarca);
+		this.controlador = controlador;
+		this.setLayout(new BorderLayout());
+		this.add(toolbarMarca(), BorderLayout.NORTH);
 	}
 
 	private JToolBar toolbarMarca() {
@@ -38,8 +33,10 @@ public class PanelMarca extends JPanel{
 		toolBarMarca = new JToolBar();
 
 		// crear marca
-		JButton botonCrear = new JButton(new ImageIcon("resources/images/add-32.png"));
+		JButton botonCrear = new JButton("Crear Marca",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear marca");
+		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -50,8 +47,10 @@ public class PanelMarca extends JPanel{
 		});
 
 		// eliminar marca
-		JButton botonElimiar = new JButton(new ImageIcon("resources/images/remove-32.png"));
+		JButton botonElimiar = new JButton("Eliminar Marca", new ImageIcon("resources/images/remove-32.png"));
 		botonElimiar.setToolTipText("Eliminar marca");
+		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -62,8 +61,10 @@ public class PanelMarca extends JPanel{
 		});
 
 		// mostrar marca
-		JButton botonMostrar = new JButton(new ImageIcon("resources/images/eye-32.png"));
+		JButton botonMostrar = new JButton("Mostrar Marca",new ImageIcon( "resources/images/eye-32.png"));
 		botonMostrar.setToolTipText("Mostrar marca");
+		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -74,9 +75,11 @@ public class PanelMarca extends JPanel{
 		});
 
 		// modificar marca
-		JButton botonCModificar = new JButton(new ImageIcon("resources/images/edit-32.png"));
-		botonCModificar.setToolTipText("Modificar marca");
-		botonCModificar.addActionListener(new ActionListener() {
+		JButton botonModificar = new JButton("Modificar Marca", new ImageIcon("resources/images/edit-32.png"));
+		botonModificar.setToolTipText("Modificar marca");
+		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
+		botonModificar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +89,7 @@ public class PanelMarca extends JPanel{
 		});
 
 		toolBarMarca.add(botonCrear);
-		toolBarMarca.add(botonCModificar);
+		toolBarMarca.add(botonModificar);
 		toolBarMarca.add(botonMostrar);
 		toolBarMarca.add(botonElimiar);
 
@@ -94,55 +97,23 @@ public class PanelMarca extends JPanel{
 	}
 
 	private void formularioAltaMarca() {
-		panelFormAlta = new JPanel(new GridLayout(2, 1));
-
 		panelFormAlta.add(camposFormularioAlta());
-		panelFormAlta.add(botonesFormulario());
-
-		panelMarca.add(panelFormAlta, BorderLayout.CENTER);
-
-		panelFormBaja.setVisible(false);
-		panelFormModificar.setVisible(false);
-		panelFormMostrar.setVisible(false);
+		this.add(panelFormAlta, BorderLayout.CENTER);
 	}
 
 	private void formularioBajaMarca() {
-		panelFormBaja = new JPanel(new GridLayout(2, 1));
-
 		panelFormBaja.add(camposFormularioBaja());
-		panelFormBaja.add(botonesFormulario());
-
-		panelMarca.add(panelFormBaja, BorderLayout.CENTER);
-
-		panelFormAlta.setVisible(false);
-		panelFormModificar.setVisible(false);
-		panelFormMostrar.setVisible(false);
+		this.add(panelFormBaja, BorderLayout.CENTER);
 	}
 
 	private void formularioMostrarMarca() {
-		panelFormMostrar = new JPanel(new GridLayout(2, 1));
-
 		panelFormMostrar.add(camposFormularioMostrar());
-		panelFormMostrar.add(botonesFormulario());
-
-		panelMarca.add(panelFormMostrar, BorderLayout.CENTER);
-
-		panelFormBaja.setVisible(false);
-		panelFormModificar.setVisible(false);
-		panelFormAlta.setVisible(false);
+		this.add(panelFormMostrar, BorderLayout.CENTER);
 	}
 
 	private void formularioModificarMarca() {
-		panelFormModificar = new JPanel(new GridLayout(2, 1));
-
 		panelFormModificar.add(camposFormularioModificar());
-		panelFormModificar.add(botonesFormulario());
-
-		panelMarca.add(panelFormModificar, BorderLayout.CENTER);
-
-		panelFormAlta.setVisible(false);
-		panelFormBaja.setVisible(false);
-		panelFormMostrar.setVisible(false);
+		this.add(panelFormModificar, BorderLayout.CENTER);
 	}
 
 	private JPanel camposFormularioAlta(){
@@ -201,10 +172,10 @@ public class PanelMarca extends JPanel{
 		panelGridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelCampos.setLayout(panelGridBagLayout);
 
-		addLabelAndTextField("Nombre:", 1, panelCampos);
-		addLabelAndTextField("Sede:", 2, panelCampos);
-		addLabelAndTextField("Pais:", 3, panelCampos);
-		addLabelAndTextField("Activa:", 4, panelCampos);
+		addLabelAndTextField("Nombre:", 0, panelCampos);
+		addLabelAndTextField("Sede:", 1, panelCampos);
+		addLabelAndTextField("Pais:", 2, panelCampos);
+		addLabelAndTextField("Activa:", 3, panelCampos);
 
 
 		return panelCampos;
@@ -249,35 +220,5 @@ public class PanelMarca extends JPanel{
 		gridBagConstraintForTextField.gridy = yPos;
 		containingPanel.add(textField, gridBagConstraintForTextField);
 		textField.setColumns(10);
-	}
-
-	private JPanel botonesFormulario() {
-
-		JPanel panelBotones = new JPanel(new GridLayout(1,2));
-
-		JButton botonAceptar = new JButton("Aceptar");
-		botonAceptar.setPreferredSize(new Dimension(40, 40));
-		botonAceptar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//IMPLEMENTAR ACEPTAR
-			}
-		});
-
-		JButton botonCancelar = new JButton("Cancelar");
-		botonCancelar.setPreferredSize(new Dimension(40, 40));
-		botonCancelar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//IMPLEMENTAR CANCELAR
-			}
-		});
-
-		panelBotones.add(botonCancelar);
-		panelBotones.add(botonAceptar);
-
-		return panelBotones;
 	}
 }

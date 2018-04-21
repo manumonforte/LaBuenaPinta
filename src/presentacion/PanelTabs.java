@@ -18,35 +18,36 @@ public class PanelTabs extends JTabbedPane {
     private PanelEmpleado panelEmpleado;
 	private PanelMarca panelMarca;
 	private PanelFactura panelFactura;
-	private JToolBar toolBar;
 
     public PanelTabs(VentanaPrincipal ventanaPrincipal, Controlador controlador) {
-        toolBar = new ToolBar(ventanaPrincipal, controlador);
 
+        //vista cerveza
         JComponent tabCerveza = makeTextPanel("PanelTabs de Cervezas");
-        addTab("Cervezas", new ImageIcon("resources/images/beer-16.png"), tabCerveza,"Does nothing");
+        addTab("Cervezas", new ImageIcon("resources/images/beer-16.png"), tabCerveza,"Vista cerveza");
         setMnemonicAt(0, KeyEvent.VK_1);
-        panelCerveza = new PanelCerveza();
-		panelCerveza.setLayout(new BorderLayout());
-		tabCerveza.add(panelCerveza);
-        panelCerveza.add(toolBar, BorderLayout.NORTH);
+        panelCerveza = new PanelCerveza(controlador);
+        tabCerveza.add(panelCerveza);
 
-
+        //vista empleado
         JComponent tabEmpleado = makeTextPanel("PanelTabs de Empleados");
-        addTab("Empleados", new ImageIcon("resources/images/employee-16.png"), tabEmpleado, "Does twice as much nothing");
+        addTab("Empleados", new ImageIcon("resources/images/employee-16.png"), tabEmpleado, "Vista empleado");
         setMnemonicAt(1, KeyEvent.VK_2);
-        panelEmpleado = new PanelEmpleado();
+        panelEmpleado = new PanelEmpleado(controlador);
         tabEmpleado.add(panelEmpleado);
 
-        JComponent tabMarca = makeTextPanel("PanelTabs de Marcas");
-        addTab("Marcas", new ImageIcon("resources/images/company-16.png"), tabMarca, "Still does nothing");
+        //vista marca
+        JComponent tabMarca = new JPanel(new GridLayout(1, 1));
+        addTab("Marcas", new ImageIcon("resources/images/company-16.png"), tabMarca, "Vista marca");
         setMnemonicAt(2, KeyEvent.VK_3);
-		tabMarca.add(createPage());
+        panelMarca = new PanelMarca(controlador);
+        tabMarca.add(panelMarca);
 
+        //vista factura
         JComponent tabFactura = makeTextPanel("PanelTabs de Facturas");
-        addTab("Facturas", new ImageIcon("resources/images/bill-16.png"), tabFactura, "Does nothing at all");
+        addTab("Facturas", new ImageIcon("resources/images/bill-16.png"), tabFactura, "Vista factura");
         setMnemonicAt(3, KeyEvent.VK_4);
-		tabFactura.add(createPage());
+        panelFactura = new PanelFactura(controlador);
+        tabFactura.add(panelFactura);
 
         //The following line enables to use scrolling tabs.
         setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
