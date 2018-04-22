@@ -48,7 +48,7 @@ public class FormAltaCerveza extends JDialog{
 
 		//ID
 		JLabel panelID = new JLabel("ID");
-		panelID.setBounds(10, 10, 80, 25);
+		panelID.setPreferredSize(new Dimension(20,20));
 		panelCampos.add(panelID);
 
 		JTextField textID = new JTextField(20);
@@ -76,7 +76,7 @@ public class FormAltaCerveza extends JDialog{
 		panelCampos.add(textStock);
 
 		//Graduacion
-		JLabel panelGraduacion = new JLabel("Graduacio");
+		JLabel panelGraduacion = new JLabel("Graduacion");
 		panelGraduacion.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelGraduacion);
 

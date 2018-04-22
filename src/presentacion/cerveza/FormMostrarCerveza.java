@@ -25,11 +25,37 @@ public class FormMostrarCerveza extends  JDialog{
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new GridLayout(2,1));
-		panelPrincipal.setPreferredSize(new Dimension(300, 300));
+		panelPrincipal.setLayout(new BorderLayout());
+		panelPrincipal.setPreferredSize(new Dimension(200, 80));
+		panelPrincipal.add(camposFormularioBaja(), BorderLayout.CENTER);
+		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
 
-		panelPrincipal.add(camposFormularioAlta());
+		this.add(panelPrincipal);
+		this.setVisible(false);
+		this.pack();
+	}
 
+	private JPanel camposFormularioBaja() {
+
+		JPanel panelCampos = new JPanel(new GridLayout(1,2));
+
+		Border border = panelCampos.getBorder();
+		Border margin = new EmptyBorder(10, 10, 10, 10);
+		panelCampos.setBorder(new CompoundBorder(border, margin));
+
+		//ID
+		JLabel panelID = new JLabel("ID");
+		panelID.setBounds(10, 10, 80, 25);
+		panelCampos.add(panelID);
+
+		JTextField textID = new JTextField(20);
+		textID.setBounds(100, 10, 160, 25);
+		panelCampos.add(textID);
+
+		return panelCampos;
+	}
+
+	private JPanel botonesFormnulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
@@ -39,7 +65,7 @@ public class FormMostrarCerveza extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.insertar_Marca, null);
+				controlador.accion(Eventos.eliminar_Cerveza, null);
 			}
 		});
 
@@ -54,50 +80,7 @@ public class FormMostrarCerveza extends  JDialog{
 
 		panelBotones.add(cancelar);
 		panelBotones.add(crear);
-		panelPrincipal.add(panelBotones);
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
-	}
-
-	private JPanel camposFormularioAlta(){
-
-		JPanel panelCampos = new JPanel();
-		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, 10, 10);
-		panelCampos.setBorder(new CompoundBorder(border, margin));
-
-		GridBagLayout panelGridBagLayout = new GridBagLayout();
-		panelGridBagLayout.columnWidths = new int[] { 86, 86, 0 };
-		panelGridBagLayout.rowHeights = new int[] { 20, 20, 20, 20, 20, 0 };
-		panelGridBagLayout.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		panelGridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panelCampos.setLayout(panelGridBagLayout);
-
-		addLabelAndTextField("ID:", 0, panelCampos);
-		addLabelAndTextField("Nombre:", 1, panelCampos);
-
-		return panelCampos;
-	}
-
-	private void addLabelAndTextField(String labelText, int yPos, Container containingPanel) {
-
-		JLabel label = new JLabel(labelText);
-		GridBagConstraints gridBagConstraintForLabel = new GridBagConstraints();
-		gridBagConstraintForLabel.fill = GridBagConstraints.BOTH;
-		gridBagConstraintForLabel.insets = new Insets(0, 0, 5, 5);
-		gridBagConstraintForLabel.gridx = 0;
-		gridBagConstraintForLabel.gridy = yPos;
-		containingPanel.add(label, gridBagConstraintForLabel);
-
-		JTextField textField = new JTextField();
-		GridBagConstraints gridBagConstraintForTextField = new GridBagConstraints();
-		gridBagConstraintForTextField.fill = GridBagConstraints.BOTH;
-		gridBagConstraintForTextField.insets = new Insets(0, 0, 5, 0);
-		gridBagConstraintForTextField.gridx = 1;
-		gridBagConstraintForTextField.gridy = yPos;
-		containingPanel.add(textField, gridBagConstraintForTextField);
-		textField.setColumns(10);
+		return panelBotones;
 	}
 }
