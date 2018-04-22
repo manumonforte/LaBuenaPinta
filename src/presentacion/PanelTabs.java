@@ -58,8 +58,4 @@ public class PanelTabs extends JTabbedPane {
         panel.setLayout(new GridLayout(2, 1));
         return panel;
     }
-
-    private JPanel createPage() {
-        return new JPanel(new BorderLayout());
-    }
 }

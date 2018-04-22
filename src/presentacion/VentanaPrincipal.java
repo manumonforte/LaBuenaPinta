@@ -4,8 +4,7 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import presentacion.controlador.Controlador;
 
@@ -27,7 +26,8 @@ public class VentanaPrincipal extends JFrame{
 	
 	private void initGUI() {
 	    this.setPreferredSize(new Dimension( 1024, 720 ));
-	    this.setResizable(false);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/logo-16.png"));
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
 		this.addWindowListener(new WindowListener() {
