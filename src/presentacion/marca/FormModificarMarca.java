@@ -18,7 +18,7 @@ public class FormModificarMarca extends JDialog{
 	public FormModificarMarca() {
 		super();
 		this.setTitle("Modificar Marca");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.initGUI();
 	}

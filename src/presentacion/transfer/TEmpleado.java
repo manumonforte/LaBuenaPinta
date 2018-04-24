@@ -1,5 +1,7 @@
 package presentacion.transfer;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class TEmpleado {
 
 	private int id_empleado;
@@ -7,6 +9,9 @@ public class TEmpleado {
 	private String DNI;
 	private boolean tiempo_completo;
 	private boolean activo;
+
+	public TEmpleado(){
+	}
 
 	public TEmpleado(int id_empleado, String nombre, String DNI, boolean tiempo_completo) {
 		this.id_empleado = id_empleado; //TODO revisar

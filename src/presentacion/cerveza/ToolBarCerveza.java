@@ -12,16 +12,16 @@ public class ToolBarCerveza extends  JToolBar{
 	public ToolBarCerveza(){
 		super();
 		this.initGUI();
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI(){
 
-		// crear marca
+		// crear cerveza
 		JButton botonCrear = new JButton("Crear Cerveza",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear Cerveza");
 		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonCrear.setPreferredSize(new Dimension(200, 58));
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -32,12 +32,11 @@ public class ToolBarCerveza extends  JToolBar{
 			}
 		});
 
-		// eliminar marca
+		// eliminar cerveza
 		JButton botonElimiar = new JButton("Eliminar Cerveza", new ImageIcon("resources/images/remove-32.png"));
 		botonElimiar.setToolTipText("Eliminar Cerveza");
 		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonElimiar.setPreferredSize(new Dimension(200, 58));
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -48,12 +47,11 @@ public class ToolBarCerveza extends  JToolBar{
 			}
 		});
 
-		// mostrar marca
+		// mostrar cerveza
 		JButton botonMostrar = new JButton("Mostrar Cerveza",new ImageIcon( "resources/images/eye-32.png"));
 		botonMostrar.setToolTipText("Mostrar Cerveza");
 		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonMostrar.setPreferredSize(new Dimension(200, 58));
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -64,12 +62,11 @@ public class ToolBarCerveza extends  JToolBar{
 			}
 		});
 
-		// modificar marca
+		// modificar cerveza
 		JButton botonModificar = new JButton("Modificar Cerveza", new ImageIcon("resources/images/edit-32.png"));
 		botonModificar.setToolTipText("Modificar Cerveza");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonModificar.setPreferredSize(new Dimension(200, 58));
 		botonModificar.addActionListener(new ActionListener() {
 
 			@Override
@@ -84,5 +81,6 @@ public class ToolBarCerveza extends  JToolBar{
 		this.add(botonModificar);
 		this.add(botonMostrar);
 		this.add(botonElimiar);
+
 	}
 }

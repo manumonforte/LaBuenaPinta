@@ -5,6 +5,9 @@ public class TFactura {
 	private int precio_total;
 	private int empleado;
 
+	public TFactura() {
+	}
+
 	public TFactura(int id_factura, int precio_total, int empleado) {
 		this.id_factura = id_factura;
 		this.precio_total = precio_total;

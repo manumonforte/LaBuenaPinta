@@ -18,7 +18,7 @@ public class FormBajaEmpleado extends  JDialog{
 	public FormBajaEmpleado() {
 		super();
 		this.setTitle("Baja Empleado");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.initGUI();
 	}

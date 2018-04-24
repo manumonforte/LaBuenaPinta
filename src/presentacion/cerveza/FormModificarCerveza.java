@@ -18,7 +18,7 @@ public class FormModificarCerveza extends JDialog{
 	public FormModificarCerveza() {
 		super();
 		this.setTitle("Modificar Cerveza");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.initGUI();
@@ -39,9 +39,9 @@ public class FormModificarCerveza extends JDialog{
 
 	private JPanel camposFormularioAlta(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(3,2));
+		JPanel panelCampos = new JPanel(new FlowLayout());
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, 10, 10);
+		Border margin = new EmptyBorder(10, 10, -50, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
 		//Nombre
@@ -50,25 +50,20 @@ public class FormModificarCerveza extends JDialog{
 		panelCampos.add(panelNombre);
 
 		JTextField textNombre = new JTextField(20);
-		textNombre.setBounds(100, 10, 160, 25);
 		panelCampos.add(textNombre);
 
 		//Stock
 		JLabel panelStock = new JLabel("Stock");
-		panelStock.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelStock);
 
 		JTextField textStock = new JTextField(20);
-		textStock.setBounds(100, 10, 160, 25);
 		panelCampos.add(textStock);
 
 		//Graduacion
 		JLabel panelGraduacion = new JLabel("Graduacion");
-		panelGraduacion.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelGraduacion);
 
 		JTextField textGraduacion = new JTextField(20);
-		textGraduacion.setBounds(100, 10, 160, 25);
 		panelCampos.add(textGraduacion);
 
 		return panelCampos;
@@ -93,7 +88,7 @@ public class FormModificarCerveza extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 

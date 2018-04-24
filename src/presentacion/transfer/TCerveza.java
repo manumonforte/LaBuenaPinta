@@ -8,6 +8,9 @@ public class TCerveza {
 	private double precio;
 	private boolean activa;
 
+	public TCerveza() {
+	}
+
 	public TCerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa) {
 		this.id_cerveza = id_cerveza; //TODO revisar
 		this.nombre = nombre;

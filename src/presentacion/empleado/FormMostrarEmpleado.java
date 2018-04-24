@@ -17,7 +17,7 @@ public class FormMostrarEmpleado extends JDialog{
 	public FormMostrarEmpleado() {
 		super();
 		this.setTitle("Mostrar Empleado");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.initGUI();
 	}
@@ -47,7 +47,7 @@ public class FormMostrarEmpleado extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 

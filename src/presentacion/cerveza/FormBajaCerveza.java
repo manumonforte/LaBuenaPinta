@@ -15,10 +15,12 @@ public class FormBajaCerveza extends  JDialog{
 
 	private Controlador controlador;
 
+	private JTextField textID;
+
 	public FormBajaCerveza() {
 		super();
 		this.setTitle("Baja Cerveza");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.initGUI();
@@ -38,19 +40,17 @@ public class FormBajaCerveza extends  JDialog{
 
 	private JPanel camposFormularioBaja() {
 
-		JPanel panelCampos = new JPanel(new GridLayout(1,2));
+		JPanel panelCampos = new JPanel(new FlowLayout());
 
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, 10, 10);
+		Border margin = new EmptyBorder(10, 10, -50, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
 		//ID
 		JLabel panelID = new JLabel("ID");
-		panelID.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelID);
 
-		JTextField textID = new JTextField(20);
-		textID.setBounds(100, 10, 160, 25);
+		textID = new JTextField(20);
 		panelCampos.add(textID);
 
 		return panelCampos;
@@ -75,7 +75,7 @@ public class FormBajaCerveza extends  JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 

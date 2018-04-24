@@ -18,7 +18,7 @@ public class FormBajaFactura extends JDialog {
 	public FormBajaFactura() {
 		super();
 		this.setTitle("Baja Factura");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.initGUI();
 	}

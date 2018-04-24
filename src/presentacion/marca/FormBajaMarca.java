@@ -18,7 +18,7 @@ public class FormBajaMarca extends  JDialog {
 	public FormBajaMarca() {
 		super();
 		this.setTitle("Baja Marca");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.initGUI();
 	}

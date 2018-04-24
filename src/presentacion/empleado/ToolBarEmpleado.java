@@ -12,6 +12,7 @@ public class ToolBarEmpleado extends JToolBar{
 	public ToolBarEmpleado(){
 		super();
 		this.initGUI();
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI(){
@@ -21,7 +22,6 @@ public class ToolBarEmpleado extends JToolBar{
 		botonCrear.setToolTipText("Crear empleado");
 		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonCrear.setPreferredSize(new Dimension(200, 58));
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -37,7 +37,6 @@ public class ToolBarEmpleado extends JToolBar{
 		botonElimiar.setToolTipText("Eliminar empleado");
 		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonElimiar.setPreferredSize(new Dimension(200, 58));
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -53,7 +52,6 @@ public class ToolBarEmpleado extends JToolBar{
 		botonMostrar.setToolTipText("Mostrar empleado");
 		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonMostrar.setPreferredSize(new Dimension(200, 58));
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -69,7 +67,6 @@ public class ToolBarEmpleado extends JToolBar{
 		botonModificar.setToolTipText("Modificar empleado");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonModificar.setPreferredSize(new Dimension(200, 58));
 		botonModificar.addActionListener(new ActionListener() {
 
 			@Override

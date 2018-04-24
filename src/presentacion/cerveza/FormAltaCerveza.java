@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.transfer.TCerveza;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,18 +13,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FormAltaCerveza extends JDialog{
-
-	private Controlador controlador;
-	private JComboBox<String> lista;
+	private JTextField textNombre;
+	private JTextField textStock;
+	private JTextField textGraduacion;
+	private JTextField textPrecio;
+	private JComboBox comboBox;
 
 	public FormAltaCerveza() {
 		super();
 		this.setTitle("Alta Cerveza");
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.initGUI();
 	}
+
+	public String getTextNombre() {
+		return textNombre.getText();
+	}
+
+	public int getTextStock() {
+		return Integer.parseInt(textStock.getText());
+	}
+
+	public int getTextGraduacion() {
+		return Integer.parseInt(textGraduacion.getText());
+	}
+
+	public float getTextPrecio() {
+		return Float.parseFloat(textPrecio.getText());
+	}
+
+	public boolean getTextActiva() {
+		return comboBox.getSelectedItem() == "true";
+	}
+
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
@@ -40,65 +64,45 @@ public class FormAltaCerveza extends JDialog{
 
 	private JPanel camposFormularioAlta(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(6,2));
-
+		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, 10, 10);
+		Border margin = new EmptyBorder(10,10,-50,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
-
-		//ID
-		JLabel panelID = new JLabel("ID");
-		panelID.setPreferredSize(new Dimension(20,20));
-		panelCampos.add(panelID);
-
-		JTextField textID = new JTextField(20);
-		textID.setBounds(100, 10, 160, 25);
-		textID.setText("autoincrement");
-		textID.setEditable(false);
-		panelCampos.add(textID);
 
 		//Nombre
 		JLabel panelNombre = new JLabel("Nombre");
-		panelNombre.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelNombre);
 
-		JTextField textNombre = new JTextField(20);
-		textNombre.setBounds(100, 10, 160, 25);
+		textNombre = new JTextField(20);
 		panelCampos.add(textNombre);
 
 		//Stock
 		JLabel panelStock = new JLabel("Stock");
-		panelStock.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelStock);
 
-		JTextField textStock = new JTextField(20);
-		textStock.setBounds(100, 10, 160, 25);
+		textStock = new JTextField(20);
 		panelCampos.add(textStock);
 
 		//Graduacion
 		JLabel panelGraduacion = new JLabel("Graduacion");
-		panelGraduacion.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelGraduacion);
 
-		JTextField textGraduacion = new JTextField(20);
-		textGraduacion.setBounds(100, 10, 160, 25);
+		textGraduacion = new JTextField(20);
 		panelCampos.add(textGraduacion);
 
 		//Precio
 		JLabel panelPrecio = new JLabel("Precio");
-		panelPrecio.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelPrecio);
 
-		JTextField textPrecio = new JTextField(20);
-		textPrecio.setBounds(100, 10, 160, 25);
+		textPrecio = new JTextField(20);
 		panelCampos.add(textPrecio);
 
 		//Activa
 		JLabel panelActiva= new JLabel("Activa");
-		panelActiva.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelActiva);
 
-		panelCampos.add(selecionarActiva());
+		comboBox = selecionarActiva();
+		panelCampos.add(comboBox);
 
 		return panelCampos;
 	}
@@ -112,8 +116,12 @@ public class FormAltaCerveza extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.insertar_Cerveza, null);
+				TCerveza cerveza = new TCerveza();
+				cerveza.setNombre(getTextNombre());
+				cerveza.setGraduacion(getTextGraduacion());
+				cerveza.setPrecio(getTextPrecio());
+				cerveza.setActiva(getTextActiva());
+				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 			}
 		});
 
@@ -122,7 +130,7 @@ public class FormAltaCerveza extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 
@@ -133,8 +141,7 @@ public class FormAltaCerveza extends JDialog{
 	}
 
 	private JComboBox selecionarActiva() {
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(180, 285, 91, 20);
+		comboBox = new JComboBox();
 		comboBox.addItem("true");
 		comboBox.addItem("false");
 

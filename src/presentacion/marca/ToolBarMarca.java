@@ -10,6 +10,7 @@ public class ToolBarMarca extends JToolBar {
 	public ToolBarMarca(){
 		super();
 		this.initGUI();
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI() {
@@ -19,7 +20,6 @@ public class ToolBarMarca extends JToolBar {
 		botonCrear.setToolTipText("Crear marca");
 		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonCrear.setPreferredSize(new Dimension(200, 58));
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -35,7 +35,6 @@ public class ToolBarMarca extends JToolBar {
 		botonElimiar.setToolTipText("Eliminar marca");
 		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonElimiar.setPreferredSize(new Dimension(200, 58));
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -51,7 +50,6 @@ public class ToolBarMarca extends JToolBar {
 		botonMostrar.setToolTipText("Mostrar marca");
 		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonMostrar.setPreferredSize(new Dimension(200, 58));
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -67,7 +65,6 @@ public class ToolBarMarca extends JToolBar {
 		botonModificar.setToolTipText("Modificar marca");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonModificar.setPreferredSize(new Dimension(200, 58));
 		botonModificar.addActionListener(new ActionListener() {
 
 			@Override

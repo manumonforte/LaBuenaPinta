@@ -26,7 +26,7 @@ public class VentanaPrincipal extends JFrame{
 	
 	private void initGUI() {
 	    this.setPreferredSize(new Dimension( 1024, 720 ));
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/logo-16.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/logo-32.png"));
 		this.setResizable(false);
 		//this.setLocationRelativeTo(null);
 

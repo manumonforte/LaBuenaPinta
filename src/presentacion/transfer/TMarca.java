@@ -7,6 +7,9 @@ public class TMarca {
 	private String pais;
 	private boolean activa;
 
+	public  TMarca() {
+	}
+
 	public TMarca(int id_marca, String nombre, String sede, String pais, boolean activa) {
 		this.id_marca = id_marca; //TODO revisar
 		this.nombre = nombre;
