@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FormAltaCerveza extends JDialog{
+
 	private JTextField textNombre;
 	private JTextField textStock;
 	private JTextField textGraduacion;
@@ -51,11 +52,10 @@ public class FormAltaCerveza extends JDialog{
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new BorderLayout());
-		panelPrincipal.setPreferredSize(new Dimension(300, 300));
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
-		panelPrincipal.add(camposFormularioAlta(), BorderLayout.CENTER);
-		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
+		panelPrincipal.add(camposFormularioAlta());
+		panelPrincipal.add(botonesFormnulario());
 
 		this.add(panelPrincipal);
 		this.setVisible(false);
@@ -66,7 +66,7 @@ public class FormAltaCerveza extends JDialog{
 
 		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10,10,-50,10);
+		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
 		//Nombre
@@ -120,6 +120,7 @@ public class FormAltaCerveza extends JDialog{
 				cerveza.setNombre(getTextNombre());
 				cerveza.setGraduacion(getTextGraduacion());
 				cerveza.setPrecio(getTextPrecio());
+				cerveza.setStock(getTextStock());
 				cerveza.setActiva(getTextActiva());
 				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 			}
