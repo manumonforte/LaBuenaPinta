@@ -8,13 +8,9 @@ import java.awt.*;
 
 public class PanelEmpleado extends JPanel {
 
-	private Controlador controlador;
-
-	public PanelEmpleado(Controlador controlador) {
-		super();
-		this.controlador = controlador;
-		this.setLayout(new BorderLayout());
-		this.add(new ToolBarEmpleado(), BorderLayout.NORTH);
+	public PanelEmpleado() {
+		setLayout(new BorderLayout());
+		add(new ToolBarEmpleado(), BorderLayout.NORTH);
 	}
 }
 

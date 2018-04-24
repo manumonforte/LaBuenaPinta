@@ -21,12 +21,10 @@ public class FormAltaCerveza extends JDialog{
 	private JComboBox comboBox;
 
 	public FormAltaCerveza() {
-		super();
-		this.setTitle("Alta Cerveza");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.initGUI();
+		setTitle("Alta Cerveza");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		initGUI();
 	}
 
 	public String getTextNombre() {
