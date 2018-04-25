@@ -3,6 +3,7 @@ package presentacion.cerveza;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TCerveza;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -51,6 +52,7 @@ public class FormAltaCerveza extends JDialog{
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
+		Util.addEscapeListener(this);
 
 		panelPrincipal.add(camposFormularioAlta());
 		panelPrincipal.add(botonesFormnulario());

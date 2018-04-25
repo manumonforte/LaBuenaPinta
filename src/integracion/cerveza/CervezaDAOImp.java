@@ -18,7 +18,7 @@ public class CervezaDAOImp implements CervezaDAO {
 	private final String READ = READALL + " WHERE id_cerveza = ?";
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
 	private final String READBYBRAND = READALL + " JOIN produce ON id_cerveza = cerveza WHERE marca = ?";
-	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, activa = ? WHERE id_cerveza = ?";
+	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, WHERE id_cerveza = ?";
 	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_cerveza = ?";
 
 	public CervezaDAOImp() {
@@ -81,10 +81,13 @@ public class CervezaDAOImp implements CervezaDAO {
 	@Override
 	public List<TCerveza> mostrarPorMarca(int id){
 		ArrayList<TCerveza> lista = new ArrayList<TCerveza>();
-		try (PreparedStatement st = conn.prepareStatement(READBYBRAND); ResultSet rs = st.executeQuery()) {
-			while (rs.next()){
-				lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
-						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa")));
+		try (PreparedStatement st = conn.prepareStatement(READBYBRAND)) {
+			st.setInt(1, id);
+				try (ResultSet rs = st.executeQuery()) {
+					while (rs.next()) {
+						lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
+								rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa")));
+					}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,7 +116,6 @@ public class CervezaDAOImp implements CervezaDAO {
 			st.setInt(2, e.getStock());
 			st.setDouble(3, e.getGraduacion());
 			st.setDouble(4, e.getPrecio());
-			st.setBoolean(5, e.isActiva());
 			st.setInt(5, e.getId_cerveza());
 			st.executeUpdate();
 		} catch (SQLException e1) {
