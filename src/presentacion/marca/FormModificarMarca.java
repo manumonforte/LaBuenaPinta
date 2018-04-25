@@ -48,15 +48,15 @@ public class FormModificarMarca extends JDialog{
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
-		panelPrincipal.add(camposFormularioAlta());
-		panelPrincipal.add(botonesFormnulario());
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
 
 		this.add(panelPrincipal);
 		this.setVisible(false);
 		this.pack();
 	}
 
-	private JPanel camposFormularioAlta(){
+	private JPanel camposFormulario(){
 
 		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
 		Border border = panelCampos.getBorder();
@@ -94,7 +94,7 @@ public class FormModificarMarca extends JDialog{
 		return panelCampos;
 	}
 
-	private  JPanel botonesFormnulario(){
+	private  JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 

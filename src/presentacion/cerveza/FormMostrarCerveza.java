@@ -2,6 +2,8 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.transfer.TCerveza;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,33 +18,31 @@ public class FormMostrarCerveza extends  JDialog{
 	private JTextField textID;
 
 	public FormMostrarCerveza() {
-		super();
-		this.setTitle("Mostrar Cerveza");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.initGUI();
+		setTitle("Mostrar Cerveza");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new BorderLayout());
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
-		panelPrincipal.add(camposFormularioBaja());
-		panelPrincipal.add(botonesFormnulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
+
+		add(panelPrincipal);
+		pack();
 	}
 
-	public JTextField getTextID() {
-		return textID;
+	public int getTextID() {
+		return Integer.parseInt(textID.getText());
 	}
 
-	private JPanel camposFormularioBaja() {
+	private JPanel camposFormulario() {
 
-		JPanel panelCampos = new JPanel(new GridLayout(1,2));
-
+		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 0, 7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -58,16 +58,18 @@ public class FormMostrarCerveza extends  JDialog{
 		return panelCampos;
 	}
 
-	private JPanel botonesFormnulario(){
+	private JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("CREAR");
+		JButton crear = new JButton("MOSTRAR");
 		crear.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				TCerveza cerveza = new TCerveza();
+				cerveza.setId_cerveza(getTextID());
+				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 			}
 		});
 

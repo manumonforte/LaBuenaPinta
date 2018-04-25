@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,45 +19,43 @@ public class FormBajaCerveza extends  JDialog{
 	private JTextField textID;
 
 	public FormBajaCerveza() {
-		super();
-		this.setTitle("Baja Cerveza");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.initGUI();
+		setTitle("Baja Cerveza");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new BorderLayout());
-		panelPrincipal.setPreferredSize(new Dimension(200, 80));
-		panelPrincipal.add(camposFormularioBaja(), BorderLayout.CENTER);
-		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
+
+		add(panelPrincipal);
+		setVisible(false);
+		pack();
 	}
 
-	private JPanel camposFormularioBaja() {
+	private JPanel camposFormulario() {
 
-		JPanel panelCampos = new JPanel(new FlowLayout());
-
+		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 0, 7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, -50, 10);
+		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
 		//ID
 		JLabel panelID = new JLabel("ID");
 		panelCampos.add(panelID);
 
-		textID = new JTextField(20);
+		textID = new JTextField(10);
 		panelCampos.add(textID);
 
 		return panelCampos;
 	}
 
-	private JPanel botonesFormnulario(){
+	private JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 

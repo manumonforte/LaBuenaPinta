@@ -28,7 +28,7 @@ public class FormModificarEmpleado extends  JDialog{
 		panelPrincipal.setLayout(new GridLayout(2,1));
 		panelPrincipal.setPreferredSize(new Dimension(300, 300));
 
-		panelPrincipal.add(camposFormularioAlta());
+		panelPrincipal.add(camposFormulario());
 
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
@@ -61,7 +61,7 @@ public class FormModificarEmpleado extends  JDialog{
 		this.pack();
 	}
 
-	private JPanel camposFormularioAlta(){
+	private JPanel camposFormulario(){
 
 		JPanel panelCampos = new JPanel();
 		Border border = panelCampos.getBorder();

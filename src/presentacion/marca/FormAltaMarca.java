@@ -3,6 +3,7 @@ package presentacion.marca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,11 +22,11 @@ public class FormAltaMarca extends JDialog {
 	private JComboBox comboBox;
 
 	public FormAltaMarca() {
-		this.setTitle("Alta Marca");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.initGUI();
+		setTitle("Alta Marca");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	public String getTextNombre() {
@@ -48,15 +49,14 @@ public class FormAltaMarca extends JDialog {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
-		panelPrincipal.add(camposFormularioAlta());
-		panelPrincipal.add(botonesFormnulario());
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
 	}
 
-	private JPanel camposFormularioAlta(){
+	private JPanel camposFormulario(){
 
 		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
 		Border border = panelCampos.getBorder();
@@ -94,7 +94,7 @@ public class FormAltaMarca extends JDialog {
 		return panelCampos;
 	}
 
-	private  JPanel botonesFormnulario(){
+	private  JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 

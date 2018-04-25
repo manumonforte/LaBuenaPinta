@@ -25,26 +25,27 @@ public class FormAltaCerveza extends JDialog{
 		setTitle("Alta Cerveza");
 		setLocationRelativeTo(null);
 		setResizable(false);
+		Util.addEscapeListener(this);
 		initGUI();
 	}
 
-	public String getTextNombre() {
+	private String getTextNombre() {
 		return textNombre.getText();
 	}
 
-	public int getTextStock() {
+	private int getTextStock() {
 		return Integer.parseInt(textStock.getText());
 	}
 
-	public int getTextGraduacion() {
+	private int getTextGraduacion() {
 		return Integer.parseInt(textGraduacion.getText());
 	}
 
-	public float getTextPrecio() {
+	private float getTextPrecio() {
 		return Float.parseFloat(textPrecio.getText());
 	}
 
-	public boolean getTextActiva() {
+	private boolean getTextActiva() {
 		return comboBox.getSelectedItem() == "true";
 	}
 
@@ -52,19 +53,17 @@ public class FormAltaCerveza extends JDialog{
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
-		Util.addEscapeListener(this);
 
-		panelPrincipal.add(camposFormularioAlta());
-		panelPrincipal.add(botonesFormnulario());
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
 	}
 
-	private JPanel camposFormularioAlta(){
+	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(5,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -73,28 +72,28 @@ public class FormAltaCerveza extends JDialog{
 		JLabel panelNombre = new JLabel("Nombre");
 		panelCampos.add(panelNombre);
 
-		textNombre = new JTextField(20);
+		textNombre = new JTextField(10);
 		panelCampos.add(textNombre);
 
 		//Stock
 		JLabel panelStock = new JLabel("Stock");
 		panelCampos.add(panelStock);
 
-		textStock = new JTextField(20);
+		textStock = new JTextField(10);
 		panelCampos.add(textStock);
 
 		//Graduacion
 		JLabel panelGraduacion = new JLabel("Graduacion");
 		panelCampos.add(panelGraduacion);
 
-		textGraduacion = new JTextField(20);
+		textGraduacion = new JTextField(10);
 		panelCampos.add(textGraduacion);
 
 		//Precio
 		JLabel panelPrecio = new JLabel("Precio");
 		panelCampos.add(panelPrecio);
 
-		textPrecio = new JTextField(20);
+		textPrecio = new JTextField(10);
 		panelCampos.add(textPrecio);
 
 		//Activa
@@ -107,7 +106,7 @@ public class FormAltaCerveza extends JDialog{
 		return panelCampos;
 	}
 
-	private JPanel botonesFormnulario(){
+	private JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 

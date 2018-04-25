@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,73 +14,66 @@ import java.awt.event.ActionListener;
 
 public class FormModificarCerveza extends JDialog{
 
-	private Controlador controlador;
-
 	public FormModificarCerveza() {
-		super();
-		this.setTitle("Modificar Cerveza");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.initGUI();
+		setTitle("Modificar Cerveza");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new BorderLayout());
-		panelPrincipal.setPreferredSize(new Dimension(300, 200));
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
-		panelPrincipal.add(camposFormularioAlta(), BorderLayout.CENTER);
-		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
+		panelPrincipal.add(camposFormulario());
+		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
 	}
 
-	private JPanel camposFormularioAlta(){
+	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new FlowLayout());
+		JPanel panelCampos = new JPanel(new GridLayout(3,2,0,7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, -50, 10);
+		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
 		//Nombre
 		JLabel panelNombre = new JLabel("Nombre");
-		panelNombre.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelNombre);
 
-		JTextField textNombre = new JTextField(20);
+		JTextField textNombre = new JTextField(10);
 		panelCampos.add(textNombre);
 
 		//Stock
 		JLabel panelStock = new JLabel("Stock");
 		panelCampos.add(panelStock);
 
-		JTextField textStock = new JTextField(20);
+		JTextField textStock = new JTextField(10);
 		panelCampos.add(textStock);
 
 		//Graduacion
 		JLabel panelGraduacion = new JLabel("Graduacion");
 		panelCampos.add(panelGraduacion);
 
-		JTextField textGraduacion = new JTextField(20);
+		JTextField textGraduacion = new JTextField(10);
 		panelCampos.add(textGraduacion);
 
 		return panelCampos;
 	}
 
-	private JPanel botonesFormnulario(){
+	private JPanel botonesFormulario(){
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("CREAR");
+		JButton crear = new JButton("MODIFICAR");
 		crear.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.insertar_Cerveza, null);
+				Controlador.getInstancia().accion(Eventos.insertar_Marca, null);//TODO
 			}
 		});
 
