@@ -29,11 +29,9 @@ public class FormBajaMarca extends  JDialog {
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new BorderLayout());
-		panelPrincipal.setPreferredSize(new Dimension(200, 200));
-
-		panelPrincipal.add(camposFormularioBaja(), BorderLayout.CENTER);
-		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
+		panelPrincipal.add(camposFormularioBaja());
+		panelPrincipal.add(botonesFormnulario());
 
 		this.add(panelPrincipal);
 		this.setVisible(false);
@@ -47,11 +45,11 @@ public class FormBajaMarca extends  JDialog {
 		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
-		//Nombre
-		JLabel panelNombre = new JLabel("ID");
-		panelCampos.add(panelNombre);
+		//ID
+		JLabel panelID = new JLabel("ID");
+		panelCampos.add(panelID);
 
-		textID = new JTextField(20);
+		textID = new JTextField(10);
 		panelCampos.add(textID);
 
 		return panelCampos;

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class FormMostrarCerveza extends  JDialog{
 
-	private Controlador controlador;
+	private JTextField textID;
 
 	public FormMostrarCerveza() {
 		super();
@@ -26,13 +26,17 @@ public class FormMostrarCerveza extends  JDialog{
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BorderLayout());
-		panelPrincipal.setPreferredSize(new Dimension(200, 80));
-		panelPrincipal.add(camposFormularioBaja(), BorderLayout.CENTER);
-		panelPrincipal.add(botonesFormnulario(), BorderLayout.SOUTH);
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
+		panelPrincipal.add(camposFormularioBaja());
+		panelPrincipal.add(botonesFormnulario());
 
 		this.add(panelPrincipal);
 		this.setVisible(false);
 		this.pack();
+	}
+
+	public JTextField getTextID() {
+		return textID;
 	}
 
 	private JPanel camposFormularioBaja() {
@@ -45,10 +49,9 @@ public class FormMostrarCerveza extends  JDialog{
 
 		//ID
 		JLabel panelID = new JLabel("ID");
-		panelID.setBounds(10, 10, 80, 25);
 		panelCampos.add(panelID);
 
-		JTextField textID = new JTextField(20);
+		textID = new JTextField(10);
 		textID.setBounds(100, 10, 160, 25);
 		panelCampos.add(textID);
 
@@ -64,8 +67,7 @@ public class FormMostrarCerveza extends  JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.eliminar_Cerveza, null);
+
 			}
 		});
 

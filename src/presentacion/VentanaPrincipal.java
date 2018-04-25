@@ -16,7 +16,7 @@ public class VentanaPrincipal extends JFrame{
 	}
 	
 	private void initGUI() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/logo-32.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/logo-64.png"));
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 
