@@ -14,14 +14,14 @@ CREATE TABLE cerveza(
     precio FLOAT NOT NULL,
     activa BOOLEAN NOT NULL DEFAULT 0,
     marca INT NOT NULL,
-    FOREIGN KEY(marca) REFERENCES marca(id_marca),
+    FOREIGN KEY(marca) REFERENCES marca(id_marca)
 );
 
 CREATE TABLE empleado(
     id_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     DNI VARCHAR(9) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT 0,
+    activo BOOLEAN NOT NULL DEFAULT 0
 );
 
 CREATE TABLE empleado_tparcial(
