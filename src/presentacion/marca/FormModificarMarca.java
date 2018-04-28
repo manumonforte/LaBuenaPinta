@@ -3,6 +3,7 @@ package presentacion.marca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -14,22 +15,16 @@ import java.awt.event.ActionListener;
 
 public class FormModificarMarca extends JDialog{
 
-	private JTextField textID;
 	private JTextField textNombre;
 	private JTextField textSede;
 	private JTextField textPais;
 
 	public FormModificarMarca() {
-		super();
-		this.setTitle("Modificar Marca");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.initGUI();
-	}
-
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
+		setTitle("Modificar Marca");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	public String getTextNombre() {
@@ -63,13 +58,6 @@ public class FormModificarMarca extends JDialog{
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
-		//ID
-		JLabel panelID = new JLabel("ID");
-		panelCampos.add(panelID);
-
-		textID = new JTextField(10);
-		panelCampos.add(textID);
-
 		//Nombre
 		JLabel panelNombre = new JLabel("Nombre");
 		panelCampos.add(panelNombre);
@@ -98,13 +86,12 @@ public class FormModificarMarca extends JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("MODIFICAR");
-		crear.addActionListener(new ActionListener(){
+		JButton modificar = new JButton("MODIFICAR");
+		modificar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
-				marca.setId_marca(getTextID());
 				marca.setNombre(getTextNombre());
 				marca.setSede(getTextSede());
 				marca.setPais(getTextPais());
@@ -123,7 +110,7 @@ public class FormModificarMarca extends JDialog{
 		});
 
 		panelBotones.add(cancelar);
-		panelBotones.add(crear);
+		panelBotones.add(modificar);
 
 		return panelBotones;
 	}

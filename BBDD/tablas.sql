@@ -6,6 +6,15 @@ CREATE TABLE marca(
     activa BOOLEAN NOT NULL DEFAULT 0
 );
 
+CREATE TABLE cerveza(
+    id_cerveza INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    graduacion FLOAT NOT NULL,
+    precio FLOAT NOT NULL,
+    activa BOOLEAN NOT NULL DEFAULT 0
+);
+
 CREATE TABLE produce(
     marca INT NOT NULL,
     cerveza INT NOT NULL,
@@ -14,13 +23,11 @@ CREATE TABLE produce(
     FOREIGN KEY(cerveza) REFERENCES cerveza(id_cerveza)
 );
 
-CREATE TABLE cerveza(
-    id_cerveza INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    stock INT NOT NULL DEFAULT 0,
-    graduacion FLOAT NOT NULL,
-    precio FLOAT NOT NULL,
-    activa BOOLEAN NOT NULL DEFAULT 0
+CREATE TABLE factura(
+    id_factura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    precio_total FLOAT NOT NULL,
+    empleado INT NOT NULL,
+    FOREIGN KEY(empleado) REFERENCES empleado(id_empleado)
 );
 
 CREATE TABLE asociada(
@@ -33,13 +40,6 @@ CREATE TABLE asociada(
     FOREIGN KEY(cerveza) REFERENCES cerveza(id_cerveza)
 );
 
-CREATE TABLE factura(
-    id_factura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    precio_total FLOAT NOT NULL,
-    empleado INT NOT NULL,
-    FOREIGN KEY(empleado) REFERENCES empleado(id_empleado)
-);
-
 CREATE TABLE empleado(
     id_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
@@ -47,3 +47,28 @@ CREATE TABLE empleado(
     activo BOOLEAN NOT NULL DEFAULT 0,
     tiempo_completo BOOLEAN NOT NULL DEFAULT 0
 );
+
+CREATE TABLE empleado_tparcial(
+    id_empleado INT NOT NULL,
+    turno VARCHAR (100) NOT NULL,
+    PRIMARY KEY (id_empleado),
+    FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado)
+);
+
+CREATE TABLE empleado_tcompleto(
+    id_empleado INT NOT NULL,
+    horas_extra INT,
+    PRIMARY KEY (id_empleado),
+    FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado)
+);
+
+
+
+
+
+
+
+
+
+
+

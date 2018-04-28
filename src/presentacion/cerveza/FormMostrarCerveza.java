@@ -62,8 +62,8 @@ public class FormMostrarCerveza extends  JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("MOSTRAR");
-		crear.addActionListener(new ActionListener(){
+		JButton mostrar = new JButton("MOSTRAR");
+		mostrar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,7 +83,7 @@ public class FormMostrarCerveza extends  JDialog{
 		});
 
 		panelBotones.add(cancelar);
-		panelBotones.add(crear);
+		panelBotones.add(mostrar);
 
 		return panelBotones;
 	}

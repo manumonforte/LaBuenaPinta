@@ -100,7 +100,7 @@ public class FormAltaCerveza extends JDialog{
 		JLabel panelActiva= new JLabel("Activa");
 		panelCampos.add(panelActiva);
 
-		comboBox = selecionarActiva();
+		comboBox = seleccionarActiva();
 		panelCampos.add(comboBox);
 
 		return panelCampos;
@@ -140,7 +140,7 @@ public class FormAltaCerveza extends JDialog{
 		return panelBotones;
 	}
 
-	private JComboBox selecionarActiva() {
+	private JComboBox seleccionarActiva() {
 		comboBox = new JComboBox();
 		comboBox.addItem("true");
 		comboBox.addItem("false");

@@ -3,6 +3,7 @@ package presentacion.marca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,6 +21,7 @@ public class FormBajaMarca extends  JDialog {
 		this.setTitle("Baja Marca");
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		Util.addEscapeListener(this);
 		this.initGUI();
 	}
 

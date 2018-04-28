@@ -3,6 +3,7 @@ package presentacion.marca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,11 +18,11 @@ public class FormMostrarMarca extends  JDialog{
 	private JTextField textID;
 
 	public FormMostrarMarca() {
-		super();
-		this.setTitle("Mostrar Marca");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.initGUI();
+		setTitle("Mostrar Marca");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
 	}
 
 	public String getTextID() {

@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.transfer.TCerveza;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -14,8 +15,6 @@ import java.awt.event.ActionListener;
 
 public class FormBajaCerveza extends  JDialog{
 
-	private Controlador controlador;
-
 	private JTextField textID;
 
 	public FormBajaCerveza() {
@@ -24,6 +23,10 @@ public class FormBajaCerveza extends  JDialog{
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
+	}
+
+	public int getTextID() {
+		return Integer.parseInt(textID.getText());
 	}
 
 	private void initGUI() {
@@ -59,13 +62,14 @@ public class FormBajaCerveza extends  JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("CREAR");
-		crear.addActionListener(new ActionListener(){
+		JButton eliminar = new JButton("ELIMINAR");
+		eliminar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.eliminar_Cerveza, null);
+				TCerveza cerveza = new TCerveza();
+				cerveza.setId_cerveza(getTextID());
+				Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
 			}
 		});
 
@@ -79,7 +83,7 @@ public class FormBajaCerveza extends  JDialog{
 		});
 
 		panelBotones.add(cancelar);
-		panelBotones.add(crear);
+		panelBotones.add(eliminar);
 
 		return panelBotones;
 	}

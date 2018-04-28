@@ -88,7 +88,7 @@ public class FormAltaMarca extends JDialog {
 		JLabel panelActiva= new JLabel("Activa");
 		panelCampos.add(panelActiva);
 
-		comboBox = selecionarActiva();
+		comboBox = seleccionarActiva();
 		panelCampos.add(comboBox);
 
 		return panelCampos;
@@ -129,7 +129,7 @@ public class FormAltaMarca extends JDialog {
 	}
 
 
-	private JComboBox selecionarActiva() {
+	private JComboBox seleccionarActiva() {
 		comboBox = new JComboBox();
 		comboBox.addItem("true");
 		comboBox.addItem("false");
