@@ -19,6 +19,7 @@ public class FormAltaCerveza extends JDialog{
 	private JTextField textStock;
 	private JTextField textGraduacion;
 	private JTextField textPrecio;
+	private JTextField textMarca;
 	private JComboBox comboBox;
 
 	public FormAltaCerveza() {
@@ -49,6 +50,10 @@ public class FormAltaCerveza extends JDialog{
 		return comboBox.getSelectedItem() == "true";
 	}
 
+	private int getTextMarca() {
+		return Integer.parseInt(textMarca.getText());
+	}
+
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
@@ -63,7 +68,7 @@ public class FormAltaCerveza extends JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(5,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -96,6 +101,13 @@ public class FormAltaCerveza extends JDialog{
 		textPrecio = new JTextField(10);
 		panelCampos.add(textPrecio);
 
+		//Marca
+		JLabel panelMarca = new JLabel("Marca(ID)");
+		panelCampos.add(panelMarca);
+
+		textMarca = new JTextField(10);
+		panelCampos.add(textMarca);
+
 		//Activa
 		JLabel panelActiva= new JLabel("Activa");
 		panelCampos.add(panelActiva);
@@ -121,7 +133,9 @@ public class FormAltaCerveza extends JDialog{
 				cerveza.setPrecio(getTextPrecio());
 				cerveza.setStock(getTextStock());
 				cerveza.setActiva(getTextActiva());
+				cerveza.set_marca(getTextMarca());
 				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
+                dispose();
 			}
 		});
 

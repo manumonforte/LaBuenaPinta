@@ -70,6 +70,8 @@ public class FormBajaCerveza extends  JDialog{
 				TCerveza cerveza = new TCerveza();
 				cerveza.setId_cerveza(getTextID());
 				Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
+				dispose();
+
 			}
 		});
 

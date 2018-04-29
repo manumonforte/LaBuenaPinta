@@ -13,12 +13,12 @@ import java.util.List;
 public class CervezaDAOImp implements CervezaDAO {
 	private Connection conn;
 
-	private final String INSERT = "INSERT INTO cerveza(nombre, stock, graduacion, precio, activa) VALUES(?, ?, ?, ?, ?)";
+	private final String INSERT = "INSERT INTO cerveza(nombre, stock, graduacion, precio, activa, marca) VALUES(?, ?, ?, ?, ?, ?)";
 	private final String READALL = "SELECT * FROM cerveza";
 	private final String READ = READALL + " WHERE id_cerveza = ?";
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
-	private final String READBYBRAND = READALL + " JOIN produce ON id_cerveza = cerveza WHERE marca = ?";
-	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, WHERE id_cerveza = ?";
+	private final String READBYBRAND = READALL + " WHERE marca = ?";
+	private final String UPDATE = "UPDATE cerveza SET stock = ?, graduacion = ?, precio = ? WHERE nombre = ?";
 	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_cerveza = ?";
 
 	public CervezaDAOImp() {
@@ -33,6 +33,8 @@ public class CervezaDAOImp implements CervezaDAO {
 			st.setDouble(3, e.getGraduacion());
 			st.setDouble(4, e.getPrecio());
 			st.setBoolean(5, e.isActiva());
+			st.setInt(6, e.get_marca());
+
 			st.executeUpdate();
 			try(ResultSet rs = st.getGeneratedKeys()) {
 				if (rs.next()) {
@@ -52,7 +54,7 @@ public class CervezaDAOImp implements CervezaDAO {
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					c = new TCerveza(id, rs.getString("nombre"), rs.getInt("stock"),
-							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"));
+							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"), rs.getInt("marca"));
 				}
 			}
 		} catch (SQLException e) {
@@ -69,7 +71,7 @@ public class CervezaDAOImp implements CervezaDAO {
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					c = new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
-							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"));
+							rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"), rs.getInt("marca"));
 				}
 			}
 		} catch (SQLException e) {
@@ -86,7 +88,7 @@ public class CervezaDAOImp implements CervezaDAO {
 				try (ResultSet rs = st.executeQuery()) {
 					while (rs.next()) {
 						lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
-								rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa")));
+								rs.getDouble("graduacion"), rs.getDouble("precio"), rs.getBoolean("activa"), rs.getInt("marca")));
 					}
 			}
 		} catch (SQLException e) {
@@ -101,7 +103,7 @@ public class CervezaDAOImp implements CervezaDAO {
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()){
 				lista.add(new TCerveza(rs.getInt("id_cerveza"), rs.getString("nombre"), rs.getInt("stock"),
-						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa")));
+						rs.getDouble("graduacion"),rs.getDouble("precio"), rs.getBoolean("activa"), rs.getInt("marca")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,11 +114,10 @@ public class CervezaDAOImp implements CervezaDAO {
 	@Override
 	public void modificar(TCerveza e) {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
-			st.setString(1, e.getNombre());
-			st.setInt(2, e.getStock());
-			st.setDouble(3, e.getGraduacion());
-			st.setDouble(4, e.getPrecio());
-			st.setInt(5, e.getId_cerveza());
+			st.setInt(1, e.getStock());
+			st.setDouble(2, e.getGraduacion());
+			st.setDouble(3, e.getPrecio());
+			st.setString(4, e.getNombre());
 			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

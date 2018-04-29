@@ -7,17 +7,19 @@ public class TCerveza {
 	private double graduacion;
 	private double precio;
 	private boolean activa;
+	private int marca;
 
 	public TCerveza() {
 	}
 
-	public TCerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa) {
+	public TCerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa, int id_marca) {
 		this.id_cerveza = id_cerveza; //TODO revisar
 		this.nombre = nombre;
 		this.stock = stock;
 		this.graduacion = graduacion;
 		this.precio = precio;
 		this.activa = activa;
+		this.marca = id_marca;
 	}
 
 	public int getId_cerveza() {
@@ -67,5 +69,14 @@ public class TCerveza {
 	public void setActiva(boolean activa) {
 		this.activa = activa;
 	}
+
+	public int get_marca() {
+		return marca;
+	}
+
+	public void set_marca(int id_marca) {
+		this.marca = id_marca;
+	}
+
 
 }

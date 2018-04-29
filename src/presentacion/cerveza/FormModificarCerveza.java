@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.transfer.TCerveza;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -13,6 +14,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FormModificarCerveza extends JDialog{
+
+	private JTextField textNombre;
+	private JTextField textStock;
+	private JTextField textGraduacion;
+	private JTextField textPrecio;
+
+
+	public String getTextNombre() {
+		return textNombre.getText();
+	}
+	public int getTextStock() {
+		return Integer.parseInt(textStock.getText());
+	}
+	public int getTextGraduacion() {
+		return Integer.parseInt(textGraduacion.getText());
+	}
+	public int getTextPrecio() {
+		return Integer.parseInt(textPrecio.getText());
+	}
+
 
 	public FormModificarCerveza() {
 		setTitle("Modificar Cerveza");
@@ -35,7 +56,7 @@ public class FormModificarCerveza extends JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(3,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -44,22 +65,29 @@ public class FormModificarCerveza extends JDialog{
 		JLabel panelNombre = new JLabel("Nombre");
 		panelCampos.add(panelNombre);
 
-		JTextField textNombre = new JTextField(10);
+		textNombre = new JTextField(10);
 		panelCampos.add(textNombre);
 
 		//Stock
 		JLabel panelStock = new JLabel("Stock");
 		panelCampos.add(panelStock);
 
-		JTextField textStock = new JTextField(10);
+		textStock = new JTextField(10);
 		panelCampos.add(textStock);
 
 		//Graduacion
 		JLabel panelGraduacion = new JLabel("Graduacion");
 		panelCampos.add(panelGraduacion);
 
-		JTextField textGraduacion = new JTextField(10);
+		textGraduacion = new JTextField(10);
 		panelCampos.add(textGraduacion);
+
+		//Graduacion
+		JLabel panelPrecio = new JLabel("Precio");
+		panelCampos.add(panelPrecio);
+
+		textPrecio = new JTextField(10);
+		panelCampos.add(textPrecio);
 
 		return panelCampos;
 	}
@@ -73,7 +101,13 @@ public class FormModificarCerveza extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstancia().accion(Eventos.insertar_Marca, null);//TODO
+				TCerveza cerveza = new TCerveza();
+				cerveza.setNombre(getTextNombre());
+				cerveza.setStock((getTextStock()));
+				cerveza.setGraduacion(getTextGraduacion());
+				cerveza.setPrecio(getTextPrecio());
+				Controlador.getInstancia().accion(Eventos.modificar_Cerveza,cerveza);//TODO
+				dispose();
 			}
 		});
 

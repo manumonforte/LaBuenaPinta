@@ -95,7 +95,7 @@ public class FormModificarMarca extends JDialog{
 				marca.setNombre(getTextNombre());
 				marca.setSede(getTextSede());
 				marca.setPais(getTextPais());
-				Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
+				Controlador.getInstancia().accion(Eventos.modificar_Marca, marca);
 				dispose();
 			}
 		});

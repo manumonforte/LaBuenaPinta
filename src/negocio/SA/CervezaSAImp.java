@@ -32,17 +32,15 @@ public class CervezaSAImp implements CervezaSA{
 
 	@Override
 	public boolean modificar_cerveza(TCerveza tCerveza) {
-		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(tCerveza.getId_cerveza());
+		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre());
 
 		if (tl == null) {
-			return false;
-		} else if (FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre()).getId_cerveza()
-				!= tl.getId_cerveza()) {
 			return false;
 		} else {
 			FactoriaDAOImp.getInstancia().getCervezaDAO().modificar(tCerveza);
 			return true;
-		}	}
+		}
+	}
 
 	@Override
 	public boolean baja_cerveza(TCerveza tCerveza) {
