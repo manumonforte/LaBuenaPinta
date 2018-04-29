@@ -18,11 +18,10 @@ public class FormBajaMarca extends  JDialog {
 	private JTextField textID;
 
 	public FormBajaMarca() {
-		this.setTitle("Baja Marca");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		setTitle("Baja Marca");
+		setLocationRelativeTo(null);
 		Util.addEscapeListener(this);
-		this.initGUI();
+		initGUI();
 	}
 
 	public int getTextID() {

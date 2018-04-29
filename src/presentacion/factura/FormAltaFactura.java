@@ -2,6 +2,9 @@ package presentacion.factura;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.transfer.TEmpleado;
+import presentacion.transfer.TFactura;
+import presentacion.util.Util;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,48 +16,31 @@ import java.awt.event.ActionListener;
 
 public class FormAltaFactura extends JDialog {
 
-	private Controlador controlador;
+	private JTextField textCantidadTotal;
+	private JComboBox comboEmpleado;
 
 	public FormAltaFactura() {
-		super();
-		this.setTitle("Alta Factura");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.initGUI();
+		setTitle("Alta Factura");
+		setLocationRelativeTo(null);
+		setResizable(false);
+		Util.addEscapeListener(this);
+		initGUI();
+	}
+
+	public int getTextCantidadTotal() {
+		return Integer.parseInt(textCantidadTotal.getText());
+	}
+
+	public int getComboEmpleado() {
+		return (int) comboEmpleado.getSelectedItem();
 	}
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setLayout(new GridLayout(2,1));
-		panelPrincipal.setPreferredSize(new Dimension(300, 300));
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
 		panelPrincipal.add(camposFormulario());
-
-		//Botones
-		JPanel panelBotones = new JPanel(new FlowLayout());
-
-		JButton crear = new JButton("CREAR");
-		crear.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//NOTA: LOS DATOS A RETORNAR POR EL BOTON ACEPTAR ESTAN A NULL
-				controlador.accion(Eventos.insertar_Factura, null);
-			}
-		});
-
-		JButton cancelar = new JButton("CANCELAR");
-		cancelar.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
-
-		panelBotones.add(cancelar);
-		panelBotones.add(crear);
-		panelPrincipal.add(panelBotones);
+		panelPrincipal.add(botonesFormulario());
 
 		this.add(panelPrincipal);
 		this.setVisible(false);
@@ -63,42 +49,68 @@ public class FormAltaFactura extends JDialog {
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel();
+		JPanel panelCampos = new JPanel(new GridLayout(2,2,0,7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10, 10, 10, 10);
+		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
-		GridBagLayout panelGridBagLayout = new GridBagLayout();
-		panelGridBagLayout.columnWidths = new int[] { 86, 86, 0 };
-		panelGridBagLayout.rowHeights = new int[] { 20, 20, 20, 20, 20, 0 };
-		panelGridBagLayout.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		panelGridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panelCampos.setLayout(panelGridBagLayout);
+		//Cantidad total
+		JLabel panelNombre = new JLabel("Cantidad total");
+		panelCampos.add(panelNombre);
 
-		addLabelAndTextField("ID:", 0, panelCampos);
-		addLabelAndTextField("Precio total:", 1, panelCampos);
-		addLabelAndTextField("Empleado:", 2, panelCampos);
+		textCantidadTotal = new JTextField(10);
+		panelCampos.add(textCantidadTotal);
+
+		//Empleado
+		JLabel panelActiva= new JLabel("Empleado");
+		panelCampos.add(panelActiva);
+
+		comboEmpleado = seleccionarEmpleado(); //NOTA: hay que pasarle al combo box la lista de los empleados de la BBDD
+		panelCampos.add(comboEmpleado);
 
 		return panelCampos;
 	}
 
-	private void addLabelAndTextField(String labelText, int yPos, Container containingPanel) {
+	private  JPanel botonesFormulario(){
+		//Botones
+		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JLabel label = new JLabel(labelText);
-		GridBagConstraints gridBagConstraintForLabel = new GridBagConstraints();
-		gridBagConstraintForLabel.fill = GridBagConstraints.BOTH;
-		gridBagConstraintForLabel.insets = new Insets(0, 0, 5, 5);
-		gridBagConstraintForLabel.gridx = 0;
-		gridBagConstraintForLabel.gridy = yPos;
-		containingPanel.add(label, gridBagConstraintForLabel);
+		JButton crear = new JButton("GENERAR");
+		crear.addActionListener(new ActionListener(){
 
-		JTextField textField = new JTextField();
-		GridBagConstraints gridBagConstraintForTextField = new GridBagConstraints();
-		gridBagConstraintForTextField.fill = GridBagConstraints.BOTH;
-		gridBagConstraintForTextField.insets = new Insets(0, 0, 5, 0);
-		gridBagConstraintForTextField.gridx = 1;
-		gridBagConstraintForTextField.gridy = yPos;
-		containingPanel.add(textField, gridBagConstraintForTextField);
-		textField.setColumns(10);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TFactura factura = new TFactura();
+				factura.setPrecio_total(getTextCantidadTotal());
+				factura.setEmpleado(getComboEmpleado());
+				Controlador.getInstancia().accion(Eventos.insertar_Factura, factura);
+				dispose();
+			}
+		});
+
+		JButton cancelar = new JButton("CANCELAR");
+		cancelar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+
+		panelBotones.add(cancelar);
+		panelBotones.add(crear);
+
+		return panelBotones;
+	}
+
+	private JComboBox seleccionarEmpleado() {
+		comboEmpleado = new JComboBox();
+		/*
+		for(int i = 0; i < ; i++){
+			Controlador.getInstancia().accion(Eventos.mostrar_Empleado,i);
+			comboEmpleado.add();
+		}
+		*/
+		return comboEmpleado;
 	}
 }
