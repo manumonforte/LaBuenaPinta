@@ -8,13 +8,11 @@ import java.awt.event.ActionListener;
 public class ToolBarMarca extends JToolBar {
 
 	public ToolBarMarca(){
-		super();
-		this.initGUI();
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		initGUI();
+		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI() {
-
 		// crear marca
 		JButton botonCrear = new JButton("Crear Marca",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear marca");
@@ -75,9 +73,9 @@ public class ToolBarMarca extends JToolBar {
 			}
 		});
 
-		this.add(botonCrear);
-		this.add(botonModificar);
-		this.add(botonMostrar);
-		this.add(botonElimiar);
+		add(botonCrear);
+		add(botonModificar);
+		add(botonMostrar);
+		add(botonElimiar);
 	}
 }

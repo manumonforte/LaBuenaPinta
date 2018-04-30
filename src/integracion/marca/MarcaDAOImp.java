@@ -17,7 +17,7 @@ public class MarcaDAOImp implements MarcaDAO {
 	private final String READALL = "SELECT * FROM marca";
 	private final String READ = READALL + " WHERE id_marca = ?";
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
-	private final String UPDATE = "UPDATE marca SET sede = ?, pais = ? WHERE nombre = ?";
+	private final String UPDATE = "UPDATE marca SET nombre = ?, sede = ?, pais = ? WHERE id_marca = ?";
 	private final String DELETE = "UPDATE marca SET activa = 0 WHERE id_marca = ?";
 
 	public MarcaDAOImp() {
@@ -93,9 +93,10 @@ public class MarcaDAOImp implements MarcaDAO {
 	@Override
 	public void modificar(TMarca e) {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
-			st.setString(1, e.getSede());
-			st.setString(2, e.getPais());
-			st.setString(3, e.getNombre());
+			st.setString(1, e.getNombre());
+			st.setString(2, e.getSede());
+			st.setString(3, e.getPais());
+			st.setInt(4, e.getId_marca());
 			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

@@ -18,7 +18,7 @@ public class CervezaDAOImp implements CervezaDAO {
 	private final String READ = READALL + " WHERE id_cerveza = ?";
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
 	private final String READBYBRAND = READALL + " WHERE marca = ?";
-	private final String UPDATE = "UPDATE cerveza SET stock = ?, graduacion = ?, precio = ? WHERE nombre = ?";
+	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, WHERE id_cerveza = ?";
 	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_cerveza = ?";
 
 	public CervezaDAOImp() {
@@ -114,10 +114,11 @@ public class CervezaDAOImp implements CervezaDAO {
 	@Override
 	public void modificar(TCerveza e) {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
-			st.setInt(1, e.getStock());
-			st.setDouble(2, e.getGraduacion());
-			st.setDouble(3, e.getPrecio());
-			st.setString(4, e.getNombre());
+			st.setString(1, e.getNombre());
+			st.setInt(2, e.getStock());
+			st.setDouble(3, e.getGraduacion());
+			st.setDouble(4, e.getPrecio());
+			st.setInt(5, e.getId_cerveza());
 			st.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

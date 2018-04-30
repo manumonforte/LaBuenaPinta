@@ -53,6 +53,6 @@ public class Util {
 	}
 
 	public static boolean parseaActiva(String s){
-		return Boolean.parseBoolean(s ="true");
+		return s.equals("true");
 	}
 }

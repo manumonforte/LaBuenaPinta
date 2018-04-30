@@ -1,6 +1,5 @@
 package presentacion.marca;
 
-import presentacion.VentanaPrincipal;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
@@ -43,7 +42,7 @@ public class FormAltaMarca extends JDialog {
 	}
 
 	public boolean getTextActiva() {
-		return Util.parseaActiva(comboBox.getSelectedItem().toString());
+		return Util.parseaActiva((String) comboBox.getSelectedItem());
 	}
 
 	private void initGUI() {
@@ -113,7 +112,7 @@ public class FormAltaMarca extends JDialog {
 					dispose();
 					Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
 				}catch (Exception ex){
-					JOptionPane.showMessageDialog(getRootPane(),"Error", "Error Alta Marca", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				System.out.println(getTextNombre() + getTextPais() + getTextSede());
 			}

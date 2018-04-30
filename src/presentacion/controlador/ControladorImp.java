@@ -33,7 +33,7 @@ public class ControladorImp extends Controlador {
 				FactoriaSA.getInstancia().generarSACerveza().mostrar_cerveza((TCerveza) datos);
 				break;
 			case mostraTodos_Cerveza:
-				FactoriaSA.getInstancia().generarSACerveza().mostrar_todos_cerveza().toString();
+				FactoriaSA.getInstancia().generarSACerveza().mostrar_todos_cerveza();
 				break;
 			case modificar_Cerveza:
 				FactoriaSA.getInstancia().generarSACerveza().modificar_cerveza((TCerveza) datos);

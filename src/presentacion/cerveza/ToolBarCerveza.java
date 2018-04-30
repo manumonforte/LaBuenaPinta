@@ -1,7 +1,5 @@
 package presentacion.cerveza;
 
-import presentacion.empleado.FormModificarEmpleado;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,13 +8,11 @@ import java.awt.event.ActionListener;
 public class ToolBarCerveza extends  JToolBar{
 
 	public ToolBarCerveza(){
-		super();
-		this.initGUI();
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		initGUI();
+		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI(){
-
 		// crear cerveza
 		JButton botonCrear = new JButton("Crear Cerveza",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear Cerveza");
@@ -77,10 +73,9 @@ public class ToolBarCerveza extends  JToolBar{
 			}
 		});
 
-		this.add(botonCrear);
-		this.add(botonModificar);
-		this.add(botonMostrar);
-		this.add(botonElimiar);
-
+		add(botonCrear);
+		add(botonModificar);
+		add(botonMostrar);
+		add(botonElimiar);
 	}
 }

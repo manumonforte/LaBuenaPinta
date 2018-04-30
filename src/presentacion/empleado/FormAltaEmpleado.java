@@ -80,7 +80,7 @@ public class FormAltaEmpleado extends JDialog{
 		panelCampos.add(textDNI);
 
 		//Activa
-		JLabel panelActiva= new JLabel("Activa");
+		JLabel panelActiva= new JLabel("Activo");
 		panelCampos.add(panelActiva);
 
 		comboActiva = seleccionarActiva();

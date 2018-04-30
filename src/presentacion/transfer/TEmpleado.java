@@ -1,7 +1,5 @@
 package presentacion.transfer;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 public class TEmpleado {
 
 	private int id_empleado;
@@ -56,8 +54,7 @@ public class TEmpleado {
 		return activo;
 	}
 
-	public TEmpleado setActivo(boolean activo) {
+	public void setActivo(boolean activo) {
 		this.activo = activo;
-		return this;
 	}
 }

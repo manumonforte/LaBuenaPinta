@@ -1,12 +1,7 @@
 package presentacion;
 
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.*;
-
-import presentacion.controlador.Controlador;
+import java.awt.*;
 
 public class VentanaPrincipal extends JFrame{
 

@@ -33,19 +33,22 @@ public class MarcaSAImp implements MarcaSA {
 	}
 
 	@Override
-	public boolean modificar_marca(TMarca tMarca) { //TODO revisar
-		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
+	public boolean modificar_marca(TMarca tMarca) {
+		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
 
 		if (tl == null) {
 			return false;
-		}else {
+		} else if (FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre()).getId_marca()
+				!= tl.getId_marca()) {
+			return false;
+		} else {
 			FactoriaDAOImp.getInstancia().getMarcaDAO().modificar(tMarca);
 			return true;
 		}
 	}
 
 	@Override
-	public boolean baja_marca(TMarca tMarca) {//TODO revisar
+	public boolean baja_marca(TMarca tMarca) {
 		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
 		List<TCerveza> tlCerveza = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorMarca(tMarca.getId_marca());
 

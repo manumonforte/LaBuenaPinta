@@ -10,14 +10,11 @@ import java.awt.event.ActionListener;
 public class ToolbarFactura extends JToolBar {
 
 	public ToolbarFactura() {
-		super();
-		this.initGUI();
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		initGUI();
+		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI() {
-		JPanel toolbarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
 		// crear factura
 		JButton botonCrear = new JButton("Crear Factura",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear Factura");
@@ -93,10 +90,10 @@ public class ToolbarFactura extends JToolBar {
 			}
 		});
 
-		this.add(botonCrear);
-		this.add(botonModificar);
-		this.add(botonMostrar);
-		this.add(botonElimiar);
-		this.add(botonDevolverProd);
+		add(botonCrear);
+		add(botonModificar);
+		add(botonMostrar);
+		add(botonElimiar);
+		add(botonDevolverProd);
 	}
 }

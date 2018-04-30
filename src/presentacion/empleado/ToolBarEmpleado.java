@@ -1,7 +1,5 @@
 package presentacion.empleado;
 
-import presentacion.factura.FormModificarFactura;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,9 +8,8 @@ import java.awt.event.ActionListener;
 public class ToolBarEmpleado extends JToolBar{
 
 	public ToolBarEmpleado(){
-		super();
-		this.initGUI();
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		initGUI();
+		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
 	private void initGUI(){
@@ -77,9 +74,9 @@ public class ToolBarEmpleado extends JToolBar{
 			}
 		});
 
-		this.add(botonCrear);
-		this.add(botonModificar);
-		this.add(botonMostrar);
-		this.add(botonElimiar);
+		add(botonCrear);
+		add(botonModificar);
+		add(botonMostrar);
+		add(botonElimiar);
 	}
 }

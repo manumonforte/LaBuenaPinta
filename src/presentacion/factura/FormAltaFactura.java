@@ -2,7 +2,6 @@ package presentacion.factura;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TEmpleado;
 import presentacion.transfer.TFactura;
 import presentacion.util.Util;
 
