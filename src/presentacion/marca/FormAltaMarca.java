@@ -1,5 +1,6 @@
 package presentacion.marca;
 
+import presentacion.VentanaPrincipal;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TMarca;
@@ -30,19 +31,19 @@ public class FormAltaMarca extends JDialog {
 	}
 
 	public String getTextNombre() {
-		return textNombre.getText();
+		return Util.parseaString(textNombre.getText());
 	}
 
 	public String getTextSede() {
-		return textSede.getText();
+		return Util.parseaString(textSede.getText());
 	}
 
 	public String getTextPais() {
-		return textPais.getText();
+		return Util.parseaString(textPais.getText());
 	}
 
 	public boolean getTextActiva() {
-		return comboBox.getSelectedItem() == "true";
+		return Util.parseaActiva(comboBox.getSelectedItem().toString());
 	}
 
 	private void initGUI() {
@@ -104,12 +105,17 @@ public class FormAltaMarca extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
-				marca.setNombre(getTextNombre());
-				marca.setSede(getTextSede());
-				marca.setPais(getTextPais());
-				marca.setActiva(getTextActiva());
-				Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
-				dispose();
+				try {
+					marca.setNombre(getTextNombre());
+					marca.setSede(getTextSede());
+					marca.setPais(getTextPais());
+					marca.setActiva(getTextActiva());
+					dispose();
+					Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(),"Error", "Error Alta Marca", JOptionPane.ERROR_MESSAGE);
+				}
+				System.out.println(getTextNombre() + getTextPais() + getTextSede());
 			}
 		});
 
