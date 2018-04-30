@@ -64,7 +64,7 @@ public class FormAltaFactura extends JDialog {
 		JLabel panelActiva= new JLabel("Empleado");
 		panelCampos.add(panelActiva);
 
-		comboEmpleado = seleccionarEmpleado(); //NOTA: hay que pasarle al combo box la lista de los empleados de la BBDD
+		comboEmpleado = seleccionarEmpleado(); //TODO hay que pasarle al combo box la lista de los empleados de la BBDD
 		panelCampos.add(comboEmpleado);
 
 		return panelCampos;

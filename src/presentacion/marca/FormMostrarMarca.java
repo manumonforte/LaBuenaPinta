@@ -25,10 +25,6 @@ public class FormMostrarMarca extends  JDialog{
 		initGUI();
 	}
 
-	public String getTextID() {
-		return textID.getText();
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -67,9 +63,13 @@ public class FormMostrarMarca extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
-				marca.setNombre(getTextID());
-				Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
-				dispose();
+				try {
+					marca.setId_marca(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.mostrar_Marca, marca);
+					dispose();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Mostrar Marca", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

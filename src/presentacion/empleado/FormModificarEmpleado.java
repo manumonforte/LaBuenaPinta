@@ -28,18 +28,6 @@ public class FormModificarEmpleado extends  JDialog{
 		initGUI();
 	}
 
-	public String getTextNombre() {
-		return textNombre.getText();
-	}
-
-	public String getTextDNI() {
-		return textDNI.getText();
-	}
-
-	public boolean getTextTCompleto() {
-		return comboTCompleto.getSelectedItem() == "true";
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -92,11 +80,15 @@ public class FormModificarEmpleado extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TEmpleado empleado = new TEmpleado();
-				empleado.setNombre(getTextNombre());
-				empleado.setDNI(getTextDNI());
-				empleado.setTiempo_completo(getTextTCompleto());
-				Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
-				dispose();
+				try {
+					empleado.setNombre(Util.parseaString(textNombre.getText()));
+					empleado.setDNI(Util.parseaString(textDNI.getText()));
+					empleado.setTiempo_completo(Util.parseaActiva(comboTCompleto.getSelectedItem().toString()));
+					Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Empleado", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

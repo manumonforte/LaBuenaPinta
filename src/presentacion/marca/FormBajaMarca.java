@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 public class FormBajaMarca extends  JDialog {
 
@@ -22,10 +23,6 @@ public class FormBajaMarca extends  JDialog {
 		setLocationRelativeTo(null);
 		Util.addEscapeListener(this);
 		initGUI();
-	}
-
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
 	}
 
 	private void initGUI() {
@@ -66,9 +63,13 @@ public class FormBajaMarca extends  JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
-				marca.setId_marca(getTextID());
-				Controlador.getInstancia().accion(Eventos.eliminar_Marca, marca);
-				dispose();
+				try {
+					marca.setId_marca(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.eliminar_Marca, marca);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Marca", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

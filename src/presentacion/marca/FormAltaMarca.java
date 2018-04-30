@@ -29,22 +29,6 @@ public class FormAltaMarca extends JDialog {
 		initGUI();
 	}
 
-	public String getTextNombre() {
-		return Util.parseaString(textNombre.getText());
-	}
-
-	public String getTextSede() {
-		return Util.parseaString(textSede.getText());
-	}
-
-	public String getTextPais() {
-		return Util.parseaString(textPais.getText());
-	}
-
-	public boolean getTextActiva() {
-		return Util.parseaActiva((String) comboBox.getSelectedItem());
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -105,16 +89,15 @@ public class FormAltaMarca extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
 				try {
-					marca.setNombre(getTextNombre());
-					marca.setSede(getTextSede());
-					marca.setPais(getTextPais());
-					marca.setActiva(getTextActiva());
-					dispose();
+					marca.setNombre(Util.parseaString(textNombre.getText()));
+					marca.setSede(Util.parseaString(textSede.getText()));
+					marca.setPais(Util.parseaString(textPais.getText()));
+					marca.setActiva( Util.parseaActiva(comboBox.getSelectedItem().toString()));
 					Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
+					dispose();
 				}catch (Exception ex){
-					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Marca", JOptionPane.ERROR_MESSAGE);
 				}
-				System.out.println(getTextNombre() + getTextPais() + getTextSede());
 			}
 		});
 
@@ -132,7 +115,6 @@ public class FormAltaMarca extends JDialog {
 
 		return panelBotones;
 	}
-
 
 	private JComboBox seleccionarActiva() {
 		comboBox = new JComboBox();

@@ -36,10 +36,6 @@ public class FormMostrarCerveza extends  JDialog{
 		pack();
 	}
 
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
-	}
-
 	private JPanel camposFormulario() {
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 0, 7));
@@ -68,8 +64,12 @@ public class FormMostrarCerveza extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TCerveza cerveza = new TCerveza();
-				cerveza.setId_cerveza(getTextID());
-				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
+				try {
+					cerveza.setId_cerveza(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Mostrar Cerveza", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

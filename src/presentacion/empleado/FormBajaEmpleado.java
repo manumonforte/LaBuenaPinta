@@ -25,10 +25,6 @@ public class FormBajaEmpleado extends  JDialog{
 		initGUI();
 	}
 
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -68,8 +64,13 @@ public class FormBajaEmpleado extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TEmpleado empleado = new TEmpleado();
-				empleado.setId_empleado(getTextID());
-				Controlador.getInstancia().accion(Eventos.eliminar_Empleado, empleado);
+				try {
+					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.eliminar_Empleado, empleado);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Empleado", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

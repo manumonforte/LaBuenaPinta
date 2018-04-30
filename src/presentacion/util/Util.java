@@ -30,24 +30,24 @@ public class Util {
 
 	public static int parseaIntNoNegativo(String s) throws ParseException, NumberFormatException, NullPointerException {
 		if (s == null || s.isEmpty()){
-			throw new NullPointerException("El valor: " + s + "NO es valido.");
+			throw new NullPointerException("El valor no es valido.");
 		}
 
 		int x = Integer.parseInt(s);
 		if (x < 0){
-			throw new ParseException("El valor: " + s + " NO es valido.", 0);
+			throw new ParseException("El valor no es valido.", 0);
 		}
 		return x;
 	}
 
 	public static float parseaFloatNoNegativo(String s)throws ParseException, NumberFormatException, NullPointerException{
 		if (s == null || s.isEmpty()){
-			throw new NullPointerException("El valor: " + s + "NO es valido.");
+			throw new NullPointerException("El valor no es valido.");
 		}
 
 		float x = Float.parseFloat(s);
 		if (x < 0){
-			throw new ParseException("El valor: " + s + " NO es valido.", 0);
+			throw new ParseException("El valor no es valido.", 0);
 		}
 		return x;
 	}

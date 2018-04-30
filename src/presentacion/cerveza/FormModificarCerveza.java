@@ -20,21 +20,6 @@ public class FormModificarCerveza extends JDialog{
 	private JTextField textGraduacion;
 	private JTextField textPrecio;
 
-
-	public String getTextNombre() {
-		return textNombre.getText();
-	}
-	public int getTextStock() {
-		return Integer.parseInt(textStock.getText());
-	}
-	public int getTextGraduacion() {
-		return Integer.parseInt(textGraduacion.getText());
-	}
-	public int getTextPrecio() {
-		return Integer.parseInt(textPrecio.getText());
-	}
-
-
 	public FormModificarCerveza() {
 		setTitle("Modificar Cerveza");
 		setLocationRelativeTo(null);
@@ -102,12 +87,16 @@ public class FormModificarCerveza extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TCerveza cerveza = new TCerveza();
-				cerveza.setNombre(getTextNombre());
-				cerveza.setStock((getTextStock()));
-				cerveza.setGraduacion(getTextGraduacion());
-				cerveza.setPrecio(getTextPrecio());
-				Controlador.getInstancia().accion(Eventos.modificar_Cerveza,cerveza);//TODO
-				dispose();
+				try {
+					cerveza.setNombre(Util.parseaString(textNombre.getText()));
+					cerveza.setStock((Util.parseaIntNoNegativo(textStock.getText())));
+					cerveza.setGraduacion(Util.parseaFloatNoNegativo(textGraduacion.getText()));
+					cerveza.setPrecio(Util.parseaFloatNoNegativo(textPrecio.getText()));
+					Controlador.getInstancia().accion(Eventos.modificar_Cerveza,cerveza);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Cerveza", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

@@ -30,31 +30,6 @@ public class FormAltaCerveza extends JDialog{
 		initGUI();
 	}
 
-	private String getTextNombre() {
-		return textNombre.getText();
-	}
-
-	private int getTextStock() {
-		return Integer.parseInt(textStock.getText());
-	}
-
-	private int getTextGraduacion() {
-		return Integer.parseInt(textGraduacion.getText());
-	}
-
-	private float getTextPrecio() {
-		return Float.parseFloat(textPrecio.getText());
-	}
-
-	private boolean getTextActiva() {
-		return comboBox.getSelectedItem() == "true";
-	}
-
-	private int getTextMarca() {
-		return Integer.parseInt(textMarca.getText());
-	}
-
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -128,14 +103,19 @@ public class FormAltaCerveza extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TCerveza cerveza = new TCerveza();
-				cerveza.setNombre(getTextNombre());
-				cerveza.setGraduacion(getTextGraduacion());
-				cerveza.setPrecio(getTextPrecio());
-				cerveza.setStock(getTextStock());
-				cerveza.setActiva(getTextActiva());
-				cerveza.set_marca(getTextMarca());
-				Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
-                dispose();
+				try {
+					cerveza.setNombre(Util.parseaString(textNombre.getText()));
+					cerveza.setGraduacion(Util.parseaIntNoNegativo(textGraduacion.getText()));
+					cerveza.setPrecio(Util.parseaFloatNoNegativo(textPrecio.getText()));
+					cerveza.setStock(Util.parseaIntNoNegativo(textStock.getText()));
+					cerveza.setActiva(Util.parseaActiva(comboBox.getSelectedItem().toString()));
+					cerveza.set_marca(Util.parseaIntNoNegativo(textMarca.getText()));
+					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Cerveza", JOptionPane.ERROR_MESSAGE);
+
+				}
 			}
 		});
 

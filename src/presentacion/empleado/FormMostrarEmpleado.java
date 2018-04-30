@@ -24,9 +24,6 @@ public class FormMostrarEmpleado extends JDialog{
 		Util.addEscapeListener(this);
 		initGUI();
 	}
-	public String getTextID() {
-		return textID.getText();
-	}
 
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
@@ -66,9 +63,13 @@ public class FormMostrarEmpleado extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TEmpleado empleado = new TEmpleado();
-				empleado.setNombre(getTextID());
-				Controlador.getInstancia().accion(Eventos.mostrar_Empleado, empleado);
-				dispose();
+				try {
+					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.mostrar_Empleado, empleado);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Mostrar Empleado", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

@@ -25,10 +25,6 @@ public class FormBajaCerveza extends  JDialog{
 		initGUI();
 	}
 
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -68,10 +64,13 @@ public class FormBajaCerveza extends  JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TCerveza cerveza = new TCerveza();
-				cerveza.setId_cerveza(getTextID());
-				Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
-				dispose();
-
+				try {
+					cerveza.setId_cerveza(Util.parseaIntNoNegativo(textID.getText()));
+					Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
+					dispose();
+				}catch (Exception ex){
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Cerveza", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

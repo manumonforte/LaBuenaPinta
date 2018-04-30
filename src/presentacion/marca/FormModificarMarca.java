@@ -27,18 +27,6 @@ public class FormModificarMarca extends JDialog{
 		initGUI();
 	}
 
-	public String getTextNombre() {
-		return textNombre.getText();
-	}
-
-	public String getTextSede() {
-		return textSede.getText();
-	}
-
-	public String getTextPais() {
-		return textPais.getText();
-	}
-
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
@@ -92,11 +80,15 @@ public class FormModificarMarca extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
-				marca.setNombre(getTextNombre());
-				marca.setSede(getTextSede());
-				marca.setPais(getTextPais());
-				Controlador.getInstancia().accion(Eventos.modificar_Marca, marca);
-				dispose();
+				try {
+					marca.setNombre(Util.parseaString(textNombre.getText()));
+					marca.setSede(Util.parseaString(textSede.getText()));
+					marca.setPais(Util.parseaString(textPais.getText()));
+					Controlador.getInstancia().accion(Eventos.modificar_Marca, marca);
+					dispose();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Marca", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
