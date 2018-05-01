@@ -18,7 +18,7 @@ public class CervezaDAOImp implements CervezaDAO {
 	private final String READ = READALL + " WHERE id_cerveza = ?";
 	private final String READBYNAME = READALL + " WHERE nombre = ?";
 	private final String READBYBRAND = READALL + " WHERE marca = ?";
-	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ?, WHERE id_cerveza = ?";
+	private final String UPDATE = "UPDATE cerveza SET nombre = ?, stock = ?, graduacion = ?, precio = ? WHERE id_cerveza = ?";
 	private final String DELETE = "UPDATE cerveza SET activa = 0 WHERE id_cerveza = ?";
 
 	public CervezaDAOImp() {
