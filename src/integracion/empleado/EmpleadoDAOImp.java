@@ -2,6 +2,8 @@ package integracion.empleado;
 
 import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TEmpleado;
+import presentacion.transfer.TEmpleadoCompleto;
+import presentacion.transfer.TEmpleadoParcial;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +15,13 @@ import java.util.List;
 public class EmpleadoDAOImp implements EmpleadoDAO {
 	private Connection conn;
 
-	private final String INSERT = "INSERT INTO empleado(nombre, DNI, tiempo_completo) VALUES(?, ?, ?)";
+	private final String INSERT = "INSERT INTO empleado(nombre, DNI, activo) VALUES(?, ?, ?)";
+	private final String INSERTCompleto = "INSERT INTO empleado_tcompleto(id_empleado, horas_extra) VALUES(?, ?)";
+	private final String INSERTParcial = "INSERT INTO empleado_tparcial(id_empleado, turno) VALUES(?, ?)";
 	private final String READALL = "SELECT * FROM empleado";
 	private final String READ = READALL + " WHERE id_empleado = ?";
 	private final String READBYDNI = READALL + " WHERE DNI = ?";
-	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_marca = ?";
+	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_empleado = ?";
 	private final String DELETE = "UPDATE empleado SET activo = 0 WHERE id_empleado = ?";
 
 	public EmpleadoDAOImp() {
@@ -29,7 +33,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		try (PreparedStatement st = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			st.setString(1, e.getNombre());
 			st.setString(2, e.getDNI());
-			st.setBoolean(3, e.isTiempo_completo());
+			st.setBoolean(3, e.isActivo());
 			st.executeUpdate();
 			try (ResultSet rs = st.getGeneratedKeys()) {
 				if (rs.next()) {
@@ -38,6 +42,28 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+		//Introducimos en la tabla empleado
+		if(!e.isTiempo_completo()) {
+			TEmpleadoParcial empleadoParcial = (TEmpleadoParcial) e;
+			try (PreparedStatement ste = conn.prepareStatement(INSERTParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1, e.getId_empleado());
+				ste.setString(2, empleadoParcial.getTurno().toString());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}else{
+			TEmpleadoCompleto empleadoCompleto = (TEmpleadoCompleto) e;
+			try (PreparedStatement ste = conn.prepareStatement(INSERTCompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1, e.getId_empleado());
+				ste.setInt(2, empleadoCompleto.getHoras_extra());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -51,6 +77,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 					e = new TEmpleado(id,
 							rs.getString("nombre"),
 							rs.getString("DNI"),
+							rs.getBoolean("activo"),
 							rs.getBoolean("tiempo_completo"));
 				}
 			}
@@ -70,6 +97,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 					e = new TEmpleado(rs.getInt("id_empleado"),
 							rs.getString("nombre"),
 							rs.getString("DNI"),
+							rs.getBoolean("activo"),
 							rs.getBoolean("tiempo_completo"));
 				}
 			}
@@ -87,6 +115,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 				lista.add(new TEmpleado(rs.getInt("id_empleado"),
 						rs.getString("nombre"),
 						rs.getString("DNI"),
+						rs.getBoolean("activo"),
 						rs.getBoolean("tiempo_completo")));
 			}
 		} catch (SQLException ex) {
@@ -100,8 +129,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
 			st.setString(1, e.getNombre());
 			st.setString(2, e.getDNI());
-			st.setBoolean(3, e.isTiempo_completo());
-			st.setInt(5, e.getId_empleado());
+			st.setInt(4, e.getId_empleado());
 			st.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();

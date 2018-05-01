@@ -11,10 +11,11 @@ public class TEmpleado {
 	public TEmpleado(){
 	}
 
-	public TEmpleado(int id_empleado, String nombre, String DNI, boolean tiempo_completo) {
+	public TEmpleado(int id_empleado , String DNI, String nombre, boolean activo, boolean tiempo_completo) {
 		this.id_empleado = id_empleado; //TODO revisar
 		this.nombre = nombre;
 		this.DNI = DNI;
+		this.activo=activo;
 		this.tiempo_completo = tiempo_completo;
 	}
 
@@ -56,5 +57,13 @@ public class TEmpleado {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public String toString() {
+		return "******Empleado*******\n"+
+				"ID: "+this.getId_empleado() + "\n"+
+				"DNI: "+this.getDNI() + "\n"+
+				"TiempoCompleto: "+this.isTiempo_completo() + "\n"+
+				"Activo: " +this.isActivo()+"\n";
 	}
 }

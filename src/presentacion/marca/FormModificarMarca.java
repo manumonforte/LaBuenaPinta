@@ -18,6 +18,7 @@ public class FormModificarMarca extends JDialog{
 	private JTextField textNombre;
 	private JTextField textSede;
 	private JTextField textPais;
+	private JTextField textID;
 
 	public FormModificarMarca() {
 		setTitle("Modificar Marca");
@@ -41,10 +42,18 @@ public class FormModificarMarca extends JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(5,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
+
+
+		//ID
+		JLabel panelID = new JLabel("ID buscado");
+		panelCampos.add(panelID);
+
+		textID = new JTextField(10);
+		panelCampos.add(textID);
 
 		//Nombre
 		JLabel panelNombre = new JLabel("Nombre");
@@ -81,6 +90,7 @@ public class FormModificarMarca extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				TMarca marca = new TMarca();
 				try {
+					marca.setId_marca(Util.parseaIntNoNegativo(textID.getText()));
 					marca.setNombre(Util.parseaString(textNombre.getText()));
 					marca.setSede(Util.parseaString(textSede.getText()));
 					marca.setPais(Util.parseaString(textPais.getText()));

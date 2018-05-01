@@ -3,7 +3,10 @@ package presentacion.empleado;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.transfer.TEmpleado;
+import presentacion.transfer.TEmpleadoCompleto;
+import presentacion.transfer.TEmpleadoParcial;
 import presentacion.util.Util;
+import presentacion.util.tipoTurno;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -88,13 +91,24 @@ public class FormAltaEmpleado extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TEmpleado empleado = new TEmpleado();
 				try {
-					empleado.setNombre(Util.parseaString(textNombre.getText()));
-					empleado.setDNI(Util.parseaString(textDNI.getText()));
-					empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
-					empleado.setTiempo_completo(Util.parseaActiva(comboTCompleto.getSelectedItem().toString()));
-					Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
+					if(comboTCompleto.getSelectedItem().equals("true")){
+						TEmpleadoCompleto empleado = new TEmpleadoCompleto();
+						empleado.setNombre(Util.parseaString(textNombre.getText()));
+						empleado.setDNI(Util.parseaString(textDNI.getText()));
+						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
+						empleado.setHoras_extra(0);
+						empleado.setTiempo_completo(true);
+						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
+					}else{
+						TEmpleadoParcial empleado = new TEmpleadoParcial();
+						empleado.setNombre(Util.parseaString(textNombre.getText()));
+						empleado.setDNI(Util.parseaString(textDNI.getText()));
+						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
+						empleado.setTurno(tipoTurno.m);
+						empleado.setTiempo_completo(false);
+						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
+					}
 					dispose();
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Empleado", JOptionPane.ERROR_MESSAGE);

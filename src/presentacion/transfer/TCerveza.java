@@ -79,4 +79,14 @@ public class TCerveza {
 	}
 
 
+	@Override
+	public String toString() {
+		return "******Cerveza*******\n"+
+				"ID: "+this.getId_cerveza() + "\n"+
+				"Nombre: "+this.getNombre() + "\n"+
+				"Stock: "+this.getStock() + "\n"+
+				"Graduacion: " +this.getGraduacion()+"\n" +
+				"Precio: "+this.getPrecio() + "\n"+
+				"Activa: "+ this.isActiva();
+	}
 }

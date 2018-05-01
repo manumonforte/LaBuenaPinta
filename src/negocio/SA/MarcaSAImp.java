@@ -35,11 +35,10 @@ public class MarcaSAImp implements MarcaSA {
 	@Override
 	public boolean modificar_marca(TMarca tMarca) {
 		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
-
+		TMarca m = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
 		if (tl == null) {
 			return false;
-		} else if (FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre()).getId_marca()
-				!= tl.getId_marca()) {
+		} else if ( m != null  &&   m.getId_marca() != tl.getId_marca()) {
 			return false;
 		} else {
 			FactoriaDAOImp.getInstancia().getMarcaDAO().modificar(tMarca);

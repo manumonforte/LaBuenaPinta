@@ -6,6 +6,9 @@ import presentacion.transfer.TEmpleado;
 import presentacion.transfer.TFactura;
 import presentacion.transfer.TMarca;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class ControladorImp extends Controlador {
 
 	@Override
@@ -15,7 +18,7 @@ public class ControladorImp extends Controlador {
 				FactoriaSA.getInstancia().generarSAMarca().insertar_marca((TMarca) datos);
 				break;
 			case mostrar_Marca:
-				FactoriaSA.getInstancia().generarSAMarca().mostrar_marca((TMarca) datos);
+				TMarca m = FactoriaSA.getInstancia().generarSAMarca().mostrar_marca((TMarca) datos);
 				break;
 			case mostraTodos_Marca:
 				FactoriaSA.getInstancia().generarSAMarca().mostrar_todos_marca();
@@ -30,7 +33,7 @@ public class ControladorImp extends Controlador {
 				FactoriaSA.getInstancia().generarSACerveza().insertar_cerveza((TCerveza) datos);
 				break;
 			case mostrar_Cerveza:
-				FactoriaSA.getInstancia().generarSACerveza().mostrar_cerveza((TCerveza) datos);
+				TCerveza c = FactoriaSA.getInstancia().generarSACerveza().mostrar_cerveza((TCerveza) datos);
 				break;
 			case mostraTodos_Cerveza:
 				FactoriaSA.getInstancia().generarSACerveza().mostrar_todos_cerveza();
@@ -45,7 +48,7 @@ public class ControladorImp extends Controlador {
 				FactoriaSA.getInstancia().generarSAEmpleado().insertar_emplado((TEmpleado) datos);
 				break;
 			case mostrar_Empleado:
-				FactoriaSA.getInstancia().generarSAEmpleado().mostrar_empleado((TEmpleado) datos);
+				TEmpleado e = FactoriaSA.getInstancia().generarSAEmpleado().mostrar_empleado((TEmpleado) datos);
 				break;
 			case mostraTodos_Empleado:
 				FactoriaSA.getInstancia().generarSAEmpleado().mostrar_todos_empleado();
@@ -60,7 +63,7 @@ public class ControladorImp extends Controlador {
 				FactoriaSA.getInstancia().generarSAFactura().insertar_factura((TFactura) datos);
 				break;
 			case mostrar_Factura:
-				FactoriaSA.getInstancia().generarSAFactura().mostrar_factura((TFactura) datos);
+				TFactura f = FactoriaSA.getInstancia().generarSAFactura().mostrar_factura((TFactura) datos);
 				break;
 			case mostraTodos_Factura:
 				FactoriaSA.getInstancia().generarSAFactura().mostrar_todos_factura();

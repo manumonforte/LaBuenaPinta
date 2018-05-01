@@ -57,4 +57,13 @@ public class TMarca {
 	public void setActiva(boolean activa) {
 		this.activa = activa;
 	}
+
+	@Override
+	public String toString() {
+		return "******Marca*******\n"+
+				"ID: "+this.getId_marca() + "\n"+
+				"Nombre: "+this.getNombre() + "\n"+
+				"Sede: "+this.getSede() + "\n"+
+				"Pais: " +this.getPais();
+	}
 }
