@@ -1,4 +1,4 @@
-package negocio.InterfacesSA;
+package negocio.cerveza;
 
 import presentacion.transfer.TCerveza;
 

@@ -1,14 +1,13 @@
-package negocio.SA;
+package negocio.marca;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
-import negocio.InterfacesSA.MarcaSA;
+import negocio.marca.MarcaSA;
 import presentacion.transfer.TCerveza;
 import presentacion.transfer.TMarca;
 
 import java.util.List;
 
 public class MarcaSAImp implements MarcaSA {
-	//TODO
 
 	@Override
 	public boolean insertar_marca(TMarca tMarca) {
