@@ -1,26 +1,26 @@
 package presentacion.transfer;
 
-import presentacion.util.tipoTurno;
+import presentacion.util.TipoTurno;
 
 public class TEmpleadoParcial extends TEmpleado {
 
 
-    private tipoTurno turno;
+    private TipoTurno turno;
 
     public TEmpleadoParcial(){
 
     }
 
-    public TEmpleadoParcial(int id_empleado, String nombre, String DNI, boolean activo,tipoTurno turno) {
+    public TEmpleadoParcial(int id_empleado, String nombre, String DNI, boolean activo,TipoTurno turno) {
         super(id_empleado,DNI,nombre,activo,false);
         this.turno = turno;
     }
 
-    public tipoTurno getTurno() {
+    public TipoTurno getTurno() {
         return turno;
     }
 
-    public void setTurno(tipoTurno turno) {
+    public void setTurno(TipoTurno turno) {
         this.turno = turno;
     }
 

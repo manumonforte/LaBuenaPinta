@@ -2,11 +2,10 @@ package presentacion.empleado;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TEmpleado;
 import presentacion.transfer.TEmpleadoCompleto;
 import presentacion.transfer.TEmpleadoParcial;
 import presentacion.util.Util;
-import presentacion.util.tipoTurno;
+import presentacion.util.TipoTurno;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -122,9 +121,9 @@ public class FormAltaEmpleado extends JDialog{
 						empleado.setDNI(Util.parseaString(textDNI.getText()));
 						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
 						if (comboTParcial.getSelectedItem().equals("t")){
-							empleado.setTurno(tipoTurno.t);
+							empleado.setTurno(TipoTurno.t);
 						}else {
-							empleado.setTurno(tipoTurno.m);
+							empleado.setTurno(TipoTurno.m);
 						}
 						empleado.setTiempo_completo(false);
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);

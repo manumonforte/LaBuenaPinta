@@ -26,4 +26,9 @@ public abstract class ModeloTabla<T> extends DefaultTableModel {
 	public int getRowCount() {
 		return lista == null ? 0 : lista.size();
 	}
+
+	public void setLista(List<T> lista) {
+		this.lista = lista;
+		fireTableStructureChanged();
+	}
 }

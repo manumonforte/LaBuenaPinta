@@ -1,5 +1,5 @@
 package presentacion.util;
 
-public enum tipoTurno {
+public enum TipoTurno {
     m, t
 }

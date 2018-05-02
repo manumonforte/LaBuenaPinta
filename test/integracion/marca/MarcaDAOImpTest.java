@@ -50,10 +50,10 @@ class MarcaDAOImpTest {
 	}
 
 	private boolean iguales(TMarca expected, TMarca actual) {
-		return expected.getId_marca() != actual.getId_marca() ||
-				!expected.getNombre().equals(actual.getNombre()) ||
-				!expected.getPais().equals(actual.getPais()) ||
-				!expected.getSede().equals(actual.getSede()) ||
-				expected.isActiva() != actual.isActiva();
+		return expected.getId_marca() == actual.getId_marca() &&
+				expected.getNombre().equals(actual.getNombre()) &&
+				expected.getPais().equals(actual.getPais()) &&
+				expected.getSede().equals(actual.getSede()) &&
+				expected.isActiva() == actual.isActiva();
 	}
 }

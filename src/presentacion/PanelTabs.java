@@ -1,15 +1,19 @@
 package presentacion;
 
 import presentacion.cerveza.PanelCerveza;
+import presentacion.controlador.Controlador;
+import presentacion.controlador.Eventos;
 import presentacion.empleado.PanelEmpleado;
 import presentacion.factura.PanelFactura;
 import presentacion.marca.PanelMarca;
+import presentacion.transfer.TMarca;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 class PanelTabs extends JTabbedPane {
 
@@ -53,18 +57,26 @@ class PanelTabs extends JTabbedPane {
 		addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent changeEvent) {
-				switch (getSelectedIndex()) {//TODO
+				switch (getSelectedIndex()) {
+					case 0:
+						ArrayList listaMarca = new ArrayList<TMarca>();
+						Controlador.getInstancia().accion(Eventos.mostraTodos_Marca, listaMarca);
+						panelMarca.getModelo().setLista(listaMarca);
+						break;
 					case 1:
-						//Controlador.getInstancia().accion(Eventos.mostraTodos_Marca, null);
+						ArrayList listaCerveza = new ArrayList<TMarca>();
+						Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCerveza);
+						panelMarca.getModelo().setLista(listaCerveza);
 						break;
 					case 2:
-						//Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, null);
+						ArrayList listaEmpleado = new ArrayList<TMarca>();
+						Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleado);
+						panelMarca.getModelo().setLista(listaEmpleado);
 						break;
 					case 3:
-						//Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, null);
-						break;
-					case 4:
-						//Controlador.getInstancia().accion(Eventos.mostraTodos_Factura, null);
+						//ArrayList listaListaFactura = new ArrayList<TMarca>();
+						//Controlador.getInstancia().accion(Eventos.mostraTodos_Factura, listaListaFactura);
+						//panelMarca.getModelo().setLista(listaListaFactura);
 						break;
 				}
 			}

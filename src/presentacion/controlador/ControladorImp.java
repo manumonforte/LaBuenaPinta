@@ -18,142 +18,134 @@ public class ControladorImp extends Controlador {
 	public void accion(Eventos evento, Object datos) {
 		switch (evento) {//TODO lanzar JOptionPane con cada resultado
 			case insertar_Marca:
-				if(FactoriaSA.getInstancia().generarSAMarca().insertar_marca((TMarca) datos)){
+				if (FactoriaSA.getInstancia().generarSAMarca().insertar_marca((TMarca) datos)) {
 					JOptionPane.showMessageDialog(null, "Marca registrada con exito");
-				}else {
-					JOptionPane.showMessageDialog(null,"Marca no registrada");
+				} else {
+					JOptionPane.showMessageDialog(null, "Marca no registrada");
 				}
 				break;
 			case mostrar_Marca:
 				TMarca marcaMostrar = FactoriaSA.getInstancia().generarSAMarca().mostrar_marca((TMarca) datos);
-				if (marcaMostrar != null){
+				if (marcaMostrar != null) {
 					JOptionPane.showMessageDialog(null, marcaMostrar.toString());
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "El ID de la marca no existe");
 				}
 				break;
 			case mostraTodos_Marca:
-				List<TMarca> listaMarca = FactoriaSA.getInstancia().generarSAMarca().mostrar_todos_marca();
-				if (listaMarca == null){
-					JOptionPane.showMessageDialog(null, null, "Error Mostrar Marca", JOptionPane.ERROR_MESSAGE);
-				}
+				List listaMarca = (List) datos;
+				listaMarca.addAll(FactoriaSA.getInstancia().generarSAMarca().mostrar_todos_marca());
 				break;
 			case modificar_Marca:
-				if(FactoriaSA.getInstancia().generarSAMarca().modificar_marca((TMarca) datos)){
+				if (FactoriaSA.getInstancia().generarSAMarca().modificar_marca((TMarca) datos)) {
 					JOptionPane.showMessageDialog(null, "Marca modificada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Marca no modificada");
 				}
 				break;
 			case eliminar_Marca:
-				if(FactoriaSA.getInstancia().generarSAMarca().baja_marca((TMarca) datos)){
+				if (FactoriaSA.getInstancia().generarSAMarca().baja_marca((TMarca) datos)) {
 					JOptionPane.showMessageDialog(null, "Marca eliminada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Marca no eliminada");
 				}
 				break;
 			case insertar_Cerveza:
-				if(FactoriaSA.getInstancia().generarSACerveza().insertar_cerveza((TCerveza) datos)){
+				if (FactoriaSA.getInstancia().generarSACerveza().insertar_cerveza((TCerveza) datos)) {
 					JOptionPane.showMessageDialog(null, "Cerveza registrada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Cerveza no registrada");
 				}
 				break;
 			case mostrar_Cerveza:
 				TCerveza cervezaMostrar = FactoriaSA.getInstancia().generarSACerveza().mostrar_cerveza((TCerveza) datos);
-				if (cervezaMostrar != null){
+				if (cervezaMostrar != null) {
 					JOptionPane.showMessageDialog(null, cervezaMostrar.toString());
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "El ID de la cerveza no existe");
 				}
 				break;
 			case mostraTodos_Cerveza:
-				List<TCerveza> listaCerveza = FactoriaSA.getInstancia().generarSACerveza().mostrar_todos_cerveza();
-				if (listaCerveza == null){
-					JOptionPane.showMessageDialog(null, null, "Error Mostrar Cerveza", JOptionPane.ERROR_MESSAGE);
-				}
+				List listCerveza = (List) datos;
+				listCerveza.addAll(FactoriaSA.getInstancia().generarSACerveza().mostrar_todos_cerveza());
 				break;
 			case modificar_Cerveza:
-				if(FactoriaSA.getInstancia().generarSACerveza().modificar_cerveza((TCerveza) datos)){
+				if (FactoriaSA.getInstancia().generarSACerveza().modificar_cerveza((TCerveza) datos)) {
 					JOptionPane.showMessageDialog(null, "Cerveza modificada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Cerveza no modificada");
 				}
 				break;
 			case eliminar_Cerveza:
-				if(FactoriaSA.getInstancia().generarSACerveza().baja_cerveza((TCerveza) datos)){
+				if (FactoriaSA.getInstancia().generarSACerveza().baja_cerveza((TCerveza) datos)) {
 					JOptionPane.showMessageDialog(null, "Cerveza eliminada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Cerveza no eliminada");
 				}
 				break;
 			case insertar_Empleado:
-				if(FactoriaSA.getInstancia().generarSAEmpleado().insertar_emplado((TEmpleado) datos)){
+				if (FactoriaSA.getInstancia().generarSAEmpleado().insertar_emplado((TEmpleado) datos)) {
 					JOptionPane.showMessageDialog(null, "Empleado registrada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Empleado no eliminado");
 				}
 				break;
 			case mostrar_Empleado:
 				TEmpleado empleadoMostrar = FactoriaSA.getInstancia().generarSAEmpleado().mostrar_empleado((TEmpleado) datos);
-				if (empleadoMostrar != null){
+				if (empleadoMostrar != null) {
 					JOptionPane.showMessageDialog(null, empleadoMostrar.toString());
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "El ID del empleado no existe");
 				}
 				break;
 			case mostraTodos_Empleado:
-				List<TEmpleado> listaEmpleado = FactoriaSA.getInstancia().generarSAEmpleado().mostrar_todos_empleado();
-				if (listaEmpleado == null){
-					JOptionPane.showMessageDialog(null, null, "Error Mostrar Empleado", JOptionPane.ERROR_MESSAGE);
-				}
+				List listaEmpleado = (List) datos;
+				listaEmpleado.addAll(FactoriaSA.getInstancia().generarSAEmpleado().mostrar_todos_empleado());
 				break;
 			case modificar_Empleado:
-				if(FactoriaSA.getInstancia().generarSAEmpleado().modificar_empleado((TEmpleado) datos)){
+				if (FactoriaSA.getInstancia().generarSAEmpleado().modificar_empleado((TEmpleado) datos)) {
 					JOptionPane.showMessageDialog(null, "Empleado modificado con exito");
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Empleado no modificado");
 				}
 				break;
 			case eliminar_Empleado:
-				if(FactoriaSA.getInstancia().generarSAEmpleado().baja_empleado((TEmpleado) datos)){
+				if (FactoriaSA.getInstancia().generarSAEmpleado().baja_empleado((TEmpleado) datos)) {
 					JOptionPane.showMessageDialog(null, "Empleado eliminado con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Empleado no eliminado");
 				}
 				break;
 			case insertar_Factura:
-				if(FactoriaSA.getInstancia().generarSAFactura().insertar_factura((TFactura) datos)){
+				if (FactoriaSA.getInstancia().generarSAFactura().insertar_factura((TFactura) datos)) {
 					JOptionPane.showMessageDialog(null, "Factura generada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Factura no generada");
 				}
 				break;
 			case mostrar_Factura:
 				TFactura facturaMostrar = FactoriaSA.getInstancia().generarSAFactura().mostrar_factura((TFactura) datos);
-				if (facturaMostrar != null){
+				if (facturaMostrar != null) {
 					JOptionPane.showMessageDialog(null, facturaMostrar.toString());
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "El ID de la marca no existe");
 				}
 				break;
 			case mostraTodos_Factura:
-				List<TFactura> listaFactura = FactoriaSA.getInstancia().generarSAFactura().mostrar_todos_factura();
-				if (listaFactura == null){
-					JOptionPane.showMessageDialog(null, null, "Error Mostrar Factura", JOptionPane.ERROR_MESSAGE);
-				}
+				List listaFactura = (List) datos;
+				listaFactura.addAll(FactoriaSA.getInstancia().generarSAFactura().mostrar_todos_factura());
 				break;
 			case modificar_Factura:
-				if(FactoriaSA.getInstancia().generarSAFactura().modificar_factura((TFactura) datos)){
+				if (FactoriaSA.getInstancia().generarSAFactura().modificar_factura((TFactura) datos)) {
 					JOptionPane.showMessageDialog(null, "Factura modificada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Factura no modificada");
 				}
 				break;
 			case eliminar_Factura:
-				if(FactoriaSA.getInstancia().generarSAFactura().baja_factura((TFactura) datos)){
+				if (FactoriaSA.getInstancia().generarSAFactura().baja_factura((TFactura) datos)) {
 					JOptionPane.showMessageDialog(null, "Factura eliminada con exito");
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Factura no eliminada");
 				}
 				break;
