@@ -4,6 +4,7 @@ import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TEmpleado;
 import presentacion.transfer.TEmpleadoCompleto;
 import presentacion.transfer.TEmpleadoParcial;
+import presentacion.util.tipoTurno;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +21,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	private final String INSERTParcial = "INSERT INTO empleado_tparcial(id_empleado, turno) VALUES(?, ?)";
 	private final String READALL = "SELECT * FROM empleado";
 	private final String READ = READALL + " WHERE id_empleado = ?";
+	private final String READCompleto = "SELECT * FROM empleado_tcompleto" + " WHERE id_empleado = ?";
+	private final String READParcial= "SELECT * FROM empleado_tparcial" + " WHERE id_empleado = ?";
 	private final String READBYDNI = READALL + " WHERE DNI = ?";
 	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_empleado = ?";
 	private final String DELETE = "UPDATE empleado SET activo = 0 WHERE id_empleado = ?";
@@ -74,16 +77,46 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			st.setInt(1, id);
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
+
 					e = new TEmpleado(id,
-							rs.getString("nombre"),
 							rs.getString("DNI"),
+							rs.getString("nombre"),
 							rs.getBoolean("activo"),
-							rs.getBoolean("tiempo_completo"));
+							false);
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+		try (PreparedStatement st = conn.prepareStatement(READCompleto)) {
+			st.setInt(1, id);
+			try(ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					TEmpleadoCompleto empleadoCompleto =  new TEmpleadoCompleto(e.getId_empleado(),e.getNombre(),
+							e.getDNI(),e.isActivo(),rs.getInt("horas_extra"));
+					return  empleadoCompleto;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		try (PreparedStatement st = conn.prepareStatement(READParcial)) {
+			st.setInt(1, id);
+			try(ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					tipoTurno turno;
+					if(rs.getString("turno").equals("m")) turno =tipoTurno.m;
+					else turno = tipoTurno.t;
+					TEmpleadoParcial empleadoParcial =  new TEmpleadoParcial(e.getId_empleado(),e.getNombre(),
+							e.getDNI(),e.isActivo(),turno);
+
+					return empleadoParcial;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
 		return e;
 	}
 
@@ -116,7 +149,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 						rs.getString("nombre"),
 						rs.getString("DNI"),
 						rs.getBoolean("activo"),
-						rs.getBoolean("tiempo_completo")));
+						false));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
