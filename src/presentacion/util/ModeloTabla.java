@@ -26,6 +26,11 @@ public abstract class ModeloTabla<T> extends DefaultTableModel {
 	public int getRowCount() {
 		return lista == null ? 0 : lista.size();
 	}
+	
+	@Override
+	public boolean isCellEditable(int row, int colum) {
+		return false;
+	}
 
 	public void setLista(List<T> lista) {
 		this.lista = lista;

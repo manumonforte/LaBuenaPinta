@@ -66,12 +66,12 @@ class PanelTabs extends JTabbedPane {
 					case 1:
 						ArrayList listaCerveza = new ArrayList<TMarca>();
 						Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCerveza);
-						panelMarca.getModelo().setLista(listaCerveza);
+						panelCerveza.getModelo().setLista(listaCerveza);
 						break;
 					case 2:
 						ArrayList listaEmpleado = new ArrayList<TMarca>();
 						Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleado);
-						panelMarca.getModelo().setLista(listaEmpleado);
+						panelEmpleado.getModelo().setLista(listaEmpleado);
 						break;
 					case 3:
 						//ArrayList listaListaFactura = new ArrayList<TMarca>();

@@ -15,7 +15,7 @@ public class PanelEmpleado extends JPanel {
 	public PanelEmpleado() {
 		setLayout(new BorderLayout());
 		add(new ToolBarEmpleado(), BorderLayout.NORTH);
-		modelo = new ModeloTablaFactura(columnId);
+		modelo = new ModeloTablaEmpleado(columnId);
 		add(new PanelTabla<TEmpleado>(modelo), BorderLayout.CENTER);
 	}
 
