@@ -1,4 +1,4 @@
-package negocio.InterfacesSA;
+package negocio.marca;
 
 import presentacion.transfer.TMarca;
 

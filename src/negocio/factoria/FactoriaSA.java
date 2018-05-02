@@ -1,9 +1,9 @@
 package negocio.factoria;
 
-import negocio.InterfacesSA.CervezaSA;
-import negocio.InterfacesSA.EmpleadoSA;
-import negocio.InterfacesSA.FacturaSA;
-import negocio.InterfacesSA.MarcaSA;
+import negocio.cerveza.CervezaSA;
+import negocio.empleado.EmpleadoSA;
+import negocio.factura.FacturaSA;
+import negocio.marca.MarcaSA;
 
 public abstract class FactoriaSA {
 	private static FactoriaSA instancia = null;

@@ -1,4 +1,4 @@
-package negocio.InterfacesSA;
+package negocio.factura;
 
 import presentacion.transfer.TFactura;
 

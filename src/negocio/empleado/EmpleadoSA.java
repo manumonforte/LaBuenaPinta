@@ -1,4 +1,4 @@
-package negocio.InterfacesSA;
+package negocio.empleado;
 
 import presentacion.transfer.TEmpleado;
 
