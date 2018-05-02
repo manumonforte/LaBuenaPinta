@@ -20,8 +20,10 @@ public class FormAltaEmpleado extends JDialog{
 
 	private JTextField textNombre;
 	private JTextField textDNI;
+	private JTextField textHExtras;
 	private JComboBox comboActiva;
 	private JComboBox comboTCompleto;
+	private JComboBox comboTParcial;
 
 	public FormAltaEmpleado() {
 		setTitle("Alta Empleado");
@@ -46,7 +48,7 @@ public class FormAltaEmpleado extends JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -76,8 +78,22 @@ public class FormAltaEmpleado extends JDialog{
 		JLabel panelTCompleto= new JLabel("Tiempo completo");
 		panelCampos.add(panelTCompleto);
 
-		comboTCompleto = seleccionarTiempo();
+		comboTCompleto = seleccionarTCompleto();
 		panelCampos.add(comboTCompleto);
+
+		//Horas Extras
+		JLabel panelHorasExtras = new JLabel("Horas exttras");
+		panelCampos.add(panelHorasExtras);
+
+		textHExtras = new JTextField(10);
+		panelCampos.add(textHExtras);
+
+		//Tiemplo Parcial
+		JLabel panelTParcial = new JLabel("Tiempo parcial");
+		panelCampos.add(panelTParcial);
+
+		comboTParcial = seleccionarTParcial();
+		panelCampos.add(comboTParcial);
 
 		return panelCampos;
 	}
@@ -97,7 +113,7 @@ public class FormAltaEmpleado extends JDialog{
 						empleado.setNombre(Util.parseaString(textNombre.getText()));
 						empleado.setDNI(Util.parseaString(textDNI.getText()));
 						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
-						empleado.setHoras_extra(0);
+						empleado.setHoras_extra(Util.parseaIntNoNegativo(textHExtras.getText()));
 						empleado.setTiempo_completo(true);
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
 					}else{
@@ -105,7 +121,11 @@ public class FormAltaEmpleado extends JDialog{
 						empleado.setNombre(Util.parseaString(textNombre.getText()));
 						empleado.setDNI(Util.parseaString(textDNI.getText()));
 						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
-						empleado.setTurno(tipoTurno.m);
+						if (comboTParcial.getSelectedItem().equals("t")){
+							empleado.setTurno(tipoTurno.t);
+						}else {
+							empleado.setTurno(tipoTurno.m);
+						}
 						empleado.setTiempo_completo(false);
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
 					}
@@ -139,11 +159,34 @@ public class FormAltaEmpleado extends JDialog{
 		return comboActiva;
 	}
 
-	private JComboBox seleccionarTiempo() {
+	private JComboBox seleccionarTCompleto() {
 		comboTCompleto = new JComboBox();
 		comboTCompleto.addItem("true");
 		comboTCompleto.addItem("false");
 
+		ActionListener actionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				if (comboTCompleto.getSelectedItem().equals("false")){
+					comboTParcial.setEnabled(true);
+					textHExtras.setEnabled(false);
+				}else{
+					comboTParcial.setEnabled(false);
+					textHExtras.setEnabled(true);
+				}
+			}
+		};
+		comboTCompleto.addActionListener(actionListener);
+
 		return comboTCompleto;
+	}
+
+	private JComboBox seleccionarTParcial() {
+		comboTParcial = new JComboBox();
+		comboTParcial.addItem("m");
+		comboTParcial.addItem("t");
+		comboTParcial.setEnabled(false);
+
+		return comboTParcial;
 	}
 }

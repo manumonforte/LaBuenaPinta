@@ -63,6 +63,7 @@ public class TEmpleado {
 		return "******Empleado*******\n"+
 				"ID: "+this.getId_empleado() + "\n"+
 				"DNI: "+this.getDNI() + "\n"+
+				"Nombre: " +this.getNombre() + "\n"+
 				"TiempoCompleto: "+this.isTiempo_completo() + "\n"+
 				"Activo: " +this.isActivo()+"\n";
 	}
