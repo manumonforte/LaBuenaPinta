@@ -4,7 +4,7 @@ import integracion.gestor.GestorConnexiones;
 import presentacion.transfer.TEmpleado;
 import presentacion.transfer.TEmpleadoCompleto;
 import presentacion.transfer.TEmpleadoParcial;
-import presentacion.util.tipoTurno;
+import presentacion.util.TipoTurno;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +19,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	private final String INSERT = "INSERT INTO empleado(nombre, DNI, activo) VALUES(?, ?, ?)";
 	private final String INSERTCompleto = "INSERT INTO empleado_tcompleto(id_empleado, horas_extra) VALUES(?, ?)";
 	private final String INSERTParcial = "INSERT INTO empleado_tparcial(id_empleado, turno) VALUES(?, ?)";
-	private final String READALL = "SELECT * FROM empleado\n" +"   LEFT JOIN empleado_tcompleto USING (id_empleado)\n" +
-									"  LEFT JOIN empleado_tparcial USING (id_empleado)";
+	private final String READALL = "SELECT * FROM empleado LEFT JOIN empleado_tcompleto USING (id_empleado)" +
+			" LEFT JOIN empleado_tparcial USING (id_empleado)";
 	private final String READ = READALL + " WHERE id_empleado = ?";
 	private final String READBYDNI = READALL + " WHERE DNI = ?";
 	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_empleado = ?";
@@ -45,8 +45,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		//Introducimos en la tabla empleado
-		if(!e.isTiempo_completo()) {
+
+		if (!e.isTiempo_completo()) {
 			TEmpleadoParcial empleadoParcial = (TEmpleadoParcial) e;
 			try (PreparedStatement ste = conn.prepareStatement(INSERTParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
 				ste.setInt(1, e.getId_empleado());
@@ -56,7 +56,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		}else{
+		} else {
 			TEmpleadoCompleto empleadoCompleto = (TEmpleadoCompleto) e;
 			try (PreparedStatement ste = conn.prepareStatement(INSERTCompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
 				ste.setInt(1, e.getId_empleado());
@@ -74,28 +74,21 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		TEmpleado e = null;
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
-			try(ResultSet rs = st.executeQuery()) {
+			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					int horas = rs.getInt("horas_extra");
-					if(rs.wasNull()){
-						tipoTurno turno;
-						if(rs.getString("turno").equals("m")) turno =tipoTurno.m;
-						else turno = tipoTurno.t;
-
-						TEmpleadoParcial empleadoParcial = new TEmpleadoParcial(rs.getInt("id_empleado"),
+					if (rs.wasNull()) {
+						e = new TEmpleadoParcial(rs.getInt("id_empleado"),
 								rs.getString("nombre"),
 								rs.getString("DNI"),
 								rs.getBoolean("activo"),
-								turno);
-						return empleadoParcial;
-					}
-					else{
-						TEmpleadoCompleto empleadoCompleto = new TEmpleadoCompleto(rs.getInt("id_empleado"),
+								TipoTurno.valueOf(rs.getString("turno")));
+					} else {
+						e = new TEmpleadoCompleto(rs.getInt("id_empleado"),
 								rs.getString("nombre"),
 								rs.getString("DNI"),
 								rs.getBoolean("activo"),
 								horas);
-						return empleadoCompleto;
 					}
 				}
 			}
@@ -131,25 +124,18 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()) {
 				int horas = rs.getInt("horas_extra");
-				if(rs.wasNull()){
-					tipoTurno turno;
-					if(rs.getString("turno").equals("m")) turno =tipoTurno.m;
-					else turno = tipoTurno.t;
-
-					TEmpleadoParcial empleadoParcial = new TEmpleadoParcial(rs.getInt("id_empleado"),
+				if (rs.wasNull()) {
+					lista.add(new TEmpleadoParcial(rs.getInt("id_empleado"),
 							rs.getString("nombre"),
 							rs.getString("DNI"),
 							rs.getBoolean("activo"),
-							turno);
-					lista.add(empleadoParcial);
-				}
-				else{
-					TEmpleadoCompleto empleadoCompleto = new TEmpleadoCompleto(rs.getInt("id_empleado"),
+							TipoTurno.valueOf(rs.getString("turno"))));
+				} else {
+					lista.add(new TEmpleadoCompleto(rs.getInt("id_empleado"),
 							rs.getString("nombre"),
 							rs.getString("DNI"),
 							rs.getBoolean("activo"),
-							horas);
-					lista.add(empleadoCompleto);
+							horas));
 				}
 			}
 		} catch (SQLException ex) {
