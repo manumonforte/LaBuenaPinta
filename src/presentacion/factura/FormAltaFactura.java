@@ -2,6 +2,7 @@ package presentacion.factura;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.empleado.TEmpleado;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -11,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FormAltaFactura extends JDialog {
 
@@ -47,23 +50,16 @@ public class FormAltaFactura extends JDialog {
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(2,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(1,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
-
-		//Cantidad total
-		JLabel panelNombre = new JLabel("Cantidad total");
-		panelCampos.add(panelNombre);
-
-		textCantidadTotal = new JTextField(10);
-		panelCampos.add(textCantidadTotal);
 
 		//Empleado
 		JLabel panelActiva= new JLabel("Empleado");
 		panelCampos.add(panelActiva);
 
-		comboEmpleado = seleccionarEmpleado(); //TODO hay que pasarle al combo box la lista de los empleados de la BBDD
+		comboEmpleado = seleccionarEmpleado();
 		panelCampos.add(comboEmpleado);
 
 		return panelCampos;
@@ -79,7 +75,6 @@ public class FormAltaFactura extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TFactura factura = new TFactura();
-				factura.setPrecio_total(getTextCantidadTotal());
 				factura.setEmpleado(getComboEmpleado());
 				Controlador.getInstancia().accion(Eventos.insertar_Factura, factura);
 				dispose();
@@ -103,12 +98,12 @@ public class FormAltaFactura extends JDialog {
 
 	private JComboBox seleccionarEmpleado() {
 		comboEmpleado = new JComboBox();
-		/*
-		for(int i = 0; i < ; i++){
-			Controlador.getInstancia().accion(Eventos.mostrar_Empleado,i);
-			comboEmpleado.add();
+
+		List<TEmpleado> listaEmpleados = new ArrayList<TEmpleado>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleados);
+		for (TEmpleado listaEmpleado : listaEmpleados) {
+			comboEmpleado.addItem(listaEmpleado.getId_empleado());
 		}
-		*/
 		return comboEmpleado;
 	}
 }

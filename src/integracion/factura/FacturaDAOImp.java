@@ -13,7 +13,7 @@ import java.util.List;
 public class FacturaDAOImp implements FacturaDAO{
 	private Connection conn;
 
-	private final String INSERT = "INSERT INTO factura(precio_total, empleado) VALUES(?, ?)";
+	private final String INSERT = "INSERT INTO factura(empleado) VALUES(?)";
 	private final String READALL = "SELECT * FROM factura";
 	private final String READ = READALL + " WHERE id_factura = ?";
 	private final String UPDATE = "UPDATE factura SET precio_total = ?, empleado = ? WHERE id_factura = ?";
@@ -28,8 +28,7 @@ public class FacturaDAOImp implements FacturaDAO{
 	@Override
 	public void insertar(TFactura e) {
 		try (PreparedStatement st = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			st.setInt(1, e.getPrecio_total());
-			st.setInt(2, e.getEmpleado());
+			st.setInt(1, e.getEmpleado());
 			st.executeUpdate();
 			try(ResultSet rs = st.getGeneratedKeys()) {
 				if (rs.next()) {
