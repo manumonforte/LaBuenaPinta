@@ -64,8 +64,8 @@ public class FormMostrarEmpleado extends JDialog{
 				TEmpleado empleado = new TEmpleado();
 				try {
 					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
-					Controlador.getInstancia().accion(Eventos.mostrar_Empleado, empleado);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.mostrar_Empleado, empleado);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Mostrar Empleado", JOptionPane.ERROR_MESSAGE);
 				}

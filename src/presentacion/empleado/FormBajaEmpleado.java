@@ -65,8 +65,8 @@ public class FormBajaEmpleado extends  JDialog{
 				TEmpleado empleado = new TEmpleado();
 				try {
 					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
-					Controlador.getInstancia().accion(Eventos.eliminar_Empleado, empleado);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.eliminar_Empleado, empleado);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Empleado", JOptionPane.ERROR_MESSAGE);
 				}

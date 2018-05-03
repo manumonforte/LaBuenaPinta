@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 public class FormModificarEmpleado extends  JDialog{
 
 	private JTextField textNombre;
+	private JTextField textID;
 	private JTextField textDNI;
 	private JComboBox comboTCompleto;
 
@@ -40,10 +41,17 @@ public class FormModificarEmpleado extends  JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(3,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
+
+		//ID
+		JLabel panelID = new JLabel("ID Buscado");
+		panelCampos.add(panelID);
+
+		textID = new JTextField(10);
+		panelCampos.add(textID);
 
 		//Nombre
 		JLabel panelNombre = new JLabel("Nombre");
@@ -80,11 +88,12 @@ public class FormModificarEmpleado extends  JDialog{
 			public void actionPerformed(ActionEvent e) {
 				TEmpleado empleado = new TEmpleado();
 				try {
+					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
 					empleado.setNombre(Util.parseaString(textNombre.getText()));
 					empleado.setDNI(Util.parseaString(textDNI.getText()));
 					empleado.setTiempo_completo(Util.parseaActiva(comboTCompleto.getSelectedItem().toString()));
-					Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Empleado", JOptionPane.ERROR_MESSAGE);
 				}

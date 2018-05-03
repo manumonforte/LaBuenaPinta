@@ -109,11 +109,10 @@ public class FormAltaCerveza extends JDialog{
 					cerveza.setStock(Util.parseaIntNoNegativo(textStock.getText()));
 					cerveza.setActiva(Util.parseaActiva(comboBox.getSelectedItem().toString()));
 					cerveza.set_marca(Util.parseaIntNoNegativo(textMarca.getText()));
-					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Cerveza", JOptionPane.ERROR_MESSAGE);
-
 				}
 			}
 		});

@@ -23,7 +23,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			" LEFT JOIN empleado_tparcial USING (id_empleado)";
 	private final String READ = READALL + " WHERE id_empleado = ?";
 	private final String READBYDNI = READALL + " WHERE DNI = ?";
-	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, tiempo_completo = ? WHERE id_empleado = ?";
+	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, activo = ? WHERE id_empleado = ?";
 	private final String DELETE = "UPDATE empleado SET activo = 0 WHERE id_empleado = ?";
 
 	public EmpleadoDAOImp() {

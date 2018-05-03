@@ -82,7 +82,7 @@ public class ControladorImp extends Controlador {
 				break;
 			case insertar_Empleado:
 				if (FactoriaSA.getInstancia().generarSAEmpleado().insertar_emplado((TEmpleado) datos)) {
-					JOptionPane.showMessageDialog(null, "Empleado registrada con exito");
+					JOptionPane.showMessageDialog(null, "Empleado registrado con exito");
 				} else {
 					JOptionPane.showMessageDialog(null, "Empleado no eliminado");
 				}

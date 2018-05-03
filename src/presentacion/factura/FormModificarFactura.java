@@ -79,8 +79,8 @@ public class FormModificarFactura  extends  JDialog{
 				TFactura factura = new TFactura();
 				factura.setId_factura(getTextCantidadTotal());
 				factura.setId_factura(getComboEmpleado());
-				Controlador.getInstancia().accion(Eventos.modificar_Factura, factura);
 				dispose();
+				Controlador.getInstancia().accion(Eventos.modificar_Factura, factura);
 			}
 		});
 

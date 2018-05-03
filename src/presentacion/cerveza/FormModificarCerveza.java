@@ -99,8 +99,8 @@ public class FormModificarCerveza extends JDialog{
 					cerveza.setStock((Util.parseaIntNoNegativo(textStock.getText())));
 					cerveza.setGraduacion(Util.parseaFloatNoNegativo(textGraduacion.getText()));
 					cerveza.setPrecio(Util.parseaFloatNoNegativo(textPrecio.getText()));
-					Controlador.getInstancia().accion(Eventos.modificar_Cerveza,cerveza);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.modificar_Cerveza,cerveza);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Cerveza", JOptionPane.ERROR_MESSAGE);
 				}

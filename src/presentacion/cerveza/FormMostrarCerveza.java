@@ -65,6 +65,7 @@ public class FormMostrarCerveza extends  JDialog{
 				TCerveza cerveza = new TCerveza();
 				try {
 					cerveza.setId_cerveza(Util.parseaIntNoNegativo(textID.getText()));
+					dispose();
 					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Mostrar Cerveza", JOptionPane.ERROR_MESSAGE);

@@ -32,11 +32,10 @@ public class EmpleadoSAImp implements EmpleadoSA {
 	@Override
 	public boolean modificar_empleado(TEmpleado tEmpleado) {
 		TEmpleado tl = FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrar(tEmpleado.getId_empleado());
-
+		TEmpleado tr = FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrarPorDNI(tEmpleado.getDNI());
 		if (tl == null) {
 			return false;
-		} else if (FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrarPorDNI(tEmpleado.getDNI()).getId_empleado()
-				!= tl.getId_empleado()) {
+		} else if ( tr != null && tr.getDNI() != tr.getDNI()) {
 			return false;
 		} else {
 			FactoriaDAOImp.getInstancia().getEmpleadoDAO().modificar(tEmpleado);

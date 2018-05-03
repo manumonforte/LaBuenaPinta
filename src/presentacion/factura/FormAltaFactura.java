@@ -76,8 +76,8 @@ public class FormAltaFactura extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				TFactura factura = new TFactura();
 				factura.setEmpleado(getComboEmpleado());
-				Controlador.getInstancia().accion(Eventos.insertar_Factura, factura);
 				dispose();
+				Controlador.getInstancia().accion(Eventos.insertar_Factura, factura);
 			}
 		});
 

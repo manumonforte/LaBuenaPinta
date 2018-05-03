@@ -66,8 +66,8 @@ public class FormBajaFactura extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				TFactura factura = new TFactura();
 				factura.setId_factura(getTextID());
-				Controlador.getInstancia().accion(Eventos.eliminar_Factura, factura);
 				dispose();
+				Controlador.getInstancia().accion(Eventos.eliminar_Factura, factura);
 			}
 		});
 

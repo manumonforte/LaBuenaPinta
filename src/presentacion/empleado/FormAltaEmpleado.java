@@ -112,6 +112,7 @@ public class FormAltaEmpleado extends JDialog{
 						empleado.setActivo(Util.parseaActiva(comboActiva.getSelectedItem().toString()));
 						empleado.setHoras_extra(Util.parseaIntNoNegativo(textHExtras.getText()));
 						empleado.setTiempo_completo(true);
+						dispose();
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
 					}else{
 						TEmpleadoParcial empleado = new TEmpleadoParcial();
@@ -124,6 +125,7 @@ public class FormAltaEmpleado extends JDialog{
 							empleado.setTurno(TipoTurno.m);
 						}
 						empleado.setTiempo_completo(false);
+						dispose();
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
 					}
 					dispose();

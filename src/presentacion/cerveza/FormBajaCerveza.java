@@ -65,8 +65,8 @@ public class FormBajaCerveza extends  JDialog{
 				TCerveza cerveza = new TCerveza();
 				try {
 					cerveza.setId_cerveza(Util.parseaIntNoNegativo(textID.getText()));
-					Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
 					dispose();
+					Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Cerveza", JOptionPane.ERROR_MESSAGE);
 				}
