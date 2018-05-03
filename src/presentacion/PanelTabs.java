@@ -1,10 +1,13 @@
 package presentacion;
 
 import presentacion.cerveza.PanelCerveza;
+import presentacion.cerveza.TCerveza;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.empleado.PanelEmpleado;
+import presentacion.empleado.TEmpleado;
 import presentacion.factura.PanelFactura;
+import presentacion.factura.TFactura;
 import presentacion.marca.PanelMarca;
 import presentacion.marca.TMarca;
 
@@ -68,7 +71,7 @@ public class PanelTabs extends JTabbedPane {
 						actualizarEmpleado();
 						break;
 					case 3:
-						//actualizarEmpleado();
+						actualizarFactura();
 						break;
 				}
 			}
@@ -82,20 +85,20 @@ public class PanelTabs extends JTabbedPane {
 	}
 
 	public void actualizarCerveza(){
-		ArrayList listaCerveza = new ArrayList<TMarca>();
+		ArrayList listaCerveza = new ArrayList<TCerveza>();
 		Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCerveza);
 		panelCerveza.getModelo().setLista(listaCerveza);
 	}
 
 	public void actualizarEmpleado(){
-		ArrayList listaEmpleado = new ArrayList<TMarca>();
+		ArrayList listaEmpleado = new ArrayList<TEmpleado>();
 		Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleado);
 		panelEmpleado.getModelo().setLista(listaEmpleado);
 	}
 
 	public void actualizarFactura(){
-		ArrayList listaListaFactura = new ArrayList<TMarca>();
+		ArrayList listaListaFactura = new ArrayList<TFactura>();
 		Controlador.getInstancia().accion(Eventos.mostraTodos_Factura, listaListaFactura);
-		panelMarca.getModelo().setLista(listaListaFactura);
+		panelFactura.getModelo().setLista(listaListaFactura);
 	}
 }

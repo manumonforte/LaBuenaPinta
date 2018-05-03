@@ -23,7 +23,7 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	private final String READALL = "SELECT * FROM empleado LEFT JOIN empleado_tcompleto USING (id_empleado)" +
 			" LEFT JOIN empleado_tparcial USING (id_empleado)";
 	private final String READ = READALL + " WHERE id_empleado = ?";
-    private final String READBYDNI = READALL + " WHERE DNI = ?";
+	private final String READBYDNI = READALL + " WHERE DNI = ?";
 
 	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ? WHERE id_empleado = ?";
 	private final String UPDATECompleto = "UPDATE empleado_tcompleto SET horas_extra = ? WHERE id_empleado = ?";
@@ -113,11 +113,20 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 			st.setString(1, DNI);
 			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
-					e = new TEmpleado(rs.getInt("id_empleado"),
-							rs.getString("nombre"),
-							rs.getString("DNI"),
-							rs.getBoolean("activo"),
-							rs.getBoolean("tiempo_completo"));
+					int horas = rs.getInt("horas_extra");
+					if (rs.wasNull()) {
+						e = new TEmpleadoParcial(rs.getInt("id_empleado"),
+								rs.getString("nombre"),
+								rs.getString("DNI"),
+								rs.getBoolean("activo"),
+								TipoTurno.valueOf(rs.getString("turno")));
+					} else {
+						e = new TEmpleadoCompleto(rs.getInt("id_empleado"),
+								rs.getString("nombre"),
+								rs.getString("DNI"),
+								rs.getBoolean("activo"),
+								horas);
+					}
 				}
 			}
 		} catch (SQLException ex) {
@@ -158,17 +167,17 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		TEmpleado actual = mostrar(e.getId_empleado());
 
 		//COMPROBAMOS SI ES NECESARIO ACTUALIZAR TABLAS
-		if( actual.isTiempo_completo() && !e.isTiempo_completo()){
+		if (actual.isTiempo_completo() && !e.isTiempo_completo()) {
 			try (PreparedStatement ste = conn.prepareStatement(DELETECompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
-				ste.setInt(1,e.getId_empleado());
+				ste.setInt(1, e.getId_empleado());
 				ste.executeUpdate();
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		}else if ( !actual.isTiempo_completo() && e.isTiempo_completo()){
+		} else if (!actual.isTiempo_completo() && e.isTiempo_completo()) {
 			try (PreparedStatement ste = conn.prepareStatement(DELETEParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
-				ste.setInt(1,e.getId_empleado());
+				ste.setInt(1, e.getId_empleado());
 				ste.executeUpdate();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -176,9 +185,9 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		}
 		//MODIFICAMOS EL EMPLEADO DE LA TABLA PRINCIPAL
 		try (PreparedStatement st = conn.prepareStatement(UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			st.setString(1,e.getNombre());
+			st.setString(1, e.getNombre());
 			st.setString(2, e.getDNI());
-			st.setInt(3,e.getId_empleado());
+			st.setInt(3, e.getId_empleado());
 			st.executeUpdate();
 			try (ResultSet rs = st.getGeneratedKeys()) {
 				if (rs.next()) {
@@ -192,8 +201,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		if (!e.isTiempo_completo()) {
 			TEmpleadoParcial empleadoParcial = (TEmpleadoParcial) e;
 			try (PreparedStatement ste = conn.prepareStatement(UPDATEParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
-				ste.setString(1,empleadoParcial.getTurno().toString());
-				ste.setInt(2,e.getId_empleado());
+				ste.setString(1, empleadoParcial.getTurno().toString());
+				ste.setInt(2, e.getId_empleado());
 				ste.executeUpdate();
 
 			} catch (SQLException e1) {
@@ -202,8 +211,8 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 		} else {
 			TEmpleadoCompleto empleadoCompleto = (TEmpleadoCompleto) e;
 			try (PreparedStatement ste = conn.prepareStatement(UPDATECompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
-				ste.setInt(1,empleadoCompleto.getHoras_extra());
-				ste.setInt(2,e.getId_empleado());
+				ste.setInt(1, empleadoCompleto.getHoras_extra());
+				ste.setInt(2, e.getId_empleado());
 				ste.executeUpdate();
 
 			} catch (SQLException e1) {

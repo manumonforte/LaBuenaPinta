@@ -6,8 +6,6 @@ import presentacion.util.PanelTabla;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class PanelMarca extends JPanel {
 	private final String[] columnId = {"Id", "Nombre", "Sede", "Pais", "Activa"};

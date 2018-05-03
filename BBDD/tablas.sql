@@ -40,7 +40,7 @@ CREATE TABLE empleado_tcompleto(
 
 CREATE TABLE factura(
     id_factura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    precio_total FLOAT NOT NULL,
+    precio_total FLOAT NOT NULL DEFAULT 0,
     empleado INT NOT NULL,
     abierta BOOLEAN NOT NULL DEFAULT 1,
     FOREIGN KEY(empleado) REFERENCES empleado(id_empleado)

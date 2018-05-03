@@ -101,8 +101,10 @@ public class FormAltaFactura extends JDialog {
 
 		List<TEmpleado> listaEmpleados = new ArrayList<TEmpleado>();
 		Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleados);
-		for (TEmpleado listaEmpleado : listaEmpleados) {
-			comboEmpleado.addItem(listaEmpleado.getId_empleado());
+		for (TEmpleado empleado : listaEmpleados) {
+			if (empleado.isActivo()) {
+				comboEmpleado.addItem(empleado.getId_empleado());
+			}
 		}
 		return comboEmpleado;
 	}

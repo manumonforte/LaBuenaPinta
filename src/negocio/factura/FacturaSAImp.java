@@ -1,5 +1,6 @@
 package negocio.factura;
 
+import integracion.factoriaDAO.FactoriaDAOImp;
 import presentacion.factura.TFactura;
 
 import java.util.List;
@@ -7,26 +8,34 @@ import java.util.List;
 public class FacturaSAImp implements FacturaSA{//TODO
 	@Override
 	public boolean insertar_factura(TFactura tFactura) {
-		return false;
+		FactoriaDAOImp.getInstancia().getFacturaDAO().insertar(tFactura);
+		return true;
 	}
 
 	@Override
 	public TFactura mostrar_factura(TFactura tFactura) {
-		return null;
+		return FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
 	}
 
 	@Override
 	public List<TFactura> mostrar_todos_factura() {
-		return null;
+		return FactoriaDAOImp.getInstancia().getFacturaDAO().mostrarTodos();
 	}
 
 	@Override
 	public boolean modificar_factura(TFactura tFactura) {
-		return false;
+		return false; //TODO propongo borrarlo
 	}
 
 	@Override
 	public boolean baja_factura(TFactura tFactura) {
-		return false;
+		TFactura tl = FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
+
+		if (tl == null){
+			return false;
+		} else {
+			FactoriaDAOImp.getInstancia().getFacturaDAO().eliminar(tFactura.getId_factura());
+			return true;
+		}
 	}
 }

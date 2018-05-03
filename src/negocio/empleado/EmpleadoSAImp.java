@@ -10,7 +10,7 @@ public class EmpleadoSAImp implements EmpleadoSA {
 	public boolean insertar_emplado(TEmpleado tEmpleado) {
 		TEmpleado tl = FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrarPorDNI(tEmpleado.getDNI());
 
-		if (tl == null){
+		if (tl == null) {
 			FactoriaDAOImp.getInstancia().getEmpleadoDAO().insertar(tEmpleado);
 			return true;
 		} else {
@@ -35,7 +35,7 @@ public class EmpleadoSAImp implements EmpleadoSA {
 		TEmpleado tr = FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrarPorDNI(tEmpleado.getDNI());
 		if (tl == null) {
 			return false;
-		} else if ( tr != null && tr.getDNI() != tr.getDNI()) {
+		} else if (tr != null && tl.getDNI() == tr.getDNI()) {
 			return false;
 		} else {
 			FactoriaDAOImp.getInstancia().getEmpleadoDAO().modificar(tEmpleado);
@@ -47,7 +47,7 @@ public class EmpleadoSAImp implements EmpleadoSA {
 	public boolean baja_empleado(TEmpleado tEmpleado) {
 		TEmpleado tl = FactoriaDAOImp.getInstancia().getEmpleadoDAO().mostrar(tEmpleado.getId_empleado());
 
-		if (tl == null){
+		if (tl == null) {
 			return false;
 		} else {
 			FactoriaDAOImp.getInstancia().getEmpleadoDAO().eliminar(tEmpleado.getId_empleado());
