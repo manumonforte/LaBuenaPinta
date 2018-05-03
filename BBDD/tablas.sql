@@ -42,6 +42,7 @@ CREATE TABLE factura(
     id_factura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     precio_total FLOAT NOT NULL,
     empleado INT NOT NULL,
+    abierta BOOLEAN NOT NULL DEFAULT 1,
     FOREIGN KEY(empleado) REFERENCES empleado(id_empleado)
 );
 

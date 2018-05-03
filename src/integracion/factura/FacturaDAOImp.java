@@ -47,7 +47,8 @@ public class FacturaDAOImp implements FacturaDAO{
 			st.setInt(1, id);
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
-					f = new TFactura(id, rs.getInt("precio_total"), rs.getInt("empleado"));
+					f = new TFactura(id, rs.getInt("precio_total"),
+							rs.getInt("empleado"), rs.getBoolean("abierta"));
 				}
 			}
 		} catch (SQLException e) {
@@ -61,7 +62,8 @@ public class FacturaDAOImp implements FacturaDAO{
 		ArrayList<TFactura> lista = new ArrayList<TFactura>();
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()){
-				lista.add(new TFactura(rs.getInt("id_factura"), rs.getInt("precio_total"), rs.getInt("empleado")));
+				lista.add(new TFactura(rs.getInt("id_factura"), rs.getInt("precio_total"),
+						rs.getInt("empleado"), rs.getBoolean("abierta")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +94,7 @@ public class FacturaDAOImp implements FacturaDAO{
 	}
 
 	@Override
-	public void devolver_producto(int id_factura, int id_empleado) {
+	public void devolver_producto(int id_factura, int id_empleado) {//TODO MAL
 		try (PreparedStatement st = conn.prepareStatement(RETURN)) {
 			st.setInt(1, id_factura);
 			st.setInt(2, id_empleado);
