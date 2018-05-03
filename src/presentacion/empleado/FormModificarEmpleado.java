@@ -2,6 +2,7 @@ package presentacion.empleado;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.util.TipoTurno;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -17,7 +18,9 @@ public class FormModificarEmpleado extends  JDialog{
 	private JTextField textNombre;
 	private JTextField textID;
 	private JTextField textDNI;
+	private JTextField textHExtras;
 	private JComboBox comboTCompleto;
+	private JComboBox comboTParcial;
 
 	public FormModificarEmpleado() {
 		super();
@@ -41,7 +44,7 @@ public class FormModificarEmpleado extends  JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(6,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
@@ -71,8 +74,23 @@ public class FormModificarEmpleado extends  JDialog{
 		JLabel panelTCompleto= new JLabel("Tiempo completo");
 		panelCampos.add(panelTCompleto);
 
-		comboTCompleto = seleccionarTiempo();
+		comboTCompleto = seleccionarTCompleto();
 		panelCampos.add(comboTCompleto);
+
+		//Horas Extras
+		JLabel panelHorasExtras = new JLabel("Horas extras");
+		panelCampos.add(panelHorasExtras);
+
+		textHExtras = new JTextField(10);
+		panelCampos.add(textHExtras);
+
+		//Tiemplo Parcial
+		JLabel panelTParcial = new JLabel("Tiempo parcial");
+		panelCampos.add(panelTParcial);
+
+		comboTParcial = seleccionarTParcial();
+		panelCampos.add(comboTParcial);
+
 
 		return panelCampos;
 	}
@@ -86,14 +104,31 @@ public class FormModificarEmpleado extends  JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TEmpleado empleado = new TEmpleado();
 				try {
-					empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
-					empleado.setNombre(Util.parseaString(textNombre.getText()));
-					empleado.setDNI(Util.parseaString(textDNI.getText()));
-					empleado.setTiempo_completo(Util.parseaActiva(comboTCompleto.getSelectedItem().toString()));
+					if(comboTCompleto.getSelectedItem().equals("true")){
+						TEmpleadoCompleto empleado = new TEmpleadoCompleto();
+						empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
+						empleado.setNombre(Util.parseaString(textNombre.getText()));
+						empleado.setDNI(Util.parseaString(textDNI.getText()));
+						empleado.setHoras_extra(Util.parseaIntNoNegativo(textHExtras.getText()));
+						empleado.setTiempo_completo(true);
+						dispose();
+						Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
+					}else{
+						TEmpleadoParcial empleado = new TEmpleadoParcial();
+						empleado.setId_empleado(Util.parseaIntNoNegativo(textID.getText()));
+						empleado.setNombre(Util.parseaString(textNombre.getText()));
+						empleado.setDNI(Util.parseaString(textDNI.getText()));
+						if (comboTParcial.getSelectedItem().equals("t")){
+							empleado.setTurno(TipoTurno.t);
+						}else {
+							empleado.setTurno(TipoTurno.m);
+						}
+						empleado.setTiempo_completo(false);
+						dispose();
+						Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
+					}
 					dispose();
-					Controlador.getInstancia().accion(Eventos.modificar_Empleado, empleado);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Modificar Empleado", JOptionPane.ERROR_MESSAGE);
 				}
@@ -115,10 +150,33 @@ public class FormModificarEmpleado extends  JDialog{
 		return panelBotones;
 	}
 
-	private JComboBox seleccionarTiempo() {
+	private JComboBox seleccionarTParcial() {
+		comboTParcial = new JComboBox();
+		comboTParcial.setEnabled(false);
+		comboTParcial.addItem("m");
+		comboTParcial.addItem("t");
+
+		return comboTParcial;
+	}
+
+	private JComboBox seleccionarTCompleto() {
 		comboTCompleto = new JComboBox();
 		comboTCompleto.addItem("true");
 		comboTCompleto.addItem("false");
+
+		ActionListener actionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				if (comboTCompleto.getSelectedItem().equals("false")){
+					textHExtras.setEnabled(false);
+					comboTParcial.setEnabled(true);
+				}else{
+					comboTParcial.setEnabled(false);
+					textHExtras.setEnabled(true);
+				}
+			}
+		};
+		comboTCompleto.addActionListener(actionListener);
 
 		return comboTCompleto;
 	}

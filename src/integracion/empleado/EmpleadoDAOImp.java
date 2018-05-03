@@ -19,12 +19,20 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 	private final String INSERT = "INSERT INTO empleado(nombre, DNI, activo) VALUES(?, ?, ?)";
 	private final String INSERTCompleto = "INSERT INTO empleado_tcompleto(id_empleado, horas_extra) VALUES(?, ?)";
 	private final String INSERTParcial = "INSERT INTO empleado_tparcial(id_empleado, turno) VALUES(?, ?)";
+
 	private final String READALL = "SELECT * FROM empleado LEFT JOIN empleado_tcompleto USING (id_empleado)" +
 			" LEFT JOIN empleado_tparcial USING (id_empleado)";
 	private final String READ = READALL + " WHERE id_empleado = ?";
-	private final String READBYDNI = READALL + " WHERE DNI = ?";
-	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ?, activo = ? WHERE id_empleado = ?";
+    private final String READBYDNI = READALL + " WHERE DNI = ?";
+
+	private final String UPDATE = "UPDATE empleado SET nombre = ?, DNI = ? WHERE id_empleado = ?";
+	private final String UPDATECompleto = "UPDATE empleado_tcompleto SET horas_extra = ? WHERE id_empleado = ?";
+	private final String UPDATEParcial = "UPDATE empleado_tparcial SET turno = ? WHERE id_empleado = ?";
+
 	private final String DELETE = "UPDATE empleado SET activo = 0 WHERE id_empleado = ?";
+	private final String DELETECompleto = "DELETE FROM empleado_tcompleto WHERE id_empleado = ?";
+	private final String DELETEParcial = "DELETE FROM empleado_tparcial WHERE id_empleado = ?";
+
 
 	public EmpleadoDAOImp() {
 		this.conn = GestorConnexiones.getInstancia().getConnection();
@@ -146,14 +154,86 @@ public class EmpleadoDAOImp implements EmpleadoDAO {
 
 	@Override
 	public void modificar(TEmpleado e) {
-		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
-			st.setString(1, e.getNombre());
-			st.setString(2, e.getDNI());
-			st.setInt(4, e.getId_empleado());
-			st.executeUpdate();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+
+		TEmpleado actual = mostrar(e.getId_empleado());
+
+		//COMPROBAMOS SI ES NECESARIO ACTUALIZAR TABLAS
+		if( actual.isTiempo_completo() && !e.isTiempo_completo()){
+			try (PreparedStatement ste = conn.prepareStatement(DELETECompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1,e.getId_empleado());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}else if ( !actual.isTiempo_completo() && e.isTiempo_completo()){
+			try (PreparedStatement ste = conn.prepareStatement(DELETEParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1,e.getId_empleado());
+				ste.executeUpdate();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
+		//MODIFICAMOS EL EMPLEADO DE LA TABLA PRINCIPAL
+		try (PreparedStatement st = conn.prepareStatement(UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			st.setString(1,e.getNombre());
+			st.setString(2, e.getDNI());
+			st.setInt(3,e.getId_empleado());
+			st.executeUpdate();
+			try (ResultSet rs = st.getGeneratedKeys()) {
+				if (rs.next()) {
+					e.setId_empleado(rs.getInt(1));
+				}
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		if (!e.isTiempo_completo()) {
+			TEmpleadoParcial empleadoParcial = (TEmpleadoParcial) e;
+			try (PreparedStatement ste = conn.prepareStatement(UPDATEParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setString(1,empleadoParcial.getTurno().toString());
+				ste.setInt(2,e.getId_empleado());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			TEmpleadoCompleto empleadoCompleto = (TEmpleadoCompleto) e;
+			try (PreparedStatement ste = conn.prepareStatement(UPDATECompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1,empleadoCompleto.getHoras_extra());
+				ste.setInt(2,e.getId_empleado());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		//MODIFICAMOS EL EMPLEADO DE LAS TABLAS SECUNDARIAS
+		if (!e.isTiempo_completo()) {
+			TEmpleadoParcial empleadoParcial = (TEmpleadoParcial) e;
+			try (PreparedStatement ste = conn.prepareStatement(INSERTParcial, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1, e.getId_empleado());
+				ste.setString(2, empleadoParcial.getTurno().toString());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			TEmpleadoCompleto empleadoCompleto = (TEmpleadoCompleto) e;
+			try (PreparedStatement ste = conn.prepareStatement(INSERTCompleto, PreparedStatement.RETURN_GENERATED_KEYS)) {
+				ste.setInt(1, e.getId_empleado());
+				ste.setInt(2, empleadoCompleto.getHoras_extra());
+				ste.executeUpdate();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+
 	}
 
 	@Override
