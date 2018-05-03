@@ -21,10 +21,15 @@ public class ModeloTablaEmpleado extends ModeloTabla<TEmpleado> {
 				s = lista.get(indiceFil).getDNI();
 				break;
 			case 3:
-				//s = lista.get(indiceFil).get();
+				s = lista.get(indiceFil).isActivo();
 				break;
 			case 4:
-				//s = lista.get(indiceFil).isActiva(); TODO !!!!!!!!!!!!!
+				s = lista.get(indiceFil).isTiempo_completo() ?
+						((TEmpleadoCompleto) lista.get(indiceFil)).getHoras_extra() : "";
+				break;
+			case 5:
+				s = !lista.get(indiceFil).isTiempo_completo() ?
+						((TEmpleadoParcial) lista.get(indiceFil)).getTurno() : "";
 				break;
 			default:
 				assert (false);

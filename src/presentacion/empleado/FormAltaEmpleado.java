@@ -79,7 +79,7 @@ public class FormAltaEmpleado extends JDialog{
 		panelCampos.add(comboTCompleto);
 
 		//Horas Extras
-		JLabel panelHorasExtras = new JLabel("Horas exttras");
+		JLabel panelHorasExtras = new JLabel("Horas extras");
 		panelCampos.add(panelHorasExtras);
 
 		textHExtras = new JTextField(10);

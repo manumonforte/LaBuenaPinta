@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelEmpleado extends JPanel {
-	private final String[] columnId = {"Id" , "Nombre", "DNI", "Pais", "Activo"};
+	private final String[] columnId = {"Id" , "Nombre", "DNI", "Activo", "Horas extras", "Turno"};
 	private ModeloTabla modelo;
 
 	public PanelEmpleado() {
