@@ -1,5 +1,7 @@
 package presentacion.empleado;
 
+import presentacion.PanelTabs;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,12 +9,12 @@ import java.awt.event.ActionListener;
 
 public class ToolBarEmpleado extends JToolBar{
 
-	public ToolBarEmpleado(){
-		initGUI();
+	public ToolBarEmpleado(PanelTabs panelTabs){
+		initGUI(panelTabs);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
-	private void initGUI(){
+	private void initGUI(PanelTabs panelTabs){
 
 		// crear empleado
 		JButton botonCrear = new JButton("Crear Empleado", new ImageIcon("resources/images/add-32.png"));
@@ -25,7 +27,6 @@ public class ToolBarEmpleado extends JToolBar{
 			public void actionPerformed(ActionEvent e) {
 				FormAltaEmpleado formAltaEmpleado = new FormAltaEmpleado();
 				formAltaEmpleado.setVisible(true);
-				//controlador.accion(Eventos.insertar_Empleado, null);
 			}
 		});
 
@@ -40,7 +41,6 @@ public class ToolBarEmpleado extends JToolBar{
 			public void actionPerformed(ActionEvent e) {
 				FormBajaEmpleado formBajaEmpleado = new FormBajaEmpleado();
 				formBajaEmpleado.setVisible(true);
-				//controlador.accion(Eventos.eliminar_Empleado, null);
 			}
 		});
 
@@ -55,7 +55,6 @@ public class ToolBarEmpleado extends JToolBar{
 			public void actionPerformed(ActionEvent e) {
 				FormMostrarEmpleado formMostrarEmpleado = new FormMostrarEmpleado();
 				formMostrarEmpleado.setVisible(true);
-				//controlador.accion(Eventos.mostrar_Empleado, null);
 			}
 		});
 
@@ -70,7 +69,19 @@ public class ToolBarEmpleado extends JToolBar{
 			public void actionPerformed(ActionEvent e) {
 				FormModificarEmpleado formModificarEmpleado = new FormModificarEmpleado();
 				formModificarEmpleado.setVisible(true);
-				//controlador.accion(Eventos.modificar_Empleado, null);
+			}
+		});
+
+		// actualizar empleado
+		JButton botonactualizar = new JButton("Actualizar empleado");
+		botonactualizar.setToolTipText("Actualizar empleado");
+		botonactualizar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonactualizar.setHorizontalTextPosition(SwingConstants.CENTER);
+		botonactualizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panelTabs.actualizarEmpleado();
 			}
 		});
 
@@ -78,5 +89,6 @@ public class ToolBarEmpleado extends JToolBar{
 		add(botonModificar);
 		add(botonMostrar);
 		add(botonElimiar);
+		add(botonactualizar);
 	}
 }

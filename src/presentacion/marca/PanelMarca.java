@@ -13,9 +13,9 @@ public class PanelMarca extends JPanel {
 	private final String[] columnId = {"Id", "Nombre", "Sede", "Pais", "Activa"};
 	private ModeloTabla modelo;
 
-	public PanelMarca() {
+	public PanelMarca(PanelTabs panelTabs) {
 		setLayout(new BorderLayout());
-		add(new ToolBarMarca(), BorderLayout.NORTH);
+		add(new ToolBarMarca(panelTabs), BorderLayout.NORTH);
 		modelo = new ModeloTablaMarca(columnId);
 		add(new PanelTabla<TMarca>(modelo), BorderLayout.CENTER);
 	}

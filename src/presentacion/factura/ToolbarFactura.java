@@ -1,5 +1,7 @@
 package presentacion.factura;
 
+import presentacion.PanelTabs;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,12 +11,12 @@ import java.awt.event.ActionListener;
 
 public class ToolbarFactura extends JToolBar {
 
-	public ToolbarFactura() {
-		initGUI();
+	public ToolbarFactura(PanelTabs panelTabs) {
+		initGUI(panelTabs);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
-	private void initGUI() {
+	private void initGUI(PanelTabs panelTabs) {
 		// crear factura
 		JButton botonCrear = new JButton("Crear Factura",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear Factura");
@@ -26,7 +28,6 @@ public class ToolbarFactura extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				FormAltaFactura formAltaFactura = new FormAltaFactura();
 				formAltaFactura.setVisible(true);
-				//controlador.accion(Eventos.insertar_Factura, null);
 			}
 		});
 
@@ -41,7 +42,6 @@ public class ToolbarFactura extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				FormBajaFactura formBajaFactura = new FormBajaFactura();
 				formBajaFactura.setVisible(true);
-				//controlador.accion(Eventos.eliminar_Factura, null);
 			}
 		});
 
@@ -56,7 +56,6 @@ public class ToolbarFactura extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				FormMostrarFactura formMostrarFactura = new FormMostrarFactura();
 				formMostrarFactura.setVisible(true);
-				//controlador.accion(Eventos.mostrar_Factura, null);
 			}
 		});
 
@@ -71,7 +70,6 @@ public class ToolbarFactura extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				FormModificarFactura formModificarFactura = new FormModificarFactura();
 				formModificarFactura.setVisible(true);
-				//controlador.accion(Eventos.modificar_Factura, null);
 			}
 		});
 
@@ -86,7 +84,19 @@ public class ToolbarFactura extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				FormDevolverProducto formDevolverProducto = new FormDevolverProducto();
 				formDevolverProducto.setVisible(true);
-				//controlador.accion(Eventos.devolver_Producto, null);
+			}
+		});
+
+		// actualizar factura
+		JButton botonactualizar = new JButton("Actualizar factura");
+		botonactualizar.setToolTipText("Actualizar factura");
+		botonactualizar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonactualizar.setHorizontalTextPosition(SwingConstants.CENTER);
+		botonactualizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panelTabs.actualizarFactura();
 			}
 		});
 
@@ -95,5 +105,6 @@ public class ToolbarFactura extends JToolBar {
 		add(botonMostrar);
 		add(botonElimiar);
 		add(botonDevolverProd);
+		add(botonactualizar);
 	}
 }

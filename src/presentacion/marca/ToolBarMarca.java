@@ -1,5 +1,7 @@
 package presentacion.marca;
 
+import presentacion.PanelTabs;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,12 +9,12 @@ import java.awt.event.ActionListener;
 
 public class ToolBarMarca extends JToolBar {
 
-	public ToolBarMarca(){
-		initGUI();
+	public ToolBarMarca(PanelTabs panelTabs){
+		initGUI(panelTabs);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
-	private void initGUI() {
+	private void initGUI(PanelTabs panelTabs) {
 		// crear marca
 		JButton botonCrear = new JButton("Crear Marca",new ImageIcon("resources/images/add-32.png"));
 		botonCrear.setToolTipText("Crear marca");
@@ -73,9 +75,23 @@ public class ToolBarMarca extends JToolBar {
 			}
 		});
 
+		// actualizar marca
+		JButton botonactualizar = new JButton("Actualizar Marca");
+		botonactualizar.setToolTipText("Actualizar marca");
+		botonactualizar.setVerticalTextPosition(SwingConstants.BOTTOM);
+		botonactualizar.setHorizontalTextPosition(SwingConstants.CENTER);
+		botonactualizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panelTabs.actualizarMarca();
+			}
+		});
+
 		add(botonCrear);
 		add(botonModificar);
 		add(botonMostrar);
 		add(botonElimiar);
+		add(botonactualizar);
 	}
 }
