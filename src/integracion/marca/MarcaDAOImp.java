@@ -1,7 +1,7 @@
 package integracion.marca;
 
 import integracion.gestor.GestorConnexiones;
-import presentacion.transfer.TMarca;
+import presentacion.marca.TMarca;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

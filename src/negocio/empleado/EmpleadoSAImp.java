@@ -1,8 +1,7 @@
 package negocio.empleado;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
-import negocio.empleado.EmpleadoSA;
-import presentacion.transfer.TEmpleado;
+import presentacion.empleado.TEmpleado;
 
 import java.util.List;
 

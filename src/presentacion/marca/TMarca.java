@@ -1,4 +1,4 @@
-package presentacion.transfer;
+package presentacion.marca;
 
 public class TMarca {
 	private int id_marca;
@@ -11,7 +11,7 @@ public class TMarca {
 	}
 
 	public TMarca(int id_marca, String nombre, String sede, String pais, boolean activa) {
-		this.id_marca = id_marca; //TODO revisar
+		this.id_marca = id_marca;
 		this.nombre = nombre;
 		this.sede = sede;
 		this.pais = pais;

@@ -1,6 +1,6 @@
 package negocio.empleado;
 
-import presentacion.transfer.TEmpleado;
+import presentacion.empleado.TEmpleado;
 
 import java.util.List;
 

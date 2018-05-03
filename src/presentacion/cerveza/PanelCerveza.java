@@ -1,7 +1,5 @@
 package presentacion.cerveza;
 
-import presentacion.marca.ModeloTablaMarca;
-import presentacion.transfer.TCerveza;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;
 

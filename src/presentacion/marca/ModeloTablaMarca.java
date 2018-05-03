@@ -1,6 +1,5 @@
 package presentacion.marca;
 
-import presentacion.transfer.TMarca;
 import presentacion.util.ModeloTabla;
 
 public class ModeloTablaMarca extends ModeloTabla<TMarca> {

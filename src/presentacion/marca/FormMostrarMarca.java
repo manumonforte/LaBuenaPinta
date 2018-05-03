@@ -2,7 +2,6 @@ package presentacion.marca;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TMarca;
 import presentacion.util.Util;
 
 import javax.swing.*;

@@ -1,4 +1,6 @@
-package presentacion.transfer;
+package presentacion.empleado;
+
+import presentacion.empleado.TEmpleado;
 
 public class TEmpleadoCompleto extends TEmpleado {
 

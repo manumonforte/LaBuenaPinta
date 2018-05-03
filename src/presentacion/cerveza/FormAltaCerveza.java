@@ -2,7 +2,6 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TCerveza;
 import presentacion.util.Util;
 
 import javax.swing.*;

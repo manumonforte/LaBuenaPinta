@@ -1,4 +1,4 @@
-package presentacion.transfer;
+package presentacion.cerveza;
 
 public class TCerveza {
 	private int id_cerveza;
@@ -13,7 +13,7 @@ public class TCerveza {
 	}
 
 	public TCerveza(int id_cerveza, String nombre, int stock, double graduacion, double precio, boolean activa, int id_marca) {
-		this.id_cerveza = id_cerveza; //TODO revisar
+		this.id_cerveza = id_cerveza;
 		this.nombre = nombre;
 		this.stock = stock;
 		this.graduacion = graduacion;

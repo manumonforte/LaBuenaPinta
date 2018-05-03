@@ -1,17 +1,19 @@
 package presentacion.marca;
 
-import presentacion.transfer.TMarca;
+import presentacion.PanelTabs;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class PanelMarca extends JPanel{
-	private final String[] columnId = {"Id" , "Nombre", "Sede", "Pais", "Activa"};
+public class PanelMarca extends JPanel {
+	private final String[] columnId = {"Id", "Nombre", "Sede", "Pais", "Activa"};
 	private ModeloTabla modelo;
 
-	public PanelMarca(){
+	public PanelMarca() {
 		setLayout(new BorderLayout());
 		add(new ToolBarMarca(), BorderLayout.NORTH);
 		modelo = new ModeloTablaMarca(columnId);

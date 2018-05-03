@@ -1,6 +1,6 @@
 package negocio.marca;
 
-import presentacion.transfer.TMarca;
+import presentacion.marca.TMarca;
 
 import java.util.List;
 

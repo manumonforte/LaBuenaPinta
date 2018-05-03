@@ -1,6 +1,5 @@
 package presentacion.empleado;
 
-import presentacion.transfer.TEmpleado;
 import presentacion.util.ModeloTabla;
 
 public class ModeloTablaEmpleado extends ModeloTabla<TEmpleado> {

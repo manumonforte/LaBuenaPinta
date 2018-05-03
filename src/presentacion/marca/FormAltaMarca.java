@@ -2,7 +2,6 @@ package presentacion.marca;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TMarca;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -92,9 +91,9 @@ public class FormAltaMarca extends JDialog {
 					marca.setNombre(Util.parseaString(textNombre.getText()));
 					marca.setSede(Util.parseaString(textSede.getText()));
 					marca.setPais(Util.parseaString(textPais.getText()));
-					marca.setActiva( Util.parseaActiva(comboBox.getSelectedItem().toString()));
-					Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
+					marca.setActiva(Util.parseaActiva(comboBox.getSelectedItem().toString()));
 					dispose();
+					Controlador.getInstancia().accion(Eventos.insertar_Marca, marca);
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Marca", JOptionPane.ERROR_MESSAGE);
 				}

@@ -1,6 +1,6 @@
 package negocio.factura;
 
-import presentacion.transfer.TFactura;
+import presentacion.factura.TFactura;
 
 import java.util.List;
 

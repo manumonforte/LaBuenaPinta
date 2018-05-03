@@ -2,7 +2,6 @@ package presentacion.marca;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TMarca;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -12,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 
 public class FormBajaMarca extends  JDialog {
 

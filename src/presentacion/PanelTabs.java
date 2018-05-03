@@ -6,7 +6,7 @@ import presentacion.controlador.Eventos;
 import presentacion.empleado.PanelEmpleado;
 import presentacion.factura.PanelFactura;
 import presentacion.marca.PanelMarca;
-import presentacion.transfer.TMarca;
+import presentacion.marca.TMarca;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-class PanelTabs extends JTabbedPane {
+public class PanelTabs extends JTabbedPane {
 
 	private PanelCerveza panelCerveza;
 	private PanelEmpleado panelEmpleado;
@@ -59,27 +59,43 @@ class PanelTabs extends JTabbedPane {
 			public void stateChanged(ChangeEvent changeEvent) {
 				switch (getSelectedIndex()) {
 					case 0:
-						ArrayList listaMarca = new ArrayList<TMarca>();
-						Controlador.getInstancia().accion(Eventos.mostraTodos_Marca, listaMarca);
-						panelMarca.getModelo().setLista(listaMarca);
+						actualizarMarca();
 						break;
 					case 1:
-						ArrayList listaCerveza = new ArrayList<TMarca>();
-						Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCerveza);
-						panelCerveza.getModelo().setLista(listaCerveza);
+						actualizarCerveza();
 						break;
 					case 2:
-						ArrayList listaEmpleado = new ArrayList<TMarca>();
-						Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleado);
-						panelEmpleado.getModelo().setLista(listaEmpleado);
+						actualizarEmpleado();
 						break;
 					case 3:
-						//ArrayList listaListaFactura = new ArrayList<TMarca>();
-						//Controlador.getInstancia().accion(Eventos.mostraTodos_Factura, listaListaFactura);
-						//panelMarca.getModelo().setLista(listaListaFactura);
+						//actualizarEmpleado();
 						break;
 				}
 			}
 		});
+	}
+
+	void actualizarMarca(){
+		ArrayList listaMarca = new ArrayList<TMarca>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Marca, listaMarca);
+		panelMarca.getModelo().setLista(listaMarca);
+	}
+
+	void actualizarCerveza(){
+		ArrayList listaCerveza = new ArrayList<TMarca>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCerveza);
+		panelCerveza.getModelo().setLista(listaCerveza);
+	}
+
+	void actualizarEmpleado(){
+		ArrayList listaEmpleado = new ArrayList<TMarca>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Empleado, listaEmpleado);
+		panelEmpleado.getModelo().setLista(listaEmpleado);
+	}
+
+	void actualizarFactura(){
+		ArrayList listaListaFactura = new ArrayList<TMarca>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Factura, listaListaFactura);
+		panelMarca.getModelo().setLista(listaListaFactura);
 	}
 }

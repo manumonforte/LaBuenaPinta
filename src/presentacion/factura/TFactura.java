@@ -1,4 +1,4 @@
-package presentacion.transfer;
+package presentacion.factura;
 
 public class TFactura {
 	private int id_factura;

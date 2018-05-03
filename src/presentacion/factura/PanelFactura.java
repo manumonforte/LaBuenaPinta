@@ -1,6 +1,5 @@
 package presentacion.factura;
 
-import presentacion.transfer.TFactura;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;
 

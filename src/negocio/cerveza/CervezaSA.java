@@ -1,6 +1,6 @@
 package negocio.cerveza;
 
-import presentacion.transfer.TCerveza;
+import presentacion.cerveza.TCerveza;
 
 import java.util.List;
 

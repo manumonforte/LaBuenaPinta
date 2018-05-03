@@ -2,7 +2,7 @@ package integracion.marca;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import presentacion.transfer.TMarca;
+import presentacion.marca.TMarca;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;

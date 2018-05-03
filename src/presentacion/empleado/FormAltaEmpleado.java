@@ -2,8 +2,6 @@ package presentacion.empleado;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TEmpleadoCompleto;
-import presentacion.transfer.TEmpleadoParcial;
 import presentacion.util.Util;
 import presentacion.util.TipoTurno;
 

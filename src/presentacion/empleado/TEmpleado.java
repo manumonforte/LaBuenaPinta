@@ -1,4 +1,4 @@
-package presentacion.transfer;
+package presentacion.empleado;
 
 public class TEmpleado {
 
@@ -12,7 +12,7 @@ public class TEmpleado {
 	}
 
 	public TEmpleado(int id_empleado , String DNI, String nombre, boolean activo, boolean tiempo_completo) {
-		this.id_empleado = id_empleado; //TODO revisar
+		this.id_empleado = id_empleado;
 		this.nombre = nombre;
 		this.DNI = DNI;
 		this.activo=activo;

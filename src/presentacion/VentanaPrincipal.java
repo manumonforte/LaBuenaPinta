@@ -17,8 +17,7 @@ public class VentanaPrincipal extends JFrame{
 
 		PanelTabs tabbedPane = new PanelTabs();
 		setContentPane(tabbedPane);
-		tabbedPane.setSelectedIndex(1);
-		tabbedPane.setSelectedIndex(0);
+		tabbedPane.actualizarMarca();
 
 		pack();
 		setVisible(true);

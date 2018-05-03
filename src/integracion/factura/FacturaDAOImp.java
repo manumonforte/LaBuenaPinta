@@ -1,7 +1,7 @@
 package integracion.factura;
 
 import integracion.gestor.GestorConnexiones;
-import presentacion.transfer.TFactura;
+import presentacion.factura.TFactura;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

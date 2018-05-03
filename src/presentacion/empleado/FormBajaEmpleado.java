@@ -2,7 +2,6 @@ package presentacion.empleado;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.transfer.TEmpleado;
 import presentacion.util.Util;
 
 import javax.swing.*;

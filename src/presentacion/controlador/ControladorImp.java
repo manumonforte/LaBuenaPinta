@@ -1,22 +1,19 @@
 package presentacion.controlador;
 
 import negocio.factoria.FactoriaSA;
-import presentacion.VentanaPrincipal;
-import presentacion.transfer.TCerveza;
-import presentacion.transfer.TEmpleado;
-import presentacion.transfer.TFactura;
-import presentacion.transfer.TMarca;
-import sun.rmi.transport.tcp.TCPEndpoint;
+import presentacion.cerveza.TCerveza;
+import presentacion.empleado.TEmpleado;
+import presentacion.factura.TFactura;
+import presentacion.marca.TMarca;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 
 public class ControladorImp extends Controlador {
 
 	@Override
 	public void accion(Eventos evento, Object datos) {
-		switch (evento) {//TODO lanzar JOptionPane con cada resultado
+		switch (evento) {
 			case insertar_Marca:
 				if (FactoriaSA.getInstancia().generarSAMarca().insertar_marca((TMarca) datos)) {
 					JOptionPane.showMessageDialog(null, "Marca registrada con exito");
