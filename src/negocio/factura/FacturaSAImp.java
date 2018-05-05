@@ -25,11 +25,6 @@ public class FacturaSAImp implements FacturaSA{//TODO
 	}
 
 	@Override
-	public boolean modificar_factura(TFactura tFactura) {
-		return false; //TODO propongo borrarlo
-	}
-
-	@Override
 	public boolean baja_factura(TFactura tFactura) {
 		TFactura tl = FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
 
@@ -43,7 +38,12 @@ public class FacturaSAImp implements FacturaSA{//TODO
 	@Override
 	public boolean anadir_producto(TLineaFactura lineaFactura){
 		TCerveza c = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
-		FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
-		return true;
+		if (lineaFactura.getCantidad()> c.getStock()){
+			return false;
+		}
+		else {
+			FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
+		}
+			return true;
 	}
 }

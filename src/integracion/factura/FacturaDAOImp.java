@@ -78,14 +78,6 @@ public class FacturaDAOImp implements FacturaDAO{
 
 	@Override
 	public void modificar(TFactura e) {
-		try (PreparedStatement st = conn.prepareStatement(UPDATE)) {
-			st.setInt(1, e.getPrecio_total());
-			st.setInt(2, e.getEmpleado());
-			st.setInt(3, e.getId_factura());
-			st.executeUpdate();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
 	}
 
 	@Override

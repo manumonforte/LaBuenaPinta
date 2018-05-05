@@ -80,7 +80,7 @@ public class FormModificarFactura  extends  JDialog{
 				factura.setId_factura(getTextCantidadTotal());
 				factura.setId_factura(getComboEmpleado());
 				dispose();
-				Controlador.getInstancia().accion(Eventos.modificar_Factura, factura);
+				Controlador.getInstancia().accion(null,null);
 			}
 		});
 

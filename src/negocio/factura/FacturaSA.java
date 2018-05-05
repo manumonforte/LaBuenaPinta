@@ -14,8 +14,6 @@ public interface FacturaSA {
 
 	List<TFactura> mostrar_todos_factura();
 
-	boolean modificar_factura(TFactura tFactura);
-
 	boolean baja_factura(TFactura tFactura);
 
 	boolean anadir_producto(TLineaFactura lineaFactura); //TODO necesita 2 parametros

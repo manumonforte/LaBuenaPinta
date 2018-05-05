@@ -134,13 +134,6 @@ public class ControladorImp extends Controlador {
 				List listaFactura = (List) datos;
 				listaFactura.addAll(FactoriaSA.getInstancia().generarSAFactura().mostrar_todos_factura());
 				break;
-			case modificar_Factura:
-				if (FactoriaSA.getInstancia().generarSAFactura().modificar_factura((TFactura) datos)) {
-					Util.informar("Factura modificada con exito");
-				} else {
-					Util.informar("Factura no modificada");
-				}
-				break;
 			case eliminar_Factura:
 				if (FactoriaSA.getInstancia().generarSAFactura().baja_factura((TFactura) datos)) {
 					Util.informar("Factura eliminada con exito");
