@@ -74,7 +74,7 @@ public class ToolbarFactura extends JToolBar {
 		});
 
 		// devolver producto
-		JButton botonDevolverProd= new JButton("Devolver Producto", new ImageIcon("resources/images/return-32.png"));
+		JButton botonDevolverProd= new JButton("Anadir Producto", new ImageIcon("resources/images/return-32.png"));
 		botonDevolverProd.setToolTipText("Modificar Factura");
 		botonDevolverProd.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonDevolverProd.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -82,8 +82,8 @@ public class ToolbarFactura extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FormDevolverProducto formDevolverProducto = new FormDevolverProducto();
-				formDevolverProducto.setVisible(true);
+				FormAnadirProducto formAnadirProducto = new FormAnadirProducto();
+				formAnadirProducto.setVisible(true);
 			}
 		});
 

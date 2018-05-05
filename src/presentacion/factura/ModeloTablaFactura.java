@@ -20,6 +20,9 @@ public class ModeloTablaFactura extends ModeloTabla<TFactura> {
 			case 2:
 				s = lista.get(indiceFil).getEmpleado();
 				break;
+			case 3:
+				s = lista.get(indiceFil).isAbierta();
+				break;
 			default:
 				assert (false);
 		}

@@ -2,6 +2,8 @@ package negocio.factura;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
 import presentacion.factura.TFactura;
+import presentacion.cerveza.TCerveza;
+import presentacion.factura.TLineaFactura;
 
 import java.util.List;
 
@@ -37,5 +39,11 @@ public class FacturaSAImp implements FacturaSA{//TODO
 			FactoriaDAOImp.getInstancia().getFacturaDAO().eliminar(tFactura.getId_factura());
 			return true;
 		}
+	}
+	@Override
+	public boolean anadir_producto(TLineaFactura lineaFactura){
+		TCerveza c = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
+		FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
+		return true;
 	}
 }

@@ -4,6 +4,7 @@ import negocio.factoria.FactoriaSA;
 import presentacion.cerveza.TCerveza;
 import presentacion.empleado.TEmpleado;
 import presentacion.factura.TFactura;
+import presentacion.factura.TLineaFactura;
 import presentacion.marca.TMarca;
 import presentacion.util.Util;
 
@@ -145,6 +146,14 @@ public class ControladorImp extends Controlador {
 					Util.informar("Factura eliminada con exito");
 				} else {
 					Util.informar("Factura no eliminada");
+				}
+				break;
+
+			case anadir_producto:
+				if (FactoriaSA.getInstancia().generarSAFactura().anadir_producto((TLineaFactura) datos)) {
+					Util.informar("Producto anadido con exito");
+				} else {
+					Util.informar("Producto no anadido");
 				}
 				break;
 		}

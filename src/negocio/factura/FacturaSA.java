@@ -1,6 +1,8 @@
 package negocio.factura;
 
+import presentacion.cerveza.TCerveza;
 import presentacion.factura.TFactura;
+import presentacion.factura.TLineaFactura;
 
 import java.util.List;
 
@@ -16,5 +18,5 @@ public interface FacturaSA {
 
 	boolean baja_factura(TFactura tFactura);
 
-	//boolean devolver_producto() //TODO necesita 2 parametros
+	boolean anadir_producto(TLineaFactura lineaFactura); //TODO necesita 2 parametros
 }
