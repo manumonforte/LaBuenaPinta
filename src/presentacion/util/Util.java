@@ -55,4 +55,8 @@ public class Util {
 	public static boolean parseaActiva(String s){
 		return s.equals("true");
 	}
+
+	public static void informar(String s) {
+		JOptionPane.showMessageDialog(null, s);
+	}
 }
