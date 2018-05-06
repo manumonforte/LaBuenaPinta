@@ -17,12 +17,15 @@ public class FacturaDAOImp implements FacturaDAO{
 
 	private final String INSERT = "INSERT INTO factura(empleado) VALUES(?)";
 	private final String READALL = "SELECT * FROM factura";
-	private final String READ = READALL + " WHERE id_factura = ?";
+	private final String READ = READALL+ " WHERE id_factura = ?";
+	private final String READAsociada = "SELECT * FROM asociada WHERE factura = ?";
 	private final String READBYCerveza = "SELECT * FROM asociada  WHERE cerveza = ? AND factura = ?";
 	private final String UPDATE = "UPDATE factura SET precio_total = ?, empleado = ? WHERE id_factura = ?";
 	private final String DELETE = "UPDATE factura  SET abierta = 0 WHERE id_factura = ?";
 	private final String NEW = "INSERT INTO asociada VALUES (?,?,?,?)";
 	private final String UPDATECantidad = "UPDATE asociada SET cantidad = ? WHERE factura = ? AND cerveza = ?";
+	private final String UPDATECerveza = "UPDATE cerveza SET stock = ? WHERE id_cerveza = ?";
+
 
 
 	public FacturaDAOImp() {
@@ -48,12 +51,23 @@ public class FacturaDAOImp implements FacturaDAO{
 	@Override
 	public TFactura mostrar(int id) {
 		TFactura f = null;
+		int total = 0;
+		List<TLineaFactura> lista = new ArrayList<>();
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
-					f = new TFactura(id, rs.getInt("precio_total"),
-							rs.getInt("empleado"), rs.getBoolean("abierta"),null);
+					f = new TFactura(id,rs.getDouble("precio_total"),rs.getInt("empleado"),rs.getBoolean("abierta"),lista);
+				}
+				try (PreparedStatement ste = conn.prepareStatement(READAsociada)) {
+					ste.setInt(1, id);
+					try(ResultSet rse = ste.executeQuery()) {
+						while (rse.next()) {
+							lista.add(new TLineaFactura(rse.getInt("factura"), rse.getInt("cerveza"), rse.getInt("cantidad")));
+						}
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
@@ -117,6 +131,36 @@ public class FacturaDAOImp implements FacturaDAO{
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+				}
+				//actualizamos stock cerveza
+				try (PreparedStatement ste = conn.prepareStatement(UPDATECerveza)) {
+					ste.setInt(1, c.getStock()-linea.getCantidad());
+					ste.setInt(2, linea.getId_cerveza());
+					ste.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				//actualizamos precio
+				try (PreparedStatement ste = conn.prepareStatement(READ)) {
+						ste.setInt(1,linea.getId_factura());
+					try(ResultSet rse = ste.executeQuery()) {
+						if (rse.next()) {
+							TFactura f = new TFactura(rse.getInt("id_factura"), rse.getDouble("precio_total"),
+									rse.getInt("empleado"), rse.getBoolean("abierta"), null);
+							try (PreparedStatement ste2 = conn.prepareStatement(UPDATE)) {
+								ste2.setDouble(1, f.getPrecio_total()+ (linea.getCantidad()*c.getPrecio()));
+								ste2.setInt(2, f.getEmpleado());
+								ste2.setInt(3,f.getId_factura());
+								ste2.executeUpdate();
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {

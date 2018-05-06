@@ -43,7 +43,7 @@ public class FacturaSAImp implements FacturaSA{//TODO
 		}
 		else {
 			FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
-		}
 			return true;
+		}
 	}
 }

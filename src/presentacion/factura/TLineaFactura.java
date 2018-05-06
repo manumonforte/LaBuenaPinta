@@ -37,4 +37,10 @@ public class TLineaFactura {
         this.cantidad = cantidad;
     }
 
+    @Override
+    public String toString() {
+        return "-->"
+                +"Cerveza: "+getId_cerveza() + " "
+                +"Cantidad: "+getCantidad()+"\n";
+    }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TFactura {
 	private int id_factura;
-	private int precio_total;
+	private double precio_total;
 	private int empleado;
 	private List<TLineaFactura> lineaFacturas;
 	private boolean abierta;
@@ -12,7 +12,7 @@ public class TFactura {
 	public TFactura() {
 	}
 
-	public TFactura(int id_factura, int precio_total, int empleado, boolean abierta,List<TLineaFactura> lineaFacturaLista) {
+	public TFactura(int id_factura, double precio_total, int empleado, boolean abierta,List<TLineaFactura> lineaFacturaLista) {
 		this.id_factura = id_factura;
 		this.precio_total = precio_total;
 		this.empleado = empleado;
@@ -28,11 +28,11 @@ public class TFactura {
 		this.id_factura = id_factura;
 	}
 
-	public int getPrecio_total() {
+	public double getPrecio_total() {
 		return precio_total;
 	}
 
-	public void setPrecio_total(int precio_total) {
+	public void setPrecio_total(double precio_total) {
 		this.precio_total = precio_total;
 	}
 
@@ -55,4 +55,17 @@ public class TFactura {
 	public List<TLineaFactura> getLineaFacturas() { return lineaFacturas; }
 
 	public void setLineaFacturas(List<TLineaFactura> lineaFacturas) { this.lineaFacturas = lineaFacturas; }
+
+	@Override
+	public String toString() {
+		String s = "";
+		s = "*****Factura*****\n"
+				+"ID: " +getId_factura() + "\n"
+				+"Empleado : " +getEmpleado() +"\n"
+				+"Precio_total: "+ getPrecio_total()+ "\n";
+		for (TLineaFactura l: getLineaFacturas()) {
+			s+= l.toString();
+		}
+		return s;
+	}
 }
