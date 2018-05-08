@@ -21,7 +21,6 @@ public class ToolBarCerveza extends  JToolBar{
 		botonCrear.setToolTipText("Crear Cerveza");
 		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonCrear.setBorder(BorderFactory.createEmptyBorder());
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -36,7 +35,6 @@ public class ToolBarCerveza extends  JToolBar{
 		botonElimiar.setToolTipText("Eliminar Cerveza");
 		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonElimiar.setBorder(BorderFactory.createEmptyBorder());
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -51,7 +49,6 @@ public class ToolBarCerveza extends  JToolBar{
 		botonMostrar.setToolTipText("Mostrar Cerveza");
 		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonMostrar.setBorder(BorderFactory.createEmptyBorder());
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -66,7 +63,6 @@ public class ToolBarCerveza extends  JToolBar{
 		botonModificar.setToolTipText("Modificar Cerveza");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonModificar.setBorder(BorderFactory.createEmptyBorder());
 		botonModificar.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,7 +77,6 @@ public class ToolBarCerveza extends  JToolBar{
 		botonactualizar.setToolTipText("Actualizar cerveza");
 		botonactualizar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonactualizar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonactualizar.setBorder(BorderFactory.createEmptyBorder());
 		botonactualizar.addActionListener(new ActionListener() {
 
 			@Override
@@ -91,13 +86,9 @@ public class ToolBarCerveza extends  JToolBar{
 		});
 
 		add(botonCrear);
-		addSeparator();
 		add(botonModificar);
-		addSeparator();
 		add(botonMostrar);
-		addSeparator();
 		add(botonElimiar);
-		addSeparator();
 		add(botonactualizar);
 	}
 }

@@ -23,9 +23,7 @@ public class FormModificarEmpleado extends  JDialog{
 	private JComboBox comboTParcial;
 
 	public FormModificarEmpleado() {
-		super();
 		setTitle("Modificar Empleado");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -40,6 +38,7 @@ public class FormModificarEmpleado extends  JDialog{
 
 		add(panelPrincipal);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

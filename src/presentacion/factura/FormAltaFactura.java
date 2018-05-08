@@ -22,14 +22,9 @@ public class FormAltaFactura extends JDialog {
 
 	public FormAltaFactura() {
 		setTitle("Alta Factura");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
-	}
-
-	public int getTextCantidadTotal() {
-		return Integer.parseInt(textCantidadTotal.getText());
 	}
 
 	public int getComboEmpleado() {
@@ -43,9 +38,9 @@ public class FormAltaFactura extends JDialog {
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

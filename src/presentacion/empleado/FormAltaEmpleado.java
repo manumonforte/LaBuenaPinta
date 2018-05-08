@@ -24,14 +24,12 @@ public class FormAltaEmpleado extends JDialog{
 
 	public FormAltaEmpleado() {
 		setTitle("Alta Empleado");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
 	}
 
 	private void initGUI() {
-
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
 
@@ -40,7 +38,7 @@ public class FormAltaEmpleado extends JDialog{
 
 		add(panelPrincipal);
 		pack();
-
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){
@@ -128,7 +126,6 @@ public class FormAltaEmpleado extends JDialog{
 						dispose();
 						Controlador.getInstancia().accion(Eventos.insertar_Empleado, empleado);
 					}
-					dispose();
 				}catch (Exception ex){
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Alta Empleado", JOptionPane.ERROR_MESSAGE);
 				}
@@ -163,7 +160,7 @@ public class FormAltaEmpleado extends JDialog{
 		comboTCompleto.addItem("true");
 		comboTCompleto.addItem("false");
 
-		ActionListener actionListener = new ActionListener() {
+		comboTCompleto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				if (comboTCompleto.getSelectedItem().equals("false")){
@@ -174,8 +171,7 @@ public class FormAltaEmpleado extends JDialog{
 					textHExtras.setEnabled(true);
 				}
 			}
-		};
-		comboTCompleto.addActionListener(actionListener);
+		});
 
 		return comboTCompleto;
 	}

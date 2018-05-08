@@ -21,7 +21,6 @@ public class FormModificarMarca extends JDialog{
 
 	public FormModificarMarca() {
 		setTitle("Modificar Marca");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -34,14 +33,14 @@ public class FormModificarMarca extends JDialog{
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(5,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(4,2,0,7));
 		Border border = panelCampos.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));

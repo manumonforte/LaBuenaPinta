@@ -18,7 +18,6 @@ public class FormBajaEmpleado extends  JDialog{
 
 	public FormBajaEmpleado() {
 		setTitle("Baja Empleado");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -32,8 +31,8 @@ public class FormBajaEmpleado extends  JDialog{
 		panelPrincipal.add(botonesFormulario());
 
 		add(panelPrincipal);
-		setVisible(false);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario() {

@@ -24,7 +24,6 @@ public class FormAnadirProducto extends  JDialog{
 
 	public FormAnadirProducto() {
 		setTitle("Anadir Producto");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -37,9 +36,10 @@ public class FormAnadirProducto extends  JDialog{
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		setVisible(false);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

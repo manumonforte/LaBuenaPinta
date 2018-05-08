@@ -22,7 +22,6 @@ public class FormModificarCerveza extends JDialog{
 
 	public FormModificarCerveza() {
 		setTitle("Modificar Cerveza");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -37,6 +36,7 @@ public class FormModificarCerveza extends JDialog{
 
 		add(panelPrincipal);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

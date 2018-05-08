@@ -18,7 +18,6 @@ public class FormMostrarEmpleado extends JDialog{
 
 	public FormMostrarEmpleado() {
 		setTitle("Mostrar Empleado");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -27,12 +26,14 @@ public class FormMostrarEmpleado extends JDialog{
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
+
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		setVisible(false);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario() {

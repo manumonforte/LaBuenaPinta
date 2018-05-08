@@ -12,14 +12,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FormModificarFactura  extends  JDialog{
+public class FormCerrarFactura extends  JDialog{
 
 	private JTextField textCantidadTotal;
 	private JComboBox comboEmpleado;
 
-	public FormModificarFactura() {
+	public FormCerrarFactura() {
 		setTitle("Modificar Factura");
-		setLocationRelativeTo(null);
+		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
 	}
@@ -35,12 +35,13 @@ public class FormModificarFactura  extends  JDialog{
 	private void initGUI() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.Y_AXIS));
+
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

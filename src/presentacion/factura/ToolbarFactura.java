@@ -23,7 +23,6 @@ public class ToolbarFactura extends JToolBar {
 		botonCrear.setToolTipText("Crear Factura");
 		botonCrear.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonCrear.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonCrear.setBorder(BorderFactory.createEmptyBorder());
 		botonCrear.addActionListener(new ActionListener() {
 
 			@Override
@@ -38,7 +37,6 @@ public class ToolbarFactura extends JToolBar {
 		botonElimiar.setToolTipText("Eliminar Factura");
 		botonElimiar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonElimiar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonElimiar.setBorder(BorderFactory.createEmptyBorder());
 		botonElimiar.addActionListener(new ActionListener() {
 
 			@Override
@@ -53,7 +51,6 @@ public class ToolbarFactura extends JToolBar {
 		botonMostrar.setToolTipText("Mostrar Factura");
 		botonMostrar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonMostrar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonMostrar.setBorder(BorderFactory.createEmptyBorder());
 		botonMostrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,7 +60,7 @@ public class ToolbarFactura extends JToolBar {
 			}
 		});
 
-		/*// modificar factura
+		// modificar factura
 		JButton botonModificar = new JButton("Modificar Factura", new ImageIcon("resources/images/edit-32.png"));
 		botonModificar.setToolTipText("Modificar Factura");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -72,17 +69,16 @@ public class ToolbarFactura extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FormModificarFactura formModificarFactura = new FormModificarFactura();
-				formModificarFactura.setVisible(true);
+				FormCerrarFactura formCerrarFactura = new FormCerrarFactura();
+				formCerrarFactura.setVisible(true);
 			}
-		});*/
+		});
 
 		// anadir producto
 		JButton botonDevolverProd= new JButton("Anadir Producto", new ImageIcon("resources/images/return-32.png"));
-		botonDevolverProd.setToolTipText("Modificar Factura");
+		botonDevolverProd.setToolTipText("Anadir Producto");
 		botonDevolverProd.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonDevolverProd.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonDevolverProd.setBorder(BorderFactory.createEmptyBorder());
 		botonDevolverProd.addActionListener(new ActionListener() {
 
 			@Override
@@ -97,7 +93,6 @@ public class ToolbarFactura extends JToolBar {
 		botonactualizar.setToolTipText("Actualizar factura");
 		botonactualizar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonactualizar.setHorizontalTextPosition(SwingConstants.CENTER);
-		botonactualizar.setBorder(BorderFactory.createEmptyBorder());
 		botonactualizar.addActionListener(new ActionListener() {
 
 			@Override
@@ -107,14 +102,10 @@ public class ToolbarFactura extends JToolBar {
 		});
 
 		add(botonCrear);
-		addSeparator();
-		//add(botonModificar);
+		add(botonModificar);
 		add(botonMostrar);
-		addSeparator();
 		add(botonElimiar);
-		addSeparator();
 		add(botonDevolverProd);
-		addSeparator();
 		add(botonactualizar);
 	}
 }

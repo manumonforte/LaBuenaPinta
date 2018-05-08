@@ -18,7 +18,6 @@ public class FormMostrarCerveza extends  JDialog{
 
 	public FormMostrarCerveza() {
 		setTitle("Mostrar Cerveza");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -33,6 +32,7 @@ public class FormMostrarCerveza extends  JDialog{
 
 		add(panelPrincipal);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario() {

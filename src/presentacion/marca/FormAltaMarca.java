@@ -22,7 +22,6 @@ public class FormAltaMarca extends JDialog {
 
 	public FormAltaMarca() {
 		setTitle("Alta Marca");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -37,6 +36,7 @@ public class FormAltaMarca extends JDialog {
 
 		add(panelPrincipal);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario(){

@@ -18,7 +18,6 @@ public class FormBajaCerveza extends  JDialog{
 
 	public FormBajaCerveza() {
 		setTitle("Baja Cerveza");
-		setLocationRelativeTo(null);
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
@@ -32,8 +31,8 @@ public class FormBajaCerveza extends  JDialog{
 		panelPrincipal.add(botonesFormulario());
 
 		add(panelPrincipal);
-		setVisible(false);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario() {

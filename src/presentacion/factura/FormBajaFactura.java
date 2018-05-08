@@ -18,7 +18,6 @@ public class FormBajaFactura extends JDialog {
 
 	public FormBajaFactura() {
 		setTitle("Baja Factura");
-		setLocationRelativeTo(null);
 		Util.addEscapeListener(this);
 		initGUI();
 	}
@@ -33,9 +32,10 @@ public class FormBajaFactura extends JDialog {
 		panelPrincipal.add(camposFormulario());
 		panelPrincipal.add(botonesFormulario());
 
-		this.add(panelPrincipal);
-		this.setVisible(false);
-		this.pack();
+		add(panelPrincipal);
+		setVisible(false);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel camposFormulario() {
