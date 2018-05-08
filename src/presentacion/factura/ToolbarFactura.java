@@ -61,8 +61,8 @@ public class ToolbarFactura extends JToolBar {
 		});
 
 		// modificar factura
-		JButton botonModificar = new JButton("Modificar Factura", new ImageIcon("resources/images/edit-32.png"));
-		botonModificar.setToolTipText("Modificar Factura");
+		JButton botonModificar = new JButton("Cerrar Factura", new ImageIcon("resources/images/edit-32.png"));
+		botonModificar.setToolTipText("Cerrar Factura");
 		botonModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		botonModificar.setHorizontalTextPosition(SwingConstants.CENTER);
 		botonModificar.addActionListener(new ActionListener() {

@@ -1,6 +1,5 @@
 package negocio.factura;
 
-import presentacion.cerveza.TCerveza;
 import presentacion.factura.TFactura;
 import presentacion.factura.TLineaFactura;
 
@@ -16,5 +15,7 @@ public interface FacturaSA {
 
 	boolean baja_factura(TFactura tFactura);
 
-	boolean anadir_producto(TLineaFactura lineaFactura); //TODO necesita 2 parametros
+	boolean anadir_producto(TLineaFactura lineaFactura);
+
+	boolean cerrar_factura(TFactura tFactura);
 }

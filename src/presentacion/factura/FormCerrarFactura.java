@@ -14,22 +14,17 @@ import java.awt.event.ActionListener;
 
 public class FormCerrarFactura extends  JDialog{
 
-	private JTextField textCantidadTotal;
-	private JComboBox comboEmpleado;
+	private JTextField textID;
 
 	public FormCerrarFactura() {
-		setTitle("Modificar Factura");
+		setTitle("Cerrar Factura");
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
 	}
 
-	public int getTextCantidadTotal() {
-		return Integer.parseInt(textCantidadTotal.getText());
-	}
-
-	public int getComboEmpleado() {
-		return (int) comboEmpleado.getSelectedItem();
+	public int getTextID() {
+		return Integer.parseInt(textID.getText());
 	}
 
 	private void initGUI() {
@@ -46,24 +41,17 @@ public class FormCerrarFactura extends  JDialog{
 
 	private JPanel camposFormulario(){
 
-		JPanel panelCampos = new JPanel(new GridLayout(2,2,0,7));
+		JPanel panelCampos = new JPanel(new GridLayout(1,2,0,7));
 		Border border = panelCampos.getBorder();
-		Border margin = new EmptyBorder(10,10,10,10);
+		Border margin = new EmptyBorder(10, 10, 10, 10);
 		panelCampos.setBorder(new CompoundBorder(border, margin));
 
-		//Cantidad total
-		JLabel panelNombre = new JLabel("Cantidad total");
-		panelCampos.add(panelNombre);
+		//ID
+		JLabel panelID = new JLabel("ID");
+		panelCampos.add(panelID);
 
-		textCantidadTotal = new JTextField(10);
-		panelCampos.add(textCantidadTotal);
-
-		//Empleado
-		JLabel panelActiva= new JLabel("Empleado");
-		panelCampos.add(panelActiva);
-
-		comboEmpleado = seleccionarEmpleado(); //NOTA: hay que pasarle al combo box la lista de los empleados de la BBDD
-		panelCampos.add(comboEmpleado);
+		textID = new JTextField(10);
+		panelCampos.add(textID);
 
 		return panelCampos;
 	}
@@ -72,16 +60,15 @@ public class FormCerrarFactura extends  JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton mostrar = new JButton("MODIFICAR");
-		mostrar.addActionListener(new ActionListener(){
+		JButton cerrar = new JButton("MODIFICAR");
+		cerrar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TFactura factura = new TFactura();
-				factura.setId_factura(getTextCantidadTotal());
-				factura.setId_factura(getComboEmpleado());
+				factura.setId_factura(getTextID());
 				dispose();
-				Controlador.getInstancia().accion(null,null);
+				Controlador.getInstancia().accion(Eventos.cerrar_factura,factura);
 			}
 		});
 
@@ -95,19 +82,8 @@ public class FormCerrarFactura extends  JDialog{
 		});
 
 		panelBotones.add(cancelar);
-		panelBotones.add(mostrar);
+		panelBotones.add(cerrar);
 
 		return panelBotones;
-	}
-
-	private JComboBox seleccionarEmpleado() {
-		comboEmpleado = new JComboBox();
-		/*
-		for(int i = 0; i < ; i++){
-			Controlador.getInstancia().accion(Eventos.mostrar_Empleado,i);
-			comboEmpleado.add();
-		}
-		*/
-		return comboEmpleado;
 	}
 }

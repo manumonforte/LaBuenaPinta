@@ -104,7 +104,7 @@ public class FormAltaCerveza extends JDialog{
 				TCerveza cerveza = new TCerveza();
 				try {
 					cerveza.setNombre(Util.parseaString(textNombre.getText()));
-					cerveza.setGraduacion(Util.parseaIntNoNegativo(textGraduacion.getText()));
+					cerveza.setGraduacion(Util.parseaFloatNoNegativo(textGraduacion.getText()));
 					cerveza.setPrecio(Util.parseaFloatNoNegativo(textPrecio.getText()));
 					cerveza.setStock(Util.parseaIntNoNegativo(textStock.getText()));
 					cerveza.setActiva(Util.parseaActiva(comboBox.getSelectedItem().toString()));

@@ -18,10 +18,11 @@ public class FacturaDAOImp implements FacturaDAO{
 	private final String INSERT = "INSERT INTO factura(empleado) VALUES(?)";
 	private final String READALL = "SELECT * FROM factura";
 	private final String READ = READALL+ " WHERE id_factura = ?";
-	private final String READAsociada = "SELECT * FROM asociada WHERE factura = ?";
-	private final String READBYCerveza = "SELECT * FROM asociada  WHERE cerveza = ? AND factura = ?";
+	private final String READCERVEZASDEFACTURA = "SELECT * FROM asociada WHERE factura = ?";
+	private final String READASOCIADA = "SELECT * FROM asociada  WHERE cerveza = ? AND factura = ?";
 	private final String UPDATE = "UPDATE factura SET precio_total = ?, empleado = ? WHERE id_factura = ?";
-	private final String DELETE = "UPDATE factura  SET abierta = 0 WHERE id_factura = ?";
+	private final String CLOSE = "UPDATE factura  SET abierta = 0 WHERE id_factura = ?";
+	private final String DELETE = "DELETE FROM factura WHERE id_factura = ?";
 	private final String NEW = "INSERT INTO asociada VALUES (?,?,?,?)";
 	private final String UPDATECantidad = "UPDATE asociada SET cantidad = ? WHERE factura = ? AND cerveza = ?";
 	private final String UPDATECerveza = "UPDATE cerveza SET stock = ? WHERE id_cerveza = ?";
@@ -59,7 +60,7 @@ public class FacturaDAOImp implements FacturaDAO{
 				if (rs.next()) {
 					f = new TFactura(id,rs.getDouble("precio_total"),rs.getInt("empleado"),rs.getBoolean("abierta"),lista);
 				}
-				try (PreparedStatement ste = conn.prepareStatement(READAsociada)) {
+				try (PreparedStatement ste = conn.prepareStatement(READCERVEZASDEFACTURA)) {
 					ste.setInt(1, id);
 					try(ResultSet rse = ste.executeQuery()) {
 						while (rse.next()) {
@@ -105,11 +106,12 @@ public class FacturaDAOImp implements FacturaDAO{
 	}
 
 	@Override
-	public void anadirProducto(TLineaFactura linea, TCerveza c) {//TODO MAL
-		try (PreparedStatement st = conn.prepareStatement(READBYCerveza)) {
+	public void anadirProducto(TLineaFactura linea, TCerveza c) {
+		try (PreparedStatement st = conn.prepareStatement(READASOCIADA)) {
 			st.setInt(1,linea.getId_cerveza());
 			st.setInt(2,linea.getId_factura());
 			try(ResultSet rs = st.executeQuery()) {
+				//Si no esta se crea la fila
 				if (!rs.next()) {
 					try (PreparedStatement ste = conn.prepareStatement(NEW)) {
 						ste.setInt(1, linea.getId_factura());
@@ -120,8 +122,8 @@ public class FacturaDAOImp implements FacturaDAO{
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-				}
-				else{
+				//Si esta se añade la cantidad
+				} else {
 					int parcial = rs.getInt("cantidad");
 					try (PreparedStatement ste = conn.prepareStatement(UPDATECantidad)) {
 						ste.setInt(1,linea.getCantidad()+parcial);
@@ -168,5 +170,15 @@ public class FacturaDAOImp implements FacturaDAO{
 		}
 
 
+	}
+
+	@Override
+	public void cerrar(int id) {
+		try (PreparedStatement st = conn.prepareStatement(CLOSE)) {
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

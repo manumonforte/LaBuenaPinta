@@ -18,6 +18,7 @@ public class FormBajaFactura extends JDialog {
 
 	public FormBajaFactura() {
 		setTitle("Baja Factura");
+		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
 	}

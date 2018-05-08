@@ -58,14 +58,14 @@ public class TFactura {
 
 	@Override
 	public String toString() {
-		String s = "";
-		s = "*****Factura*****\n"
-				+"ID: " +getId_factura() + "\n"
-				+"Empleado : " +getEmpleado() +"\n"
-				+"Precio_total: "+ getPrecio_total()+ "\n";
+		StringBuilder s = new StringBuilder();
+		s = new StringBuilder("*****Factura*****\n"
+				+ "ID: " + getId_factura() + "\n"
+				+ "Empleado : " + getEmpleado() + "\n"
+				+ "Precio_total: " + getPrecio_total() + "\n");
 		for (TLineaFactura l: getLineaFacturas()) {
-			s+= l.toString();
+			s.append(l.toString());
 		}
-		return s;
+		return s.toString();
 	}
 }

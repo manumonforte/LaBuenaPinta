@@ -2,6 +2,7 @@ package negocio.cerveza;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
 import presentacion.cerveza.TCerveza;
+import presentacion.marca.TMarca;
 
 import java.util.List;
 
@@ -11,7 +12,10 @@ public class CervezaSAImp implements CervezaSA{
 	public boolean insertar_cerveza(TCerveza tCerveza) {
 		TCerveza tl = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorNombre(tCerveza.getNombre());
 
-		if (tl == null){
+		//Comprobar que la marca existe
+		TMarca tlmarca = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tCerveza.get_marca());
+
+		if (tl == null && tlmarca != null){
 			FactoriaDAOImp.getInstancia().getCervezaDAO().insertar(tCerveza);
 			return true;
 		} else {

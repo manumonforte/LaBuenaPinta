@@ -7,7 +7,7 @@ import presentacion.factura.TLineaFactura;
 
 import java.util.List;
 
-public class FacturaSAImp implements FacturaSA{//TODO
+public class FacturaSAImp implements FacturaSA{
 	@Override
 	public boolean insertar_factura(TFactura tFactura) {
 		FactoriaDAOImp.getInstancia().getFacturaDAO().insertar(tFactura);
@@ -43,6 +43,18 @@ public class FacturaSAImp implements FacturaSA{//TODO
 		}
 		else {
 			FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
+			return true;
+		}
+	}
+
+	@Override
+	public boolean cerrar_factura(TFactura tFactura) {
+		TFactura tl = FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
+
+		if (tl == null){
+			return false;
+		} else {
+			FactoriaDAOImp.getInstancia().getFacturaDAO().cerrar(tFactura.getId_factura());
 			return true;
 		}
 	}
