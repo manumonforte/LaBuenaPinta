@@ -151,10 +151,10 @@ public class ControladorImp extends Controlador {
 				break;
 
 			case cerrar_factura:
-				if (FactoriaSA.getInstancia().generarSAFactura().anadir_producto((TLineaFactura) datos)) {
-					Util.informar("Producto anadido con exito");
+				if (FactoriaSA.getInstancia().generarSAFactura().cerrar_factura((TFactura) datos)) {
+					Util.informar("Factura cerrada con exito");
 				} else {
-					Util.informar("Producto no anadido");
+					Util.informar("Factura no cerrada");
 				}
 				break;
 		}
