@@ -2,6 +2,7 @@ package presentacion.cerveza;
 
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
+import presentacion.marca.TMarca;
 import presentacion.util.Util;
 
 import javax.swing.*;
@@ -11,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FormAltaCerveza extends JDialog{
 
@@ -19,7 +22,9 @@ public class FormAltaCerveza extends JDialog{
 	private JTextField textGraduacion;
 	private JTextField textPrecio;
 	private JTextField textMarca;
-	private JComboBox comboBox;
+	private JComboBox comboBoxActiva;
+	private JComboBox comboBoxMarca;
+
 
 	public FormAltaCerveza() {
 		setTitle("Alta Cerveza");
@@ -79,15 +84,15 @@ public class FormAltaCerveza extends JDialog{
 		JLabel panelMarca = new JLabel("Marca(ID)");
 		panelCampos.add(panelMarca);
 
-		textMarca = new JTextField(10);
-		panelCampos.add(textMarca);
+		comboBoxMarca = seleccionarMarca();
+		panelCampos.add(comboBoxMarca);
 
 		//Activa
 		JLabel panelActiva= new JLabel("Activa");
 		panelCampos.add(panelActiva);
 
-		comboBox = seleccionarActiva();
-		panelCampos.add(comboBox);
+		comboBoxActiva = seleccionarActiva();
+		panelCampos.add(comboBoxActiva);
 
 		return panelCampos;
 	}
@@ -107,8 +112,8 @@ public class FormAltaCerveza extends JDialog{
 					cerveza.setGraduacion(Util.parseaFloatNoNegativo(textGraduacion.getText()));
 					cerveza.setPrecio(Util.parseaFloatNoNegativo(textPrecio.getText()));
 					cerveza.setStock(Util.parseaIntNoNegativo(textStock.getText()));
-					cerveza.setActiva(Util.parseaActiva(comboBox.getSelectedItem().toString()));
-					cerveza.set_marca(Util.parseaIntNoNegativo(textMarca.getText()));
+					cerveza.setActiva(Util.parseaActiva(comboBoxActiva.getSelectedItem().toString()));
+					cerveza.set_marca((int)comboBoxMarca.getSelectedItem());
 					dispose();
 					Controlador.getInstancia().accion(Eventos.insertar_Cerveza, cerveza);
 				}catch (Exception ex){
@@ -133,10 +138,21 @@ public class FormAltaCerveza extends JDialog{
 	}
 
 	private JComboBox seleccionarActiva() {
-		comboBox = new JComboBox();
-		comboBox.addItem("true");
-		comboBox.addItem("false");
+		comboBoxActiva = new JComboBox();
+		comboBoxActiva.addItem("true");
+		comboBoxActiva.addItem("false");
 
-		return comboBox;
+		return comboBoxActiva;
+	}
+
+	private JComboBox seleccionarMarca(){
+		comboBoxMarca = new JComboBox();
+
+		List<TMarca> listaMarcas = new ArrayList<TMarca>();
+		Controlador.getInstancia().accion(Eventos.mostraTodos_Marca, listaMarcas);
+		for (TMarca marca: listaMarcas) {
+			comboBoxMarca.addItem(marca.getId_marca());
+		}
+		return  comboBoxMarca;
 	}
 }
