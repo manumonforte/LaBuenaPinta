@@ -1,7 +1,7 @@
 package integracion.empleado;
 
 import integracion.DAO;
-import presentacion.empleado.TEmpleado;
+import negocio.empleado.TEmpleado;
 
 public interface EmpleadoDAO extends DAO<TEmpleado> {
 	TEmpleado mostrarPorDNI(String DNI);

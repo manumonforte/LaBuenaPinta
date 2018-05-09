@@ -1,5 +1,8 @@
 package presentacion.empleado;
 
+import negocio.empleado.TEmpleado;
+import negocio.empleado.TEmpleadoCompleto;
+import negocio.empleado.TEmpleadoParcial;
 import presentacion.util.ModeloTabla;
 
 public class ModeloTablaEmpleado extends ModeloTabla<TEmpleado> {

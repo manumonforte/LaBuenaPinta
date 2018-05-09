@@ -1,4 +1,4 @@
-package presentacion.empleado;
+package negocio.empleado;
 
 public class TEmpleado {
 

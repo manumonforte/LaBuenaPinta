@@ -1,7 +1,5 @@
 package negocio.cerveza;
 
-import presentacion.cerveza.TCerveza;
-
 import java.util.List;
 
 public interface CervezaSA {

@@ -1,7 +1,7 @@
 package integracion.marca;
 
 import org.junit.jupiter.api.*;
-import presentacion.marca.TMarca;
+import negocio.marca.TMarca;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +25,12 @@ class MarcaDAOImpTest {
 	static void beforeAll() {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LBP", "empleado", "password");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try (Statement st = conn.createStatement()) {
+			st.execute("DELETE FROM cerveza");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

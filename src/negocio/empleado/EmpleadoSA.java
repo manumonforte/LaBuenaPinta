@@ -1,7 +1,5 @@
 package negocio.empleado;
 
-import presentacion.empleado.TEmpleado;
-
 import java.util.List;
 
 public interface EmpleadoSA {

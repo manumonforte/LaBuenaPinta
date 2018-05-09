@@ -1,5 +1,6 @@
 package presentacion.empleado;
 
+import negocio.empleado.TEmpleado;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;

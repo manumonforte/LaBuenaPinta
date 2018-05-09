@@ -1,8 +1,7 @@
 package negocio.cerveza;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
-import presentacion.cerveza.TCerveza;
-import presentacion.marca.TMarca;
+import negocio.marca.TMarca;
 
 import java.util.List;
 

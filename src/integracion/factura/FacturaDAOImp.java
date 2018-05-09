@@ -1,9 +1,9 @@
 package integracion.factura;
 
 import integracion.gestor.GestorConnexiones;
-import presentacion.cerveza.TCerveza;
-import presentacion.factura.TFactura;
-import presentacion.factura.TLineaFactura;
+import negocio.cerveza.TCerveza;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

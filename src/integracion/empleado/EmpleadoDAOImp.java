@@ -1,9 +1,9 @@
 package integracion.empleado;
 
 import integracion.gestor.GestorConnexiones;
-import presentacion.empleado.TEmpleado;
-import presentacion.empleado.TEmpleadoCompleto;
-import presentacion.empleado.TEmpleadoParcial;
+import negocio.empleado.TEmpleado;
+import negocio.empleado.TEmpleadoCompleto;
+import negocio.empleado.TEmpleadoParcial;
 import presentacion.util.TipoTurno;
 
 import java.sql.Connection;

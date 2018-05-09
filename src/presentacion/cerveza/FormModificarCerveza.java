@@ -1,5 +1,6 @@
 package presentacion.cerveza;
 
+import negocio.cerveza.TCerveza;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;

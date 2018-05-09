@@ -1,15 +1,15 @@
 package presentacion;
 
 import presentacion.cerveza.PanelCerveza;
-import presentacion.cerveza.TCerveza;
+import negocio.cerveza.TCerveza;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.empleado.PanelEmpleado;
-import presentacion.empleado.TEmpleado;
+import negocio.empleado.TEmpleado;
 import presentacion.factura.PanelFactura;
-import presentacion.factura.TFactura;
+import negocio.factura.TFactura;
 import presentacion.marca.PanelMarca;
-import presentacion.marca.TMarca;
+import negocio.marca.TMarca;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

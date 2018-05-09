@@ -1,7 +1,7 @@
 package integracion.cerveza;
 
 import integracion.gestor.GestorConnexiones;
-import presentacion.cerveza.TCerveza;
+import negocio.cerveza.TCerveza;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

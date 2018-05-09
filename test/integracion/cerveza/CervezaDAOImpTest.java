@@ -1,14 +1,12 @@
 package integracion.cerveza;
 
-import org.junit.jupiter.api.*;
-
 import integracion.marca.MarcaDAOImp;
-import presentacion.cerveza.TCerveza;
-import presentacion.marca.TMarca;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import negocio.cerveza.TCerveza;
+import negocio.marca.TMarca;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,16 +15,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 class CervezaDAOImpTest {
 
 	private CervezaDAOImp cervezaDAOImp;
-	private MarcaDAOImp marcaDAOImp;
 	private static Connection conn;
 	private TCerveza cerveza1;
 	private TCerveza cerveza2;
-	private TMarca marcaAsociada;
-	
+
 	@BeforeAll
 	static void beforeAll() {
 		
@@ -48,7 +48,7 @@ class CervezaDAOImpTest {
 		}
 		
 		cervezaDAOImp = new CervezaDAOImp();
-		marcaDAOImp = new MarcaDAOImp();
+		MarcaDAOImp marcaDAOImp = new MarcaDAOImp();
 		
 		cerveza1 = new TCerveza();
 		cerveza2 = new TCerveza();
@@ -68,7 +68,7 @@ class CervezaDAOImpTest {
 		cerveza2.setStock(5);
 		
 		// Precondicion marca asociada a las cervezas
-		marcaAsociada = new TMarca();
+		TMarca marcaAsociada = new TMarca();
 		marcaAsociada.setNombre("nuevaaMarca");
 		marcaAsociada.setPais("Spain");
 		marcaAsociada.setSede("Barcelona");
@@ -80,7 +80,7 @@ class CervezaDAOImpTest {
 	}
 
 	@Test
-	public void insertar() {
+	void insertar() {
 		
 		cervezaDAOImp.insertar(cerveza1);
 		
@@ -91,7 +91,7 @@ class CervezaDAOImpTest {
 	}
 
 	@Test
-	public void modificar() {
+	void modificar() {
 		
 		cervezaDAOImp.insertar(cerveza1);
 		
@@ -127,7 +127,7 @@ class CervezaDAOImpTest {
 			}
 		}
 	}
-	
+
 	@Test
 	void mostrarPorNombre() {
 		cervezaDAOImp.insertar(cerveza1);
@@ -136,7 +136,7 @@ class CervezaDAOImpTest {
 	}
 	
 	@Test
-	public void eliminar() {
+	void eliminar() {
 		cervezaDAOImp.insertar(cerveza1);
 		
 		cervezaDAOImp.eliminar(cerveza1.getId_cerveza());
@@ -153,7 +153,7 @@ class CervezaDAOImpTest {
 		}
 	}
 
-	public boolean iguales(TCerveza esper, TCerveza resul) {
+	private boolean iguales(TCerveza esper, TCerveza resul) {
 
 		return esper.getId_cerveza() == resul.getId_cerveza() && 
 				esper.get_marca() == resul.get_marca() &&

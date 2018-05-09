@@ -1,5 +1,6 @@
 package presentacion.factura;
 
+import negocio.factura.TFactura;
 import presentacion.PanelTabs;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;
@@ -8,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelFactura extends JPanel {
-	private final String[] columnId = {"Id" , "Cantidad Total", "Empleado","activa"};
+	private final String[] columnId = {"Id" , "Cantidad Total", "Empleado","Abierta"};
 	private ModeloTabla modelo;
 
 	public PanelFactura(PanelTabs panelTabs) {

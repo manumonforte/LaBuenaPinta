@@ -1,4 +1,4 @@
-package presentacion.factura;
+package negocio.factura;
 
 import java.util.List;
 
@@ -52,14 +52,17 @@ public class TFactura {
 		this.abierta = abierta;
 	}
 
-	public List<TLineaFactura> getLineaFacturas() { return lineaFacturas; }
+	public List<TLineaFactura> getLineaFacturas() {
+		return lineaFacturas;
+	}
 
-	public void setLineaFacturas(List<TLineaFactura> lineaFacturas) { this.lineaFacturas = lineaFacturas; }
+	public void setLineaFacturas(List<TLineaFactura> lineaFacturas) {
+		this.lineaFacturas = lineaFacturas;
+	}
 
 	@Override
 	public String toString() {
-		StringBuilder s = new StringBuilder();
-		s = new StringBuilder("*****Factura*****\n"
+		StringBuilder s = new StringBuilder("*****Factura*****\n"
 				+ "ID: " + getId_factura() + "\n"
 				+ "Empleado : " + getEmpleado() + "\n"
 				+ "Precio_total: " + getPrecio_total() + "\n");

@@ -1,5 +1,6 @@
 package presentacion.marca;
 
+import negocio.marca.TMarca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;

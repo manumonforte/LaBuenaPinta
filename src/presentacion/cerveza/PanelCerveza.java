@@ -1,5 +1,6 @@
 package presentacion.cerveza;
 
+import negocio.cerveza.TCerveza;
 import presentacion.PanelTabs;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;

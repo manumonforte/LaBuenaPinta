@@ -1,5 +1,6 @@
 package presentacion.cerveza;
 
+import negocio.cerveza.TCerveza;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;
@@ -66,7 +67,7 @@ public class FormBajaCerveza extends  JDialog{
 					cerveza.setId_cerveza(Util.parseaIntNoNegativo(textID.getText()));
 					dispose();
 					Controlador.getInstancia().accion(Eventos.eliminar_Cerveza, cerveza);
-				}catch (Exception ex){
+				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error Baja Cerveza", JOptionPane.ERROR_MESSAGE);
 				}
 			}

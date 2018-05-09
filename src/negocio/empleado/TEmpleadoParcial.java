@@ -1,5 +1,6 @@
-package presentacion.empleado;
+package negocio.empleado;
 
+import negocio.empleado.TEmpleado;
 import presentacion.util.TipoTurno;
 
 public class TEmpleadoParcial extends TEmpleado {

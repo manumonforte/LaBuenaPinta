@@ -1,4 +1,6 @@
-package presentacion.empleado;
+package negocio.empleado;
+
+import negocio.empleado.TEmpleado;
 
 public class TEmpleadoCompleto extends TEmpleado {
 	private int horas_extra;

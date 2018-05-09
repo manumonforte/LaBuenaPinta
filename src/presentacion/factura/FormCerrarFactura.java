@@ -1,5 +1,6 @@
 package presentacion.factura;
 
+import negocio.factura.TFactura;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;
@@ -21,10 +22,6 @@ public class FormCerrarFactura extends  JDialog{
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
-	}
-
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
 	}
 
 	private void initGUI() {
@@ -60,15 +57,19 @@ public class FormCerrarFactura extends  JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton cerrar = new JButton("MODIFICAR");
+		JButton cerrar = new JButton("CERRAR");
 		cerrar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TFactura factura = new TFactura();
-				factura.setId_factura(getTextID());
-				dispose();
-				Controlador.getInstancia().accion(Eventos.cerrar_factura,factura);
+				try {
+					TFactura factura = new TFactura();
+					factura.setId_factura(Util.parseaIntNoNegativo(textID.getText()));
+					dispose();
+					Controlador.getInstancia().accion(Eventos.cerrar_factura, factura);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error cerrar Factura", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

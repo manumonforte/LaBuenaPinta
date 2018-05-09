@@ -1,5 +1,6 @@
 package presentacion.empleado;
 
+import negocio.empleado.TEmpleado;
 import presentacion.PanelTabs;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;

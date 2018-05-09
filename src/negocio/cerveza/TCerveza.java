@@ -1,4 +1,4 @@
-package presentacion.cerveza;
+package negocio.cerveza;
 
 public class TCerveza {
 	private int id_cerveza;

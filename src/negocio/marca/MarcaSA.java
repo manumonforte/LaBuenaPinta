@@ -1,7 +1,5 @@
 package negocio.marca;
 
-import presentacion.marca.TMarca;
-
 import java.util.List;
 
 public interface MarcaSA {

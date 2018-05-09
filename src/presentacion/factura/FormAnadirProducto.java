@@ -1,6 +1,8 @@
 package presentacion.factura;
 
-import presentacion.cerveza.TCerveza;
+import negocio.cerveza.TCerveza;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;
@@ -77,7 +79,7 @@ public class FormAnadirProducto extends  JDialog{
 		//Botones
 		JPanel panelBotones = new JPanel(new FlowLayout());
 
-		JButton crear = new JButton("ANADIR PRODUCTO");
+		JButton crear = new JButton("AÑADIR PRODUCTO");
 		crear.addActionListener(new ActionListener(){
 
 			@Override
@@ -87,8 +89,8 @@ public class FormAnadirProducto extends  JDialog{
 					lineaFactura.setId_factura(Util.parseaIntNoNegativo(comboID.getSelectedItem().toString()));
 					lineaFactura.setId_cerveza(Util.parseaIntNoNegativo(comboProd.getSelectedItem().toString()));
 					lineaFactura.setCantidad(Util.parseaIntNoNegativo(textCantidad.getText()));
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+				} catch (ParseException ex) {
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error añadir producto", JOptionPane.ERROR_MESSAGE);
 				}
 				Controlador.getInstancia().accion(Eventos.anadir_producto, lineaFactura);
 				dispose();

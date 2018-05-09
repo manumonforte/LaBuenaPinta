@@ -1,5 +1,6 @@
 package presentacion.factura;
 
+import negocio.factura.TFactura;
 import presentacion.util.ModeloTabla;
 
 public class ModeloTablaFactura extends ModeloTabla<TFactura> {

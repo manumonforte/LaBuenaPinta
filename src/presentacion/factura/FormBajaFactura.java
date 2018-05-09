@@ -1,5 +1,6 @@
 package presentacion.factura;
 
+import negocio.factura.TFactura;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.Util;
@@ -21,10 +22,6 @@ public class FormBajaFactura extends JDialog {
 		setResizable(false);
 		Util.addEscapeListener(this);
 		initGUI();
-	}
-
-	public int getTextID() {
-		return Integer.parseInt(textID.getText());
 	}
 
 	private void initGUI() {
@@ -65,10 +62,14 @@ public class FormBajaFactura extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TFactura factura = new TFactura();
-				factura.setId_factura(getTextID());
-				dispose();
-				Controlador.getInstancia().accion(Eventos.eliminar_Factura, factura);
+				try {
+					TFactura factura = new TFactura();
+					factura.setId_factura(Util.parseaIntNoNegativo(textID.getText()));
+					dispose();
+					Controlador.getInstancia().accion(Eventos.eliminar_Factura, factura);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error eliminar Factura", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

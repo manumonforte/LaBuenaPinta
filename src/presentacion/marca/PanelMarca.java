@@ -1,5 +1,6 @@
 package presentacion.marca;
 
+import negocio.marca.TMarca;
 import presentacion.PanelTabs;
 import presentacion.util.ModeloTabla;
 import presentacion.util.PanelTabla;

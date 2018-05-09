@@ -1,8 +1,9 @@
 package presentacion.factura;
 
+import negocio.factura.TFactura;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.empleado.TEmpleado;
+import negocio.empleado.TEmpleado;
 import presentacion.util.Util;
 
 import javax.swing.*;

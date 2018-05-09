@@ -1,8 +1,9 @@
 package presentacion.cerveza;
 
+import negocio.cerveza.TCerveza;
+import negocio.marca.TMarca;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
-import presentacion.marca.TMarca;
 import presentacion.util.Util;
 
 import javax.swing.*;

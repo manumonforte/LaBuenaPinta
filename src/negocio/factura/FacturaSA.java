@@ -1,8 +1,5 @@
 package negocio.factura;
 
-import presentacion.factura.TFactura;
-import presentacion.factura.TLineaFactura;
-
 import java.util.List;
 
 public interface FacturaSA {

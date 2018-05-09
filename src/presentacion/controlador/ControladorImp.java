@@ -1,14 +1,13 @@
 package presentacion.controlador;
 
 import negocio.factoria.FactoriaSA;
-import presentacion.cerveza.TCerveza;
-import presentacion.empleado.TEmpleado;
-import presentacion.factura.TFactura;
-import presentacion.factura.TLineaFactura;
-import presentacion.marca.TMarca;
+import negocio.cerveza.TCerveza;
+import negocio.empleado.TEmpleado;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
+import negocio.marca.TMarca;
 import presentacion.util.Util;
 
-import javax.swing.*;
 import java.util.List;
 
 public class ControladorImp extends Controlador {

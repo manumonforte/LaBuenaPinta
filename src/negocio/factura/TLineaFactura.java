@@ -1,4 +1,4 @@
-package presentacion.factura;
+package negocio.factura;
 
 public class TLineaFactura {
 

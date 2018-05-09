@@ -1,5 +1,6 @@
 package presentacion.cerveza;
 
+import negocio.cerveza.TCerveza;
 import presentacion.util.ModeloTabla;
 
 public class ModeloTablaCerveza extends ModeloTabla<TCerveza> {

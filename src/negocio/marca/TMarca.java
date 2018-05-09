@@ -1,4 +1,4 @@
-package presentacion.marca;
+package negocio.marca;
 
 public class TMarca {
 	private int id_marca;

@@ -1,5 +1,7 @@
 package presentacion.empleado;
 
+import negocio.empleado.TEmpleadoCompleto;
+import negocio.empleado.TEmpleadoParcial;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.Eventos;
 import presentacion.util.TipoTurno;

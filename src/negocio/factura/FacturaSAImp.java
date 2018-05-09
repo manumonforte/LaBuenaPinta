@@ -1,9 +1,7 @@
 package negocio.factura;
 
 import integracion.factoriaDAO.FactoriaDAOImp;
-import presentacion.factura.TFactura;
-import presentacion.cerveza.TCerveza;
-import presentacion.factura.TLineaFactura;
+import negocio.cerveza.TCerveza;
 
 import java.util.List;
 
