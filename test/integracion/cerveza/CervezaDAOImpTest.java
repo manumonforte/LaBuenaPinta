@@ -23,9 +23,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 class CervezaDAOImpTest {
 
 	private CervezaDAOImp cervezaDAOImp;
+	private MarcaDAOImp marcaDAOImp;
 	private static Connection conn;
 	private TCerveza cerveza1;
 	private TCerveza cerveza2;
+	private TMarca marcaAsociada;
 
 	@BeforeAll
 	static void beforeAll() {
@@ -48,7 +50,7 @@ class CervezaDAOImpTest {
 		}
 		
 		cervezaDAOImp = new CervezaDAOImp();
-		MarcaDAOImp marcaDAOImp = new MarcaDAOImp();
+		marcaDAOImp = new MarcaDAOImp();
 		
 		cerveza1 = new TCerveza();
 		cerveza2 = new TCerveza();
@@ -68,7 +70,7 @@ class CervezaDAOImpTest {
 		cerveza2.setStock(5);
 		
 		// Precondicion marca asociada a las cervezas
-		TMarca marcaAsociada = new TMarca();
+		marcaAsociada = new TMarca();
 		marcaAsociada.setNombre("nuevaaMarca");
 		marcaAsociada.setPais("Spain");
 		marcaAsociada.setSede("Barcelona");
