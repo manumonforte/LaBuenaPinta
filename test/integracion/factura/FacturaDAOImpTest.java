@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,7 +40,9 @@ class FacturaDAOImpTest {
 
 	private static Connection conn;
 	private FacturaDAOImp facturaDAOImp;
-	private TFactura factura;
+	private TFactura factura1;
+	private TFactura factura2;
+	
 
 	@BeforeAll
 	static void beforeAll() {
@@ -70,7 +74,8 @@ class FacturaDAOImpTest {
 		EmpleadoDAOImp empleadoDAOImp = new EmpleadoDAOImp();
 
 
-		factura = new TFactura();
+		factura1 = new TFactura();
+		factura2 = new TFactura();
 
 		TEmpleadoCompleto empleadoAsociado = new TEmpleadoCompleto();
 		empleadoAsociado.setActivo(true);
@@ -81,27 +86,28 @@ class FacturaDAOImpTest {
 
 
 		empleadoDAOImp.insertar(empleadoAsociado);
-		factura.setEmpleado(empleadoAsociado.getId_empleado());
+		factura1.setEmpleado(empleadoAsociado.getId_empleado());
+		factura2.setEmpleado(empleadoAsociado.getId_empleado());
 	}
 
 	@Test
 	void insertar() {
 
-		facturaDAOImp.insertar(factura);
+		facturaDAOImp.insertar(factura1);
 
-		if (factura.getId_factura() != 0) {
-			TFactura facturaInsertada = facturaDAOImp.mostrar(factura.getId_factura());
-			assertTrue(iguales(factura, facturaInsertada));
+		if (factura1.getId_factura() != 0) {
+			TFactura facturaInsertada = facturaDAOImp.mostrar(factura1.getId_factura());
+			assertTrue(iguales(factura1, facturaInsertada));
 		}
 
 	}
 
 	@Test
 	void eliminar() {
-		facturaDAOImp.insertar(factura);
-		facturaDAOImp.eliminar(factura.getId_factura());
+		facturaDAOImp.insertar(factura1);
+		facturaDAOImp.eliminar(factura1.getId_factura());
 
-		assertNull(facturaDAOImp.mostrar(factura.getId_factura()));
+		assertNull(facturaDAOImp.mostrar(factura1.getId_factura()));
 
 	}
 
@@ -110,8 +116,24 @@ class FacturaDAOImpTest {
 
 	}
 
+	@Test
 	void mostrarTodos() {
+		
+		List<TFactura> original = new ArrayList<TFactura>();
+		original.add(factura1);
+		original.add(factura2);
 
+		for (TFactura tFactura : original) {
+			facturaDAOImp.insertar(tFactura);
+		}
+
+		List<TFactura> tl = facturaDAOImp.mostrarTodos();
+
+		for (int i = 0; i < original.size(); i++) {
+			if (!iguales(original.get(i), tl.get(i))) {
+				fail("La factura leida no se corresponde con la insertada");
+			}
+		}
 
 	}
 

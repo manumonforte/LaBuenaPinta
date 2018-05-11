@@ -165,20 +165,24 @@ class EmpleadoDAOImpTest {
 
 	@Test
 	void mostrarTodos() {
-
-
+		
+	
 	}
+
+
 
 	@Test
 	void mostrarPorDNICompleto() {
-
-
+		empleadoDAOImp.insertar(empCompleto);
+		assertTrue(igualesCompleto(empCompleto, 
+				(TEmpleadoCompleto) empleadoDAOImp.mostrarPorDNI(empCompleto.getDNI())));
 	}
 
 	@Test
 	void mostrarPorDNIParcial() {
-
-
+		empleadoDAOImp.insertar(empParcial);
+		assertTrue(igualesParcial(empParcial, 
+				(TEmpleadoParcial) empleadoDAOImp.mostrarPorDNI(empParcial.getDNI())));
 	}
 
 	@AfterAll
