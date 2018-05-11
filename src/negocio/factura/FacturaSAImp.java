@@ -17,59 +17,67 @@
 
 package negocio.factura;
 
-import integracion.factoriaDAO.FactoriaDAOImp;
+import integracion.factoriaDAO.FactoriaDAO;
 import negocio.cerveza.TCerveza;
+import negocio.empleado.TEmpleado;
 
 import java.util.List;
 
 public class FacturaSAImp implements FacturaSA{
 	@Override
 	public boolean insertar_factura(TFactura tFactura) {
-		FactoriaDAOImp.getInstancia().getFacturaDAO().insertar(tFactura);
-		return true;
+		TEmpleado empleado = FactoriaDAO.getInstancia().getEmpleadoDAO().mostrar(tFactura.getEmpleado());
+		if(empleado.isActivo()) {
+			FactoriaDAO.getInstancia().getFacturaDAO().insertar(tFactura);
+			return true;
+		}
+		else return false;
 	}
 
 	@Override
 	public TFactura mostrar_factura(TFactura tFactura) {
-		return FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
+		return FactoriaDAO.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
 	}
 
 	@Override
 	public List<TFactura> mostrar_todos_factura() {
-		return FactoriaDAOImp.getInstancia().getFacturaDAO().mostrarTodos();
+		return FactoriaDAO.getInstancia().getFacturaDAO().mostrarTodos();
 	}
 
 	@Override
 	public boolean baja_factura(TFactura tFactura) {
-		TFactura tl = FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
+		TFactura tl = FactoriaDAO.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
 
 		if (tl == null){
 			return false;
-		} else {
-			FactoriaDAOImp.getInstancia().getFacturaDAO().eliminar(tFactura.getId_factura());
+		} else if (tl.isAbierta()){
+			return false;
+		}
+		else{
+			FactoriaDAO.getInstancia().getFacturaDAO().eliminar(tFactura.getId_factura());
 			return true;
 		}
 	}
 	@Override
 	public boolean anadir_producto(TLineaFactura lineaFactura){
-		TCerveza c = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
-		if (lineaFactura.getCantidad()> c.getStock()){
+		TCerveza c = FactoriaDAO.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
+		if (lineaFactura.getCantidad()> c.getStock() || c.isActiva()){
 			return false;
 		}
 		else {
-			FactoriaDAOImp.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
+			FactoriaDAO.getInstancia().getFacturaDAO().anadirProducto(lineaFactura, c);
 			return true;
 		}
 	}
 
 	@Override
 	public boolean cerrar_factura(TFactura tFactura) {
-		TFactura tl = FactoriaDAOImp.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
+		TFactura tl = FactoriaDAO.getInstancia().getFacturaDAO().mostrar(tFactura.getId_factura());
 
 		if (tl == null){
 			return false;
 		} else {
-			FactoriaDAOImp.getInstancia().getFacturaDAO().cerrar(tFactura.getId_factura());
+			FactoriaDAO.getInstancia().getFacturaDAO().cerrar(tFactura.getId_factura());
 			return true;
 		}
 	}

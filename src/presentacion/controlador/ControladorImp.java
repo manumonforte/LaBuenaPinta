@@ -135,7 +135,7 @@ public class ControladorImp extends Controlador {
 				if (FactoriaSA.getInstancia().generarSAFactura().insertar_factura((TFactura) datos)) {
 					Util.informar("Factura generada con exito");
 				} else {
-					Util.informar("Factura no generada");
+					Util.informar("Factura no generada (empleado no activo)");
 				}
 				break;
 			case mostrar_Factura:

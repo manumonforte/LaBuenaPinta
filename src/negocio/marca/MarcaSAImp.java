@@ -17,7 +17,7 @@
 
 package negocio.marca;
 
-import integracion.factoriaDAO.FactoriaDAOImp;
+import integracion.factoriaDAO.FactoriaDAO;
 import negocio.cerveza.TCerveza;
 
 import java.util.List;
@@ -26,10 +26,10 @@ public class MarcaSAImp implements MarcaSA {
 
 	@Override
 	public boolean insertar_marca(TMarca tMarca) {
-		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
+		TMarca tl = FactoriaDAO.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
 
 		if (tl == null){
-			FactoriaDAOImp.getInstancia().getMarcaDAO().insertar(tMarca);
+			FactoriaDAO.getInstancia().getMarcaDAO().insertar(tMarca);
 			return true;
 		} else {
 			return false;
@@ -38,32 +38,32 @@ public class MarcaSAImp implements MarcaSA {
 
 	@Override
 	public TMarca mostrar_marca(TMarca tMarca) {
-		return FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
+		return FactoriaDAO.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
 	}
 
 	@Override
 	public List<TMarca> mostrar_todos_marca() {
-		return FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarTodos();
+		return FactoriaDAO.getInstancia().getMarcaDAO().mostrarTodos();
 	}
 
 	@Override
 	public boolean modificar_marca(TMarca tMarca) {
-		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
-		TMarca m = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
+		TMarca tl = FactoriaDAO.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
+		TMarca m = FactoriaDAO.getInstancia().getMarcaDAO().mostrarPorNombre(tMarca.getNombre());
 		if (tl == null) {
 			return false;
 		} else if ( m != null  &&   m.getId_marca() != tl.getId_marca()) {
 			return false;
 		} else {
-			FactoriaDAOImp.getInstancia().getMarcaDAO().modificar(tMarca);
+			FactoriaDAO.getInstancia().getMarcaDAO().modificar(tMarca);
 			return true;
 		}
 	}
 
 	@Override
 	public boolean baja_marca(TMarca tMarca) {
-		TMarca tl = FactoriaDAOImp.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
-		List<TCerveza> tlCerveza = FactoriaDAOImp.getInstancia().getCervezaDAO().mostrarPorMarca(tMarca.getId_marca());
+		TMarca tl = FactoriaDAO.getInstancia().getMarcaDAO().mostrar(tMarca.getId_marca());
+		List<TCerveza> tlCerveza = FactoriaDAO.getInstancia().getCervezaDAO().mostrarPorMarca(tMarca.getId_marca());
 
 		if (tl == null){
 			return false;
@@ -75,7 +75,7 @@ public class MarcaSAImp implements MarcaSA {
 			}
 		}
 
-		FactoriaDAOImp.getInstancia().getMarcaDAO().eliminar(tMarca.getId_marca());
+		FactoriaDAO.getInstancia().getMarcaDAO().eliminar(tMarca.getId_marca());
 		return true;
 	}
 }

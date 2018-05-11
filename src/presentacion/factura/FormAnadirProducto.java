@@ -135,9 +135,7 @@ public class FormAnadirProducto extends  JDialog{
 		List<TCerveza> listaCervezas = new ArrayList<TCerveza>();
 		Controlador.getInstancia().accion(Eventos.mostraTodos_Cerveza, listaCervezas);
 		for (TCerveza cerveza : listaCervezas) {
-			if (cerveza.isActiva()) {
 				comboProd.addItem(cerveza.getId_cerveza());
-			}
 		}
 		return comboProd;
 	}
