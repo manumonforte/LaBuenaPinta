@@ -23,59 +23,57 @@ import static org.junit.jupiter.api.Assertions.fail;
 class CervezaDAOImpTest {
 
 	private CervezaDAOImp cervezaDAOImp;
-	private MarcaDAOImp marcaDAOImp;
 	private static Connection conn;
 	private TCerveza cerveza1;
 	private TCerveza cerveza2;
-	private TMarca marcaAsociada;
 
 	@BeforeAll
 	static void beforeAll() {
-		
+
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LBP", "empleado", "password");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@BeforeEach
 	void BeforeEach() {
-		
-		try(Statement st = conn.createStatement()){
+
+		try (Statement st = conn.createStatement()) {
 			st.execute("DELETE FROM cerveza");
 			st.execute("DELETE FROM marca");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		cervezaDAOImp = new CervezaDAOImp();
-		marcaDAOImp = new MarcaDAOImp();
-		
+		MarcaDAOImp marcaDAOImp = new MarcaDAOImp();
+
 		cerveza1 = new TCerveza();
 		cerveza2 = new TCerveza();
-		
+
 		// Cerveza 1
 		cerveza1.setGraduacion(30.2);
 		cerveza1.setNombre("5estrellas");
 		cerveza1.setPrecio(10);
 		cerveza1.setActiva(true);
 		cerveza1.setStock(10);
-		
+
 		// Cerveza 2
 		cerveza2.setGraduacion(40.2);
 		cerveza2.setNombre("Clasica");
 		cerveza2.setPrecio(20);
 		cerveza2.setActiva(true);
 		cerveza2.setStock(5);
-		
+
 		// Precondicion marca asociada a las cervezas
-		marcaAsociada = new TMarca();
+		TMarca marcaAsociada = new TMarca();
 		marcaAsociada.setNombre("nuevaaMarca");
 		marcaAsociada.setPais("Spain");
 		marcaAsociada.setSede("Barcelona");
-		marcaAsociada.setActiva(true);	
-		
+		marcaAsociada.setActiva(true);
+
 		marcaDAOImp.insertar(marcaAsociada);
 		cerveza1.set_marca(marcaAsociada.getId_marca());
 		cerveza2.set_marca(marcaAsociada.getId_marca());
@@ -83,9 +81,9 @@ class CervezaDAOImpTest {
 
 	@Test
 	void insertar() {
-		
+
 		cervezaDAOImp.insertar(cerveza1);
-		
+
 		if (cerveza1.getId_cerveza() != 0) {
 			TCerveza cervezaInsertada = cervezaDAOImp.mostrar(cerveza1.getId_cerveza());
 			assertTrue(iguales(cerveza1, cervezaInsertada));
@@ -94,9 +92,9 @@ class CervezaDAOImpTest {
 
 	@Test
 	void modificar() {
-		
+
 		cervezaDAOImp.insertar(cerveza1);
-		
+
 		cerveza1.setNombre("changed");
 		cerveza1.setStock(5);
 		cerveza1.setGraduacion(30.0);
@@ -105,14 +103,14 @@ class CervezaDAOImpTest {
 
 		cervezaDAOImp.modificar(cerveza1);
 		TCerveza cervezaModificada = cervezaDAOImp.mostrar(cerveza1.getId_cerveza());
-		
-		assertTrue(iguales(cerveza1,cervezaModificada));	
+
+		assertTrue(iguales(cerveza1, cervezaModificada));
 
 	}
-	
+
 	@Test
 	void mostrarTodos() {
-		
+
 		List<TCerveza> original = new ArrayList<TCerveza>();
 		original.add(cerveza1);
 		original.add(cerveza2);
@@ -133,19 +131,19 @@ class CervezaDAOImpTest {
 	@Test
 	void mostrarPorNombre() {
 		cervezaDAOImp.insertar(cerveza1);
-		
+
 		assertTrue(iguales(cerveza1, cervezaDAOImp.mostrarPorNombre(cerveza1.getNombre())));
 	}
-	
+
 	@Test
 	void eliminar() {
 		cervezaDAOImp.insertar(cerveza1);
-		
+
 		cervezaDAOImp.eliminar(cerveza1.getId_cerveza());
 		assertFalse(cervezaDAOImp.mostrar(cerveza1.getId_cerveza()).isActiva());
-	
+
 	}
-	
+
 	@AfterAll
 	static void afterAll() {
 		try {
@@ -157,12 +155,12 @@ class CervezaDAOImpTest {
 
 	private boolean iguales(TCerveza esper, TCerveza resul) {
 
-		return esper.getId_cerveza() == resul.getId_cerveza() && 
+		return esper.getId_cerveza() == resul.getId_cerveza() &&
 				esper.get_marca() == resul.get_marca() &&
 				esper.getGraduacion() == resul.getGraduacion() &&
 				esper.getPrecio() == resul.getPrecio() &&
-				esper.getStock() == resul.getStock() && 
-				esper.isActiva() == resul.isActiva()&& 
+				esper.getStock() == resul.getStock() &&
+				esper.isActiva() == resul.isActiva() &&
 				esper.getNombre().equals(resul.getNombre());
 
 	}
