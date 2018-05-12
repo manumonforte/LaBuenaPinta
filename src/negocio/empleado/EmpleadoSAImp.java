@@ -50,8 +50,8 @@ public class EmpleadoSAImp implements EmpleadoSA {
 		TEmpleado tl = FactoriaDAO.getInstancia().getEmpleadoDAO().mostrar(tEmpleado.getId_empleado());
 		TEmpleado tr = FactoriaDAO.getInstancia().getEmpleadoDAO().mostrarPorDNI(tEmpleado.getDNI());
 		if (tl == null) {
-			return false;
-		} else if (tr != null && tl.getDNI() == tr.getDNI()) {
+			return false; 
+		} else if (tr != null && tl.getId_empleado() != tr.getId_empleado()) {
 			return false;
 		} else {
 			FactoriaDAO.getInstancia().getEmpleadoDAO().modificar(tEmpleado);

@@ -80,6 +80,7 @@ class MarcaSAImpTest {
 		marcaSAImp.insertar_marca(marca1);
 
 		// Modifico la marca insertada
+		marca1.setId_marca(marca1.getId_marca()); // id buscado
 		marca1.setPais("otro");
 		marca1.setSede("otra");;
 

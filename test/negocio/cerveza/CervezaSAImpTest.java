@@ -154,6 +154,7 @@ class CervezaSAImpTest {
 
 		// Modifico la cerveza insertada
 		cerveza1.setId_cerveza(12321312); // id buscado diferente
+		cerveza1.setNombre("5estrellas");
 		cerveza1.setGraduacion(20.4);
 		cerveza1.setPrecio(23);
 		cerveza1.setStock(55);

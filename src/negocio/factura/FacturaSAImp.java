@@ -27,7 +27,7 @@ public class FacturaSAImp implements FacturaSA{
 	@Override
 	public boolean insertar_factura(TFactura tFactura) {
 		TEmpleado empleado = FactoriaDAO.getInstancia().getEmpleadoDAO().mostrar(tFactura.getEmpleado());
-		if(empleado.isActivo()) {
+		if(empleado != null && empleado.isActivo()) {
 			FactoriaDAO.getInstancia().getFacturaDAO().insertar(tFactura);
 			return true;
 		}
@@ -61,7 +61,7 @@ public class FacturaSAImp implements FacturaSA{
 	@Override
 	public boolean anadir_producto(TLineaFactura lineaFactura){
 		TCerveza c = FactoriaDAO.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
-		if (lineaFactura.getCantidad()> c.getStock() || c.isActiva()){
+		if (c == null || !c.isActiva() || lineaFactura.getCantidad() > c.getStock() ){
 			return false;
 		}
 		else {

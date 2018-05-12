@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,6 +34,7 @@ import org.junit.jupiter.api.Test;
 import negocio.empleado.TEmpleado;
 import negocio.empleado.TEmpleadoCompleto;
 import negocio.empleado.TEmpleadoParcial;
+import negocio.factura.TFactura;
 import presentacion.util.TipoTurno;
 
 
@@ -94,8 +97,7 @@ class EmpleadoDAOImpTest {
 
 		if (empCompleto.getId_empleado() != 0) {
 			TEmpleado empleadoInsertado = empleadoDAOImp.mostrar(empCompleto.getId_empleado());
-			TEmpleadoCompleto insertado = (TEmpleadoCompleto) empleadoInsertado;
-			assertTrue(igualesCompleto(empCompleto, insertado));
+			assertTrue(igualesCompleto(empCompleto, (TEmpleadoCompleto)empleadoInsertado));
 		}
 
 	}
@@ -166,10 +168,27 @@ class EmpleadoDAOImpTest {
 	@Test
 	void mostrarTodos() {
 		
-	
+		List<TEmpleado> original = new ArrayList<TEmpleado>();
+		original.add(empCompleto);
+		original.add(empParcial);
+
+		for (TEmpleado tEmpleado : original) {
+			empleadoDAOImp.insertar(tEmpleado);
+		}
+
+		List<TEmpleado> tl = empleadoDAOImp.mostrarTodos();
+
+		for (int i = 0; i < original.size(); i++) {
+			if (original.get(i).isTiempo_completo() && tl.get(i).isTiempo_completo()
+				&& !igualesCompleto((TEmpleadoCompleto)original.get(i),(TEmpleadoCompleto) tl.get(i))) {
+				fail("El empleado leido no se corresponde con lel insertado");
+			}
+			else if (!original.get(i).isTiempo_completo() && !tl.get(i).isTiempo_completo()
+					&& !igualesParcial((TEmpleadoParcial)original.get(i),(TEmpleadoParcial) tl.get(i))) {
+					fail("El empleado leido no se corresponde con el insertado");
+				}	
+		}
 	}
-
-
 
 	@Test
 	void mostrarPorDNICompleto() {
