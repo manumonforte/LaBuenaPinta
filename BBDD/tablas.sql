@@ -53,7 +53,7 @@ CREATE TABLE asociada(
     precio FLOAT NOT NULL,
     PRIMARY KEY (factura, cerveza),
     FOREIGN KEY(factura) REFERENCES factura(id_factura) ON DELETE CASCADE,
-    FOREIGN KEY(cerveza) REFERENCES cerveza(id_cerveza)
+    FOREIGN KEY(cerveza) REFERENCES cerveza(id_cerveza) ON DELETE CASCADE
 );
 
 
