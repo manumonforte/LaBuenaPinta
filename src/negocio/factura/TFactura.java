@@ -17,6 +17,7 @@
 
 package negocio.factura;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TFactura {
@@ -27,6 +28,7 @@ public class TFactura {
 	private boolean abierta;
 
 	public TFactura() {
+		lineaFacturas = new ArrayList<TLineaFactura>();
 	}
 
 	public TFactura(int id_factura, double precio_total, int empleado, boolean abierta,List<TLineaFactura> lineaFacturaLista) {

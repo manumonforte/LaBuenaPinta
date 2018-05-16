@@ -69,7 +69,6 @@ public class FacturaDAOImp implements FacturaDAO{
 	@Override
 	public TFactura mostrar(int id) {
 		TFactura f = null;
-		int total = 0;
 		List<TLineaFactura> lista = new ArrayList<>();
 		try (PreparedStatement st = conn.prepareStatement(READ)) {
 			st.setInt(1, id);
@@ -100,7 +99,7 @@ public class FacturaDAOImp implements FacturaDAO{
 		try (PreparedStatement st = conn.prepareStatement(READALL); ResultSet rs = st.executeQuery()) {
 			while (rs.next()){
 				lista.add(new TFactura(rs.getInt("id_factura"), rs.getInt("precio_total"),
-						rs.getInt("empleado"), rs.getBoolean("abierta"),null));
+						rs.getInt("empleado"), rs.getBoolean("abierta"),new ArrayList<>()));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
