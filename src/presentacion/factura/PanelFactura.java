@@ -26,7 +26,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelFactura extends JPanel {
-	private final String[] columnId = {"Id" , "Cantidad Total", "Empleado","Abierta"};
+	private final String[] columnId = {"Id", "Precio Total", "Empleado", "Abierta"};
 	private ModeloTabla modelo;
 
 	public PanelFactura(PanelTabs panelTabs) {

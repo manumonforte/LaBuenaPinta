@@ -106,11 +106,12 @@ public class FormAnadirProducto extends  JDialog{
 					lineaFactura.setId_factura(Util.parseaIntNoNegativo(comboID.getSelectedItem().toString()));
 					lineaFactura.setId_cerveza(Util.parseaIntNoNegativo(comboProd.getSelectedItem().toString()));
 					lineaFactura.setCantidad(Util.parseaIntNoNegativo(textCantidad.getText()));
-				} catch (ParseException ex) {
+					dispose();
+					Controlador.getInstancia().accion(Eventos.anadir_producto, lineaFactura);
+				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(getRootPane(), ex.getMessage(), "Error añadir producto", JOptionPane.ERROR_MESSAGE);
 				}
-				Controlador.getInstancia().accion(Eventos.anadir_producto, lineaFactura);
-				dispose();
+
 			}
 		});
 
