@@ -60,8 +60,9 @@ public class FacturaSAImp implements FacturaSA{
 	}
 	@Override
 	public boolean anadir_producto(TLineaFactura lineaFactura){
+		TFactura f = FactoriaDAO.getInstancia().getFacturaDAO().mostrar(lineaFactura.getId_factura());
 		TCerveza c = FactoriaDAO.getInstancia().getCervezaDAO().mostrar(lineaFactura.getId_cerveza());
-		if (c == null || !c.isActiva() || lineaFactura.getCantidad() > c.getStock() ){
+		if (f == null || !f.isAbierta() || c == null || !c.isActiva() || lineaFactura.getCantidad() > c.getStock() ){
 			return false;
 		}
 		else {
