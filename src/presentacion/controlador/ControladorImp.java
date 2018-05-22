@@ -102,7 +102,7 @@ public class ControladorImp extends Controlador {
 				if (FactoriaSA.getInstancia().generarSAEmpleado().insertar_emplado((TEmpleado) datos)) {
 					Util.informar("Empleado registrado con exito");
 				} else {
-					Util.informar("Empleado no eliminado");
+					Util.informar("Empleado no creado");
 				}
 				break;
 			case mostrar_Empleado:
