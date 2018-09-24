@@ -11,7 +11,7 @@ He aquí el Diagrama ER:
 
 
 Equipo de Trabajo:
-  --> [Manuel Monforte](https://github.com/manumonforte)__
-  --> [Pablo Agudo](https://github.com/pibloo94)__
-  --> [Daniel Fidalgo](https://github.com/epocopa)__
-  --> [Eduardo Martínez](https://github.com/EdwardMartinz)__
+  --> [Manuel Monforte](https://github.com/manumonforte)<br />
+  --> [Pablo Agudo](https://github.com/pibloo94)<br />
+  --> [Daniel Fidalgo](https://github.com/epocopa)<br />
+  --> [Eduardo Martínez](https://github.com/EdwardMartinz)<br />
