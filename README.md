@@ -9,3 +9,9 @@ He aquí el Diagrama ER:
 
 ![Diagrama ER](https://gitlab.com/LaBuenaPinta/LaBuenaPinta/raw/master/BBDD/ER.png)
 
+
+Equipo de Trabajo:
+  --> [Manuel Monforte](https://github.com/manumonforte)
+  --> [Pablo Agudo](https://github.com/pibloo94)
+  --> [Daniel Fidalgo](https://github.com/epocopa)
+  --> [Eduardo Martínez](https://github.com/EdwardMartinz)
